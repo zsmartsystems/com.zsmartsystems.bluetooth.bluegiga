@@ -1,0 +1,19 @@
+target/
+bin/
+*.iml
+*.log
+*.log.*
+*.json
+.metadata
+local.properties
+# Eclipse project specific
+.classpath
+.settings
+.recommenders
+RemoteSystemsTempFiles/
+
+
+# Temporary
+travis.yml
+settings.xml
+com.zsmartsystems.bluetooth.bluegiga/doc

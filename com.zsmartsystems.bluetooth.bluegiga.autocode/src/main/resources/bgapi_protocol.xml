@@ -1,0 +1,1829 @@
+<protocol>
+	<command>
+		<name>attributeWrite</name>
+		<class>0x04</class>
+		<id>0x05</id>
+		<description>This command can be used to write an attributes value on a remote device. In order to write the value of an attribute a connection must exists and you need to know the handle of the attribute you want to write</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>attHandle</name>
+				<description>Attribute handle to write to</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>data</name>
+				<description>Attribute value</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>The result</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>executeWrite</name>
+		<class>0x04</class>
+		<id>0x0A</id>
+		<description>This command can be used to execute or cancel a previously queued prepare_write command on a remote device</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>commit</name>
+				<description>1: commits queued writes, 0: cancels queued writes</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>The result</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>findByTypeValue</name>
+		<class>0x04</class>
+		<id>0x00</id>
+		<description>This command can be used to find specific attributes on a remote device based on their 16-bit UUID value and value. The search can be limited by a starting and ending handle values.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>start</name>
+				<description>First requested handle number</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>end</name>
+				<description>Last requested handle number</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>uuid</name>
+				<description>2 octet UUID to find</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>value</name>
+				<description>Attribute value to find</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0 : the operation was successful. Otherwise error occurred</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>findInformation</name>
+		<class>0x04</class>
+		<id>0x03</id>
+		<description>This command can be used to find specific attributes on a remote device based on their 16-bit UUID value and value. The search can be limited by a starting and ending handle values.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>start</name>
+				<description>First attribute handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>end</name>
+				<description>Last attribute handle</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0 : the operation was successful. Otherwise error occurred</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>indicateConfirm</name>
+		<class>0x04</class>
+		<id>0x07</id>
+		<description>This command can be used to send a acknowledge a received indication from a remote device. This function allows the application to manually confirm the indicated values instead of the smart stack Bluetooth automatically doing it. The benefit of this is extra reliability since the application can for example store the received value on the flash memory before confirming the indication to the remote device.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>Command result.</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>prepareWrite</name>
+		<class>0x04</class>
+		<id>0x09</id>
+		<description>This command will send a prepare write request to a remote device for queued writes. Queued writes can for example be used to write large attribute values by transmitting the data in chunks using prepare write command. Once the data has been transmitted with multiple prepare write commands the write must then be executed or canceled with Execute Write command, which if acknowledged by the remote device triggers a Procedure Completed event.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>atthandle</name>
+				<description>Attribute handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>offset</name>
+				<description>Offset to write to</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>data</name>
+				<description>Data to write. Maximum amount of data that can be sent in single command is 18 bytes.</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>Command result.</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>readByGroupType</name>
+		<class>0x04</class>
+		<id>0x01</id>
+		<description>This command reads the value of each attribute of a given type and in a given handle range. The command is typically used for primary (UUID: 0x2800) and secondary (UUID: 0x2801) service discovery. Discovered services are reported by Group Found event. Finally when the procedure is completed a Procedure Completed event is generated.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>start</name>
+				<description>First requested handle number</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>end</name>
+				<description>Last requested handle number</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>uuid</name>
+				<description>Group UUID to find</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>Command result.</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>readByHandle</name>
+		<class>0x04</class>
+		<id>0x04</id>
+		<description>This command reads a remote attribute's value with the given handle. Read by handle can be used to read attributes up to 22 bytes long. For longer attributes command must be used.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>chrhandle</name>
+				<description>Attribute handle</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0 : the command was successful. Otherwise an error occurred</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>readByType</name>
+		<class>0x04</class>
+		<id>0x02</id>
+		<description>The command reads the value of each attribute of a given type (UUID) and in a given attribute handle range. The command can for example be used to discover the characteristic declarations (UUID: 0x2803) within a service.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>start</name>
+				<description>First attribute handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>end</name>
+				<description>Last attribute handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>uint8array</name>
+				<description>Attribute type (UUID)</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0 : the command was successful. Otherwise an error occurred</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>readLong</name>
+		<class>0x04</class>
+		<id>0x08</id>
+		<description>This command can be used to read long attribute values, which are longer than 22 bytes and cannot be read with a simple Read by Handle command. The command starts a procedure, where the client first sends a normal read command to the server and if the returned attribute value length is equal to MTU, the client will send further read long read requests until rest of the attribute is read.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>chrhandle</name>
+				<description>Attribute handle</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0 : the command was successful. Otherwise an error occurred</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>readMultiple</name>
+		<class>0x04</class>
+		<id>0x0b</id>
+		<description>This command can be used to read multiple attributes from a server.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>handles</name>
+				<description>List of attribute handles to read from the remote device</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0 : the command was successful. Otherwise an error occurred</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>writeCommand</name>
+		<class>0x04</class>
+		<id>0x06</id>
+		<description>Writes the value of a remote devices attribute. The handle and the new value of the attribute are gives as parameters.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>atthandle</name>
+				<description>Attribute handle to write</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>data</name>
+				<description>Value for the attribute</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0 : the command was successful. Otherwise an error occurred</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>procedureCompletedEvent</name>
+		<class>0x04</class>
+		<id>0x01</id>
+		<description>This event is produced at the GATT client when an attribute protocol event is completed a and new operation can be issued</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>Attribute value</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>chrHandle</name>
+				<description>Characteristic handle at which the event ended</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>attributeValueEvent</name>
+		<class>0x04</class>
+		<id>0x05</id>
+		<description>This event is produced at the GATT client side when an attribute value is passed from the GATT server to the GATT client. This event is for example produced after a successful Read by Handle operation or when an attribute is indicated or notified by the remote device.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>atthandle</name>
+				<description>Attribute handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>type</name>
+				<description>Attribute type</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>value</name>
+				<description>Attribute value (data)</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>findInformationFoundEvent</name>
+		<class>0x04</class>
+		<id>0x05</id>
+		<description>This event is generated when characteristics type mappings are found. This happens typically after Find Information command has been issued to discover all attributes of a service.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>chrhandle</name>
+				<description>Characteristics handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>uuid</name>
+				<description>Characteristics type (UUID)</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>groupFoundEvent</name>
+		<class>0x04</class>
+		<id>0x02</id>
+		<description>This event is produced when an attribute group (a service) is found. Typically this event is produced after Read by Group Type command.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>start</name>
+				<description>Starting handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>end</name>
+				<description>Ending handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>uuid</name>
+				<description>UUID of a service. Length is 0 if no services are found.</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>indicatedEvent</name>
+		<class>0x04</class>
+		<id>0x00</id>
+		<description>This event is produced at the GATT server side when an attribute is successfully indicated to the GATT client. This means the event is only produced at the GATT server if the indication is acknowledged by the GATT client (the remote device).</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>attrhandle</name>
+				<description>Attribute handle</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>readMultipleResponseEvent</name>
+		<class>0x04</class>
+		<id>0x00</id>
+		<description>This event is a response to a Read Multiple request.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>handles</name>
+				<description>This array contains the concatenated data from the multiple attributes that have been read, up to 22 bytes.</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>read</name>
+		<class>0x02</class>
+		<id>0x01</id>
+		<description>The command reads the given attribute's value from the local database. There is a 32-byte limit in the amount of data that can be read at a time. In order to read larger values multiple read commands must be used with the offset properly used.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>handle</name>
+				<description>Handle of the attribute to read</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>offset</name>
+				<description>Offset to read from. Maximum of 32 bytes can be read at a time.</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>handle</name>
+				<description>Handle of the attribute which was read</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>offset</name>
+				<description>Offset read from</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0 : the command was successful. Otherwise an error occurred</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>value</name>
+				<description>Value of the attribute</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>readType</name>
+		<class>0x02</class>
+		<id>0x02</id>
+		<description>This command reads the given attribute's type (UUID) from the local database.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>handle</name>
+				<description>Handle of the attribute to read</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>handle</name>
+				<description>Handle of the attribute which was read</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0 : the command was successful. Otherwise an error occurred</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>value</name>
+				<description>Value of the attribute type (UUID)</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>sendAttributes</name>
+		<class>0x02</class>
+		<id>0x02</id>
+		<description>This command will send an attribute value, identified by handle, via a notification or an indication to a remote device, but does not modify the current corresponding value in the local GATT database. If this attribute, identified by handle, does not have notification or indication property, or no remote device has registered for notifications or indications of this attribute, then an error will be returned.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle to send to. Use 0xFF to send to all connected clients which have subscribed to receive the notifications or indications. An error is returned as soon as the first failed transmission occurs.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>handle</name>
+				<description>Attribute handle to send.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>value</name>
+				<description>Data to send</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0 : the command was successful. Otherwise an error occurred</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>userReadResponse</name>
+		<class>0x02</class>
+		<id>0x03</id>
+		<description>This command is used to respond to an attribute Read request by a remote device, but only for attributes which have been configured with the user property. Attributes which have the user property enabled allow the attribute value to be requested from the application instead of the Smart stack automatically responding with Bluetooth the data in it's local GATT database. This command is normally used in response to a User Read Request event, which is generated when a remote device tries to read an attribute with a user property enabled. The response to User Read Request events must happen within 30 seconds or otherwise a timeout will occur.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle to response to.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>att_error</name>
+				<description>0: User Read Request is responded with data. In case of an error an application specific error code can be sent.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>value</name>
+				<description>Data to send</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>userWriteResponse</name>
+		<class>0x02</class>
+		<id>0x04</id>
+		<description>This command is used by the GATT server to acknowledge to the remote device that the attribute's value was written. This feature again allows the user application to acknowledged the attribute write operations instead of the Smart stack doing it automatically. Bluetooth The command should be used when a event is received where the reason why value has changed Value corresponds to attributes_attribute_change_reason_write_request_user. This response must be sent within 30 seconds or otherwise a timeout will occur.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle to response to.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>att_error</name>
+				<description>0: User Read Request is responded with data. In case of an error an application specific error code can be sent.</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>write</name>
+		<class>0x02</class>
+		<id>0x00</id>
+		<description>This command writes an attribute's value to the local database.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>handle</name>
+				<description>Handle of the attribute to write.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>offset</name>
+				<description>Attribute offset to write data</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>value</name>
+				<description>Value of the attribute to write</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0: the write was successful. Non-zero: An error occurred</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>attributeStatusEvent</name>
+		<class>0x02</class>
+		<id>0x02</id>
+		<description>This event indicates attribute status flags have changed. For example, this even is generated at the module acting as the GATT Server whenever the remote GATT Client changes the Client Characteristic Configuration to start or stop notification or indications from the Server.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>handle</name>
+				<description>Attribute handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>flags</name>
+				<description>Attribute status flags. See: Attribute Status Flags</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>userReadRequestEvent</name>
+		<class>0x02</class>
+		<id>0x01</id>
+		<description>This event is generated when a remote device tries to read an attribute which has the user property enabled. This event should be responded within 30 seconds with User Read Response command either containing the data or an error code.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection ID which requested attribute</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>handle</name>
+				<description>Attribute handle requested</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>offset</name>
+				<description>Attribute offset to send data from</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>maxsize</name>
+				<description>Maximum data size to respond with. If more data is sent than indicated by this parameter, the extra bytes will be ignored.</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>valueEvent</name>
+		<class>0x02</class>
+		<id>0x00</id>
+		<description>This event is produced at the GATT server when a local attribute value was written by a remote device.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>reason</name>
+				<description>Reason why value has changed see: enum Attribute Change Reason</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>handle</name>
+				<description>Attribute handle, which was changed</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>offset</name>
+				<description>Offset into attribute value where data starts</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>value</name>
+				<description>Attribute value</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>channelMapGet</name>
+		<class>0x03</class>
+		<id>0x04</id>
+		<description>This command can be used to read the current Channel Map.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle.</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>map</name>
+				<description>Current Channel Map. Each bit corresponds to one channel. 0-bit corresponds to 0 channel. Size of Channel Map is 5 bytes. Channel range: 0-36</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>channelMapSet</name>
+		<class>0x03</class>
+		<id>0x05</id>
+		<description>This command can be used to set the new Channel Map.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>map</name>
+				<description>New Channel Map. Channel Map is 5 bytes array. Each bit corresponds to one channel. 0-bit corresponds to 0 channel. Channel range: 0-36</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>result</name>
+				<description>0 : the update was successful. Non-zero: An error occurred.</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>disconnect</name>
+		<class>0x03</class>
+		<id>0x00</id>
+		<description>This command disconnects an active connection. Bluetooth When link is disconnected a Disconnected event is produced.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle to close.</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>result</name>
+				<description>0 : the update was successful. Non-zero: An error occurred.</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>getRssi</name>
+		<class>0x03</class>
+		<id>0x00</id>
+		<description>This command disconnects an active connection. Bluetooth When link is disconnected a Disconnected event is produced.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle to close.</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle.</description>
+			</parameter>
+			<parameter>
+				<data_type>int8</data_type>
+				<name>result</name>
+				<description>RSSI value of the connection in dBm. Range: -103 to -38</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>getStatus</name>
+		<class>0x03</class>
+		<id>0x07</id>
+		<description>This command returns the status of the given connection. Status is returned in a event.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle to close.</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle.</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>update</name>
+		<class>0x03</class>
+		<id>0x02</id>
+		<description>This command updates the connection parameters of a given connection. The parameters have the same meaning and follow the same rules as for the GAP class command: Connect Direct. If this command is issued at a master device, it will send parameter update request to the link layer. Bluetooth On the other hand if this command is issued at a slave device, it will send L2CAP connection parameter update request to the master, which may either accept or reject it. It will take an amount of time corresponding to at least six times the current connection interval before the new connection parameters will become active.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>interval_min</name>
+				<description>Minimum connection interval (units of 1.25ms)</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>interval_max</name>
+				<description>Maximum connection interval (units of 1.25ms)</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>latency</name>
+				<description>Slave latency which defines how many connections intervals a slave may skip.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>timeout</name>
+				<description>Supervision timeout (units of 10ms)</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description> 0 : the update was successful. Non-zero: An error occurred.</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>disconnectedEvent</name>
+		<class>0x03</class>
+		<id>0x04</id>
+		<description>This event is produced when a connection is disconnected.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>reason</name>
+				<description>Disconnection reason code. 0 : disconnected by local user</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>featureIndEvent</name>
+		<class>0x03</class>
+		<id>0x02</id>
+		<description>This event indicates the remote devices features.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>features</name>
+				<description>CtrData field from LL_FEATURE_RSP - packet</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>connectionStatusEvent</name>
+		<class>0x03</class>
+		<id>0x00</id>
+		<description>This event indicates the connection status and parameters.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>flags</name>
+				<description>Connection status flags use connstatus-enumerator</description>
+			</parameter>
+			<parameter>
+				<data_type>bd_addr</data_type>
+				<name>address</name>
+				<description>Remote devices Bluetooth address</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>address_type</name>
+				<description>Remote address type see: Bluetooth Address Types--gap</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>conn_interval</name>
+				<description>Current connection interval (units of 1.25ms)</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>timeout</name>
+				<description>Current supervision timeout (units of 10ms)</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>latency</name>
+				<description>Slave latency which tells how many connection intervals the slave may skip.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>bonding</name>
+				<description>Bonding handle if the device has been bonded with. Otherwise: 0xFF</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>versionIndEvent</name>
+		<class>0x03</class>
+		<id>0x01</id>
+		<description>This event indicates the remote devices version.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>vers_nr</name>
+				<description>Bluetooth controller specification version</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>comp_id</name>
+				<description>Manufacturer of the controller</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>sub_vers_nr</name>
+				<description>Bluetooth controller version</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>connectDirect</name>
+		<class>0x06</class>
+		<id>0x03</id>
+		<description>This command will start the GAP direct connection establishment procedure to a dedicated Smart Bluetooth device. The module will enter a state where it continuously scans for the connectable advertisement packets Bluetooth from the remote device which matches the Bluetooth address gives as a parameter. Upon receiving the advertisement packet, the module will send a connection request packet to the target device to imitate a Bluetooth connection. A successful connection will bi indicated by a event. Status If the device is configured to support more than one connection, the smallest connection interval which is divisible by maximum_connections * 2.5ms will be selected. Thus, it is important to provide minimum and maximum connection intervals so that such a connection interval is available within the range. The connection establishment procedure can be cancelled with End Procedure command.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>bd_addr</data_type>
+				<name>address</name>
+				<description>Bluetooth address of the target device.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>addr_type</name>
+				<description>see: Bluetooth Address Types.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>conn_interval_min</name>
+				<description>Minimum Connection Interval (in units of 1.25ms). Range: 6 - 3200 The lowest possible Connection Interval is 7.50ms and the largest is 4000ms.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>conn_interval_max</name>
+				<description>Maximum Connection Interval (in units of 1.25ms). Range: 6 - 3200 Must be equal or bigger than minimum Connection Interval.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>timeout</name>
+				<description>Supervision Timeout (in units of 10ms). The Supervision Timeout defines how long the devices can be out of range before the connection is closed. Range: 10 - 3200 Minimum time for the Supervision Timeout is 100ms and maximum value is 32000ms. According to the specification, the Supervision Timeout in milliseconds shall be larger than (1 + latency) * conn_interval_max * 2, where conn_interval_max is given in milliseconds.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>latency</name>
+				<description>This parameter configures the slave latency. Slave latency defines how many connection intervals a slave device can skip. Increasing slave latency will decrease the energy consumption of the slave in scenarios where slave does not have data to send at every connection interval. Range: 0 - 500 0 : Slave latency is disabled. Example: Connection interval is 10ms and slave latency is 9: this means that the slave is allowed to communicate every 100ms, but it can communicate every 10ms if needed.</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0 : procedure was successfully started Non-zero: An error occurred</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection_handle</name>
+				<description>Connection handle that is reserved for new connection</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>connectSelective</name>
+		<class>0x06</class>
+		<id>0x05</id>
+		<description>This command will start the GAP direct connection establishment procedure to a set of dedicated Bluetooth Smart devices. When this command is issued the the module will enter a state where it scans connectable Bluetooth advertisement packets from the remote devices which are registered in the local white list. Upon receiving an advertisement packet from one of the registered devices, the module will send a connection request to this device, and a successful connection will produce a connection status event. The connect selective command can be cancelled with End Procedure command. When in Initiating State there are no scan response events.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>conn_interval_min</name>
+				<description>Minimum Connection Interval (in units of 1.25ms). Range: 6 - 3200 The lowest possible Connection Interval is 7.50ms and the largest is 4000ms.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>conn_interval_max</name>
+				<description>Maximum Connection Interval (in units of 1.25ms). Range: 6 - 3200 Must be equal or bigger than minimum Connection Interval.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>timeout</name>
+				<description>Supervision Timeout (in units of 10ms). The Supervision Timeout defines how long the devices can be out of range before the connection is closed. Range: 10 - 3200 Minimum time for the Supervision Timeout is 100ms and maximum value is 32000ms. According to the specification, the Supervision Timeout in milliseconds shall be larger than (1 + latency) * conn_interval_max * 2, where conn_interval_max is given in milliseconds.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>latency</name>
+				<description>This parameter configures the slave latency. Slave latency defines how many connection intervals a slave device can skip. Increasing slave latency will decrease the energy consumption of the slave in scenarios where slave does not have data to send at every connection interval. Range: 0 - 500 0 : Slave latency is disabled. Example: Connection interval is 10ms and slave latency is 9: this means that the slave is allowed to communicate every 100ms, but it can communicate every 10ms if needed.</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0 : procedure was successfully started Non-zero: An error occurred</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connection_handle</name>
+				<description>Connection handle that is reserved for new connection</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>discover</name>
+		<class>0x06</class>
+		<id>0x02</id>
+		<description>This command starts the GAP discovery procedure to scan for advertising devices i.e. to perform a device discovery. Scanning parameters can be configured with the Set Scan Parameters command before issuing this command. To cancel on an ongoing discovery process use the End Procedure command.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>mode</name>
+				<description>see:GAP Discover Mode.</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0: Scan procedure was successfully started Non-zero: An error occurred.</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>endProcedure</name>
+		<class>0x06</class>
+		<id>0x04</id>
+		<description>This command ends the current GAP discovery procedure and stop the scanning of advertising devices.</description>
+		<command_parameters>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0: the command was successful. Non-zero: An error occurred</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>setMode</name>
+		<class>0x06</class>
+		<id>0x01</id>
+		<description>This command configures the current GAP discoverability and connectability modes. It can be used to enable advertisements and/or allow connection. The command is also meant to fully stop advertising, when using gap_non_discoverable and gap_non_connectable.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>discover</name>
+				<description>see:GAP Discoverable Mode</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>connect</name>
+				<description>see:GAP Connectable Mode</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0: the command was successful. Non-zero: An error occurred</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>scanResponseEvent</name>
+		<class>0x06</class>
+		<id>0x00</id>
+		<description>This is a scan response event. This event is normally received by a Master which is scanning for advertisement and scan response packets from Slaves.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>rssi</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>packet_type</name>
+				<description>Scan response header. 0: Connectable Advertisement packet. 2: Non Connectable Advertisement packet. 4: Scan response packet. 6: Discoverable advertisement packet</description>
+			</parameter>
+			<parameter>
+				<data_type>bd_addr</data_type>
+				<name>sender</name>
+				<description>Advertiser address type. 1: random address. 0: public address</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>bond</name>
+				<description>Bond handle if there is known bond for this device, 0xff otherwise</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8array</data_type>
+				<name>data</name>
+				<description>Scan response data</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>deleteBonding</name>
+		<class>0x05</class>
+		<id>0x02</id>
+		<description>This command deletes a bonding from the local security database. There can be a maximum of 8 bonded devices stored at the same time, and one of them must be deleted if you need bonding with a 9th device.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>handle</name>
+				<description>Bonding handle of a device. This handle can be obtained for example from events like: Scan Response Status - If handle is 0xFF, all bondings will be deleted</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0: the command was successful. Non-zero: An error occurred</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>encryptStart</name>
+		<class>0x05</class>
+		<id>0x00</id>
+		<description>This command starts the encryption for a given connection.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>handle</name>
+				<description>Bonding handle of a device. This handle can be obtained for example from events like: Scan Response Status - If handle is 0xFF, all bondings will be deleted</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>bonding</name>
+				<description>Create bonding if devices are not already bonded. 0: Do not create bonding. 1: Creating bonding</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>handle</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>0 : the encryption was started successfully</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>getBonds</name>
+		<class>0x05</class>
+		<id>0x05</id>
+		<description>This command lists all bonded devices. There can be a maximum of 8 bonded devices. The information related to the bonded devices is stored in the Flash memory, so it is persistent across resets and power-cycles.</description>
+		<command_parameters>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>bonds</name>
+				<description>Num of currently bonded devices</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>passKey</name>
+		<class>0x05</class>
+		<id>0x04</id>
+		<description>This command is used to enter a passkey required for Man-in-the-Middle pairing. It should be sent as a response to Passkey Request event.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>handle</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint32</data_type>
+				<name>passkey</name>
+				<description>Passkey. Range: 000000-999999</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>Command Result</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>setBondableMode</name>
+		<class>0x05</class>
+		<id>0x01</id>
+		<description>This command is used to enter a passkey required for Man-in-the-Middle pairing. It should be sent as a response to Passkey Request event.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>bondable</name>
+				<description>Enables or disables bonding mode. 0 : the device is not bondable. 1 : the device is bondable</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>setParameters</name>
+		<class>0x05</class>
+		<id>0x01</id>
+		<description>This command is used to configure the local Security Manager and its features</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>mitm</name>
+				<description>1: Man-in-the-middle protection required. 0: No Man-in-the-middle protection. Default: 0</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>min_key_size</name>
+				<description>Minimum key size in Bytes. Range: 7-16. Default: 7 (56bits)</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>io_capabilities</name>
+				<description>Configures the local devices I/O capabilities. See: SMP IO Capabilities for options. Default: No Input and No Output</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>whitelistBonds</name>
+		<class>0x05</class>
+		<id>0x01</id>
+		<description>This command will add all bonded devices with a known public or static address to the local devices white list. Previous entries in the white list will be first cleared. This command can't be used while advertising, scanning or being connected.</description>
+		<command_parameters>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>Command result</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>count</name>
+				<description>Number of whitelisted bonds</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>bondingFailEvent</name>
+		<class>0x05</class>
+		<id>0x01</id>
+		<description>This event indicates the bonding has failed for a connection.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>handle</name>
+				<description>Connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>result</name>
+				<description>Encryption status, describes error that occurred during bonding. See: Security Manager Protocol Errors</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>bondStatusEvent</name>
+		<class>0x05</class>
+		<id>0x04</id>
+		<description>This event outputs bonding status information.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>bond</name>
+				<description>Bonding handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>keysize</name>
+				<description>Encryption key size used in long-term key</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>mitm</name>
+				<description>Was Man-in-the-Middle mode was used in pairing. 0: No MITM used. 1: MITM was used</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>keys</name>
+				<description>Keys stored for bonding. See: Bonding Keys</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>passkeyDisplayEvent</name>
+		<class>0x05</class>
+		<id>0x02</id>
+		<description>This event tells a passkey should be printed to the user for bonding. This passkey must be entered in the remote device for bonding to be successful.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>handle</name>
+				<description>Bluetooth connection handle</description>
+			</parameter>
+			<parameter>
+				<data_type>uint32</data_type>
+				<name>passkey</name>
+				<description>Passkey range: 000000-999999</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>passkeyRequestEvent</name>
+		<class>0x05</class>
+		<id>0x03</id>
+		<description>This event indicates the Security Manager requests the user to enter passkey. The passkey the user needs to enter is displayed by the remote device. Use Passkey Entry command to respond to request</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>handle</name>
+				<description>Bluetooth connection handle</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>addressGet</name>
+		<class>0x00</class>
+		<id>0x02</id>
+		<description>This command reads the local device's public Bluetooth address.</description>
+		<command_parameters>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>bd_addr</data_type>
+				<name>address</name>
+				<description>Bluetooth address of the local device</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<command>
+		<name>hello</name>
+		<class>0x00</class>
+		<id>0x01</id>
+		<description>This command can be used to test if the local device is functional. Similar to a typical "AT" -> "OK" test.</description>
+		<command_parameters>
+		</command_parameters>
+		<response_parameters>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>reset</name>
+		<class>0x00</class>
+		<id>0x00</id>
+		<description>This command resets the local device immediately. The command does not have a response.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>boot_in_dfu</name>
+				<description>Selects the boot mode. 0 : boot to main program. 1 : boot to DFU</description>
+			</parameter>
+		</command_parameters>
+	</command>
+
+	<command>
+		<name>getConnextions</name>
+		<class>0x00</class>
+		<id>0x06</id>
+		<description>This command reads the number of supported connections from the local device.</description>
+		<command_parameters>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>maxconn</name>
+				<description>Max supported connections</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>getCounters</name>
+		<class>0x00</class>
+		<id>0x05</id>
+		<description>Read packet counters and resets them, also returns available packet buffers.</description>
+		<command_parameters>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>txok</name>
+				<description>Number of transmitted packets</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>txretry</name>
+				<description>Number of retransmitted packets</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>rxok</name>
+				<description>Number of received packets where CRC was OK</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>rxfail</name>
+				<description>Number of received packets with CRC error</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>mbuf</name>
+				<description>Number of available packet buffers</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>getInfo</name>
+		<class>0x00</class>
+		<id>0x08</id>
+		<description>This command reads the local devices software and hardware versions.</description>
+		<command_parameters>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>major</name>
+				<description>Major software version</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>minor</name>
+				<description>Minor software version</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>patch</name>
+				<description>Patch ID</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>build</name>
+				<description>Build version</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>ll_version</name>
+				<description>Link layer version</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>protocol_version</name>
+				<description>Protocol version</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>hw</name>
+				<description>Hardware version</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>bootEvent</name>
+		<class>0x00</class>
+		<id>0x00</id>
+		<description>This event is produced when the device boots up and is ready to receive commands. This event is not sent over USB interface.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>major</name>
+				<description>Major software version</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>minor</name>
+				<description>Minor software version</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>patch</name>
+				<description>Patch ID</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>build</name>
+				<description>Build version</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>ll_version</name>
+				<description>Link layer version</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>protocol_version</name>
+				<description>Protocol version</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>hw</name>
+				<description>Hardware version</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+<!-- 
+	<structure>
+		<name>EmberNetworkParameters</name>
+		<description>Network parameters.</description>
+		<parameters>
+			<parameter>
+				<data_type>uint8_t[8]</data_type>
+				<name>extendedPanId</name>
+				<description>The network's extended PAN identifier.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16_t</data_type>
+				<name>panId</name>
+				<description>The network's PAN identifier.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8_t</data_type>
+				<name>radioTxPower</name>
+				<description>A power setting, in dBm.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8_t</data_type>
+				<name>radioChannel</name>
+				<description>A radio channel.</description>
+			</parameter>
+			<parameter>
+				<data_type>EmberJoinMethod</data_type>
+				<name>joinMethod</name>
+				<description>The method used to initially join the network</description>
+			</parameter>
+			<parameter>
+				<data_type>EmberNodeId</data_type>
+				<name>nwkManagerId</name>
+				<description>NWK Manager ID. The ID of the network manager in the current network. This may only be set at joining when using EMBER_USE_NWK_COMMISSIONING as the join method.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8_t</data_type>
+				<name>nwkUpdateId</name>
+				<description>NWK Update ID. The value of the ZigBee nwkUpdateId known by the stack. This is used to determine the newest instance of the network after a PAN ID or channel change. This may only be set at joining when using EMBER_USE_NWK_COMMISSIONING as the join method.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint32_t</data_type>
+				<name>channels</name>
+				<description>NWK channel mask. The list of preferred channels that the NWK manager has told this device to use when searching for the network. This may only be set at joining when using EMBER_USE_NWK_COMMISSIONING as the join method.</description>
+				<display>hex[8]</display>
+			</parameter>
+		</parameters>
+	</structure>
+
+	<enum>
+		<name>EmberZdoConfigurationFlags</name>
+		<description>This is a bitmask that controls which incoming ZDO request messages are passed to the application.</description>
+		<values>
+			<value>
+				<name>EMBER_APP_RECEIVES_SUPPORTED_ZDO_REQUESTS</name>
+				<enum_value>0x01</enum_value>
+				<description>Set this flag in order to receive supported ZDO request messages via the incomingMessageHandler callback. A supported ZDO request is one that is handled by the EmberZNet stack. The stack will continue to handle the request and send the appropriate ZDO response even if this configuration option is enabled.</description>
+			</value>
+			<value>
+				<name>EMBER_APP_HANDLES_UNSUPPORTED_ZDO_REQUESTS</name>
+				<enum_value>0x02</enum_value>
+				<description>Set this flag in order to receive unsupported ZDO request messages via the incomingMessageHandler callback. An unsupported ZDO request is one that is not handled by the EmberZNet stack, other than to send a 'not supported' ZDO response. If this configuration option is enabled, the stack will no longer send any ZDO response, and it is the application's responsibility to do so.</description>
+			</value>
+			<value>
+				<name>EMBER_APP_HANDLES_ZDO_ENDPOINT_REQUESTS</name>
+				<enum_value>0x04</enum_value>
+				<description>Set this flag in order to receive the following ZDO request messages via the incomingMessageHandler callback: SIMPLE_DESCRIPTOR_REQUEST, MATCH_DESCRIPTORS_REQUEST, and ACTIVE_ENDPOINTS_REQUEST. If this configuration option is enabled, the stack will no longer send any ZDO response for these requests, and it is the application's responsibility to do so.</description>
+			</value>
+			<value>
+				<name>EMBER_APP_HANDLES_ZDO_BINDING_REQUESTS</name>
+				<enum_value>0x08</enum_value>
+				<description>Set this flag in order to receive the following ZDO request messages via the incomingMessageHandler callback: BINDING_TABLE_REQUEST, BIND_REQUEST, and UNBIND_REQUEST. If this configuration option is enabled, the stack will no longer send any ZDO response for these requests, and it is the application's responsibility to do so.</description>
+			</value>
+		</values>
+	</enum>
+-->
+
+</protocol>
