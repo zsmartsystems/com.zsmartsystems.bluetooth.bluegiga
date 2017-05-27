@@ -28,9 +28,9 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
-				<description>The result</description>
+				<description>0 : write was successful. Otherwise error occurred</description>
 			</parameter>
 		</response_parameters>
 	</command>
@@ -59,9 +59,9 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
-				<description>The result</description>
+				<description>0 : write was successful. Otherwise error occurred</description>
 			</parameter>
 		</response_parameters>
 	</command>
@@ -105,7 +105,7 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0 : the operation was successful. Otherwise error occurred</description>
 			</parameter>
@@ -141,7 +141,7 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0 : the operation was successful. Otherwise error occurred</description>
 			</parameter>
@@ -167,7 +167,7 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>Command result.</description>
 			</parameter>
@@ -208,7 +208,7 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>Command result.</description>
 			</parameter>
@@ -249,7 +249,7 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>Command result.</description>
 			</parameter>
@@ -280,7 +280,7 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0 : the command was successful. Otherwise an error occurred</description>
 			</parameter>
@@ -321,7 +321,7 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0 : the command was successful. Otherwise an error occurred</description>
 			</parameter>
@@ -352,7 +352,7 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0 : the command was successful. Otherwise an error occurred</description>
 			</parameter>
@@ -383,7 +383,7 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0 : the command was successful. Otherwise an error occurred</description>
 			</parameter>
@@ -419,7 +419,7 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0 : the command was successful. Otherwise an error occurred</description>
 			</parameter>
@@ -599,7 +599,7 @@
 				<description>Offset read from</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0 : the command was successful. Otherwise an error occurred</description>
 			</parameter>
@@ -630,7 +630,7 @@
 				<description>Handle of the attribute which was read</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0 : the command was successful. Otherwise an error occurred</description>
 			</parameter>
@@ -666,7 +666,7 @@
 		</command_parameters>
 		<response_parameters>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0 : the command was successful. Otherwise an error occurred</description>
 			</parameter>
@@ -744,7 +744,7 @@
 		</command_parameters>
 		<response_parameters>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0: the write was successful. Non-zero: An error occurred</description>
 			</parameter>
@@ -860,37 +860,6 @@
 	</command>
 
 	<command>
-		<name>channelMapSet</name>
-		<class>0x03</class>
-		<id>0x05</id>
-		<description>This command can be used to set the new Channel Map.</description>
-		<command_parameters>
-			<parameter>
-				<data_type>uint8</data_type>
-				<name>connection</name>
-				<description>Connection handle.</description>
-			</parameter>
-			<parameter>
-				<data_type>uint8array</data_type>
-				<name>map</name>
-				<description>New Channel Map. Channel Map is 5 bytes array. Each bit corresponds to one channel. 0-bit corresponds to 0 channel. Channel range: 0-36</description>
-			</parameter>
-		</command_parameters>
-		<response_parameters>
-			<parameter>
-				<data_type>uint8</data_type>
-				<name>connection</name>
-				<description>Connection handle.</description>
-			</parameter>
-			<parameter>
-				<data_type>uint8</data_type>
-				<name>result</name>
-				<description>0 : the update was successful. Non-zero: An error occurred.</description>
-			</parameter>
-		</response_parameters>
-	</command>
-
-	<command>
 		<name>disconnect</name>
 		<class>0x03</class>
 		<id>0x00</id>
@@ -909,7 +878,7 @@
 				<description>Connection handle.</description>
 			</parameter>
 			<parameter>
-				<data_type>uint8</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0 : the update was successful. Non-zero: An error occurred.</description>
 			</parameter>
@@ -936,7 +905,7 @@
 			</parameter>
 			<parameter>
 				<data_type>int8</data_type>
-				<name>result</name>
+				<name>rssi</name>
 				<description>RSSI value of the connection in dBm. Range: -103 to -38</description>
 			</parameter>
 		</response_parameters>
@@ -1002,7 +971,7 @@
 				<description>Connection handle.</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description> 0 : the update was successful. Non-zero: An error occurred.</description>
 			</parameter>
@@ -1126,6 +1095,37 @@
 	</command>
 
 	<command>
+		<name>setScanParameters</name>
+		<class>0x06</class>
+		<id>0x07</id>
+		<description>This command sets the scan parameters which affect how other Smart devices are discovered.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>scan_interval</name>
+				<description>Scan interval defines the interval when scanning is re-started in units of 625us. Range: 0x4 - 0x4000. Default: (46,875ms) 0x4B After every scan interval the scanner will change the frequency it operates at at it will cycle through all the three advertisements channels in a round robin fashion. According to the specification all three channels must be Bluetooth used by a scanner.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint16</data_type>
+				<name>scan_window</name>
+				<description>Scan Window defines how long time the scanner will listen on a certain frequency and try to pick up advertisement packets. Scan window is defined as units of 625us. Range: 0x4 - 0x4000. Default: 0x32 (31,25 ms). Scan windows must be equal or smaller than scan interval If scan window is equal to the scan interval value, then the module Bluetooth will be scanning at a 100% duty cycle. If scan window is half of the scan interval value, then the module Bluetooth will be scanning at a 50% duty cycle.</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>active</name>
+				<description>1: Active scanning is used. When an advertisement packet is received the Bluetooth stack will send a scan request packet to the advertiser to try and read the scan response data. 0: Passive scanning is used. No scan request is made.</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>BgApiResponse</data_type>
+				<name>result</name>
+				<description> 0: The command was executed successfully. Non-zero: An error occurred</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
 		<name>connectDirect</name>
 		<class>0x06</class>
 		<id>0x03</id>
@@ -1164,7 +1164,7 @@
 		</command_parameters>
 		<response_parameters>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0 : procedure was successfully started Non-zero: An error occurred</description>
 			</parameter>
@@ -1205,7 +1205,7 @@
 		</command_parameters>
 		<response_parameters>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0 : procedure was successfully started Non-zero: An error occurred</description>
 			</parameter>
@@ -1224,14 +1224,14 @@
 		<description>This command starts the GAP discovery procedure to scan for advertising devices i.e. to perform a device discovery. Scanning parameters can be configured with the Set Scan Parameters command before issuing this command. To cancel on an ongoing discovery process use the End Procedure command.</description>
 		<command_parameters>
 			<parameter>
-				<data_type>uint8</data_type>
+				<data_type>GapDiscoverMode</data_type>
 				<name>mode</name>
 				<description>see:GAP Discover Mode.</description>
 			</parameter>
 		</command_parameters>
 		<response_parameters>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0: Scan procedure was successfully started Non-zero: An error occurred.</description>
 			</parameter>
@@ -1247,7 +1247,7 @@
 		</command_parameters>
 		<response_parameters>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0: the command was successful. Non-zero: An error occurred</description>
 			</parameter>
@@ -1261,19 +1261,19 @@
 		<description>This command configures the current GAP discoverability and connectability modes. It can be used to enable advertisements and/or allow connection. The command is also meant to fully stop advertising, when using gap_non_discoverable and gap_non_connectable.</description>
 		<command_parameters>
 			<parameter>
-				<data_type>uint8</data_type>
+				<data_type>GapDiscoverableMode</data_type>
 				<name>discover</name>
 				<description>see:GAP Discoverable Mode</description>
 			</parameter>
 			<parameter>
-				<data_type>uint8</data_type>
+				<data_type>GapConnectableMode</data_type>
 				<name>connect</name>
 				<description>see:GAP Connectable Mode</description>
 			</parameter>
 		</command_parameters>
 		<response_parameters>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0: the command was successful. Non-zero: An error occurred</description>
 			</parameter>
@@ -1328,7 +1328,7 @@
 		</command_parameters>
 		<response_parameters>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0: the command was successful. Non-zero: An error occurred</description>
 			</parameter>
@@ -1359,7 +1359,7 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>0 : the encryption was started successfully</description>
 			</parameter>
@@ -1401,7 +1401,7 @@
 		</command_parameters>
 		<response_parameters>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>Command Result</description>
 			</parameter>
@@ -1459,7 +1459,7 @@
 		</command_parameters>
 		<response_parameters>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>Command result</description>
 			</parameter>
@@ -1483,7 +1483,7 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
 				<description>Encryption status, describes error that occurred during bonding. See: Security Manager Protocol Errors</description>
 			</parameter>
@@ -1797,33 +1797,135 @@
 			</parameter>
 		</parameters>
 	</structure>
+-->
 
 	<enum>
-		<name>EmberZdoConfigurationFlags</name>
-		<description>This is a bitmask that controls which incoming ZDO request messages are passed to the application.</description>
+		<name>GapDiscoverableMode</name>
+		<description>GAP discoverable modes</description>
 		<values>
 			<value>
-				<name>EMBER_APP_RECEIVES_SUPPORTED_ZDO_REQUESTS</name>
+				<name>gap_non_discoverable</name>
+				<enum_value>0x00</enum_value>
+				<description>Non-discoverable mode: the LE Limited Discoverable Mode and the LE General Discoverable Mode bits are NOT set in the AD Flags type. A master can still connect to the advertising slave in this mode.</description>
+			</value>
+			<value>
+				<name>gap_limited_discoverable</name>
 				<enum_value>0x01</enum_value>
-				<description>Set this flag in order to receive supported ZDO request messages via the incomingMessageHandler callback. A supported ZDO request is one that is handled by the EmberZNet stack. The stack will continue to handle the request and send the appropriate ZDO response even if this configuration option is enabled.</description>
+				<description>Discoverable using limited scanning mode: the advertisement packets will carry the LE Limited Discoverable Mode bit set in the Flags AD type.</description>
 			</value>
 			<value>
-				<name>EMBER_APP_HANDLES_UNSUPPORTED_ZDO_REQUESTS</name>
+				<name>gap_general_discoverable</name>
 				<enum_value>0x02</enum_value>
-				<description>Set this flag in order to receive unsupported ZDO request messages via the incomingMessageHandler callback. An unsupported ZDO request is one that is not handled by the EmberZNet stack, other than to send a 'not supported' ZDO response. If this configuration option is enabled, the stack will no longer send any ZDO response, and it is the application's responsibility to do so.</description>
+				<description>Discoverable using general scanning mode: the advertisement packets will carry the LE General Discoverable Mode bit set in the Flags AD type.</description>
 			</value>
 			<value>
-				<name>EMBER_APP_HANDLES_ZDO_ENDPOINT_REQUESTS</name>
+				<name>gap_broadcast</name>
+				<enum_value>0x03</enum_value>
+				<description>Same as gap_non_discoverable.</description>
+			</value>
+			<value>
+				<name>gap_user_data</name>
 				<enum_value>0x04</enum_value>
-				<description>Set this flag in order to receive the following ZDO request messages via the incomingMessageHandler callback: SIMPLE_DESCRIPTOR_REQUEST, MATCH_DESCRIPTORS_REQUEST, and ACTIVE_ENDPOINTS_REQUEST. If this configuration option is enabled, the stack will no longer send any ZDO response for these requests, and it is the application's responsibility to do so.</description>
+				<description>In this advertisement the advertisement and scan response data defined by user will be used. The user is responsible of building the advertisement data so that it also contains the appropriate desired Flags AD type.</description>
 			</value>
 			<value>
-				<name>EMBER_APP_HANDLES_ZDO_BINDING_REQUESTS</name>
-				<enum_value>0x08</enum_value>
-				<description>Set this flag in order to receive the following ZDO request messages via the incomingMessageHandler callback: BINDING_TABLE_REQUEST, BIND_REQUEST, and UNBIND_REQUEST. If this configuration option is enabled, the stack will no longer send any ZDO response for these requests, and it is the application's responsibility to do so.</description>
+				<name>gap_enhanced_broadcasting</name>
+				<enum_value>0x80</enum_value>
+				<description>When turning the most highest bit on in GAP discoverable mode, the remote devices that send scan request packets to the advertiser are reported back to the application through Scan Response event. This is so called Enhanced Broadcasting mode.</description>
 			</value>
 		</values>
 	</enum>
--->
+
+	<enum>
+		<name>GapDiscoverMode</name>
+		<description>GAP discover modes</description>
+		<values>
+			<value>
+				<name>gap_discover_limited</name>
+				<enum_value>0x00</enum_value>
+				<description>Discover only limited discoverable devices, that is, Slaves which have the LE Limited Discoverable Mode bit set in the AD type of their Flags advertisement packets.</description>
+			</value>
+			<value>
+				<name>gap_discover_generic</name>
+				<enum_value>0x01</enum_value>
+				<description>Discover limited and generic discoverable devices, that is, Slaves which have the LE Limited Discoverable Mode LE General or the Discoverable Mode bit set in the AD type of their advertisement Flags packets.</description>
+			</value>
+			<value>
+				<name>gap_discover_observation</name>
+				<enum_value>0x02</enum_value>
+				<description>Discover all devices regardless of the AD type, so also devices in Flags non-discoverable mode will be reported to host.</description>
+			</value>
+			<value>
+				<name>gap_broadcast</name>
+				<enum_value>0x03</enum_value>
+				<description>Same as gap_non_discoverable.</description>
+			</value>
+			<value>
+				<name>gap_user_data</name>
+				<enum_value>0x04</enum_value>
+				<description>In this advertisement the advertisement and scan response data defined by user will be used. The user is responsible of building the advertisement data so that it also contains the appropriate desired Flags AD type.</description>
+			</value>
+			<value>
+				<name>gap_enhanced_broadcasting</name>
+				<enum_value>0x80</enum_value>
+				<description>When turning the most highest bit on in GAP discoverable mode, the remote devices that send scan request packets to the advertiser are reported back to the application through Scan Response event. This is so called Enhanced Broadcasting mode.</description>
+			</value>
+		</values>
+	</enum>
+
+	<enum>
+		<name>GapConnectableMode</name>
+		<description>GAP connectable modes</description>
+		<values>
+			<value>
+				<name>gap_non_connectable</name>
+				<enum_value>0x00</enum_value>
+				<description>Not connectable</description>
+			</value>
+			<value>
+				<name>gap_directed_connectable</name>
+				<enum_value>0x01</enum_value>
+				<description>Directed Connectable</description>
+			</value>
+			<value>
+				<name>gap_undirected_connectable</name>
+				<enum_value>0x02</enum_value>
+				<description>Undirected connectable</description>
+			</value>
+			<value>
+				<name>gap_scannable_non_connectable</name>
+				<enum_value>0x03</enum_value>
+				<description>Same as non-connectable, but also supports ADV_SCAN_IND packets. Device accepts scan requests (active scanning) but is not connectable.</description>
+			</value>
+		</values>
+	</enum>
+
+	<enum>
+		<name>BgApiResponse</name>
+		<description>Response codes</description>
+		<values>
+			<value>
+				<name>invalid_conn_handle</name>
+				<enum_value>0x101</enum_value>
+				<description>Invalid GATT connection handle.</description>
+			</value>
+			<value>
+				<name>waiting_response</name>
+				<enum_value>0x102</enum_value>
+				<description>Waiting response from GATT server to previous procedure.</description>
+			</value>
+			<value>
+				<name>invalid_param</name>
+				<enum_value>0x180</enum_value>
+				<description>Command contained invalid parameter</description>
+			</value>
+			<value>
+				<name>wrong_state</name>
+				<enum_value>0x181</enum_value>
+				<description>Device is in wrong state to receive command</description>
+			</value>
+		</values>
+	</enum>
+
 
 </protocol>

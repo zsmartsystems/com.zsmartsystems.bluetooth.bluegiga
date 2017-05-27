@@ -9,6 +9,7 @@
 package com.zsmartsystems.bluetooth.bluegiga.command.gap;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.BgApiResponse;
 
 /**
  * Class to implement the BlueGiga command <b>connectDirect</b>.
@@ -38,9 +39,9 @@ public class BlueGigaConnectDirectResponse extends BlueGigaResponse {
     /**
      * 0 : procedure was successfully started Non-zero: An error occurred
      * <p>
-     * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
+     * BlueGiga API type is <i>BgApiResponse</i> - Java type is {@link BgApiResponse}
      */
-    private int result;
+    private BgApiResponse result;
 
     /**
      * Connection handle that is reserved for new connection
@@ -57,18 +58,18 @@ public class BlueGigaConnectDirectResponse extends BlueGigaResponse {
         super(inputBuffer);
 
         // Deserialize the fields
-        result = deserializeUInt16();
+        result = deserializeBgApiResponse();
         connection_handle = deserializeUInt8();
     }
 
     /**
      * 0 : procedure was successfully started Non-zero: An error occurred
      * <p>
-     * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
+     * BlueGiga API type is <i>BgApiResponse</i> - Java type is {@link BgApiResponse}
      *
-     * @return the current result as {@link int}
+     * @return the current result as {@link BgApiResponse}
      */
-    public int getResult() {
+    public BgApiResponse getResult() {
         return result;
     }
 

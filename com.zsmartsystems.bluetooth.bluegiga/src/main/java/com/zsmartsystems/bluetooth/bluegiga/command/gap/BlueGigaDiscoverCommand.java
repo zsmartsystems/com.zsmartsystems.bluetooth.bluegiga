@@ -9,6 +9,7 @@
 package com.zsmartsystems.bluetooth.bluegiga.command.gap;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaCommand;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapDiscoverMode;
 
 /**
  * Class to implement the BlueGiga command <b>discover</b>.
@@ -31,15 +32,15 @@ public class BlueGigaDiscoverCommand extends BlueGigaCommand {
     /**
      * see:GAP Discover Mode.
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>GapDiscoverMode</i> - Java type is {@link GapDiscoverMode}
      */
-    private int mode;
+    private GapDiscoverMode mode;
     /**
      * see:GAP Discover Mode.
      *
-     * @param mode the mode to set as {@link int}
+     * @param mode the mode to set as {@link GapDiscoverMode}
      */
-    public void setMode(int mode) {
+    public void setMode(GapDiscoverMode mode) {
         this.mode = mode;
     }
 
@@ -50,7 +51,7 @@ public class BlueGigaDiscoverCommand extends BlueGigaCommand {
         serializeHeader(COMMAND_CLASS, COMMAND_METHOD);
 
         // Serialize the fields
-        serializeUInt8(mode);
+        serializeGapDiscoverMode(mode);
 
         return getPayload();
     }

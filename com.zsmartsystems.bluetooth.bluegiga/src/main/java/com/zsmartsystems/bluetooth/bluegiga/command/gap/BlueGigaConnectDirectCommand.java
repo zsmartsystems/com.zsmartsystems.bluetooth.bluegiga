@@ -38,9 +38,9 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
     /**
      * Bluetooth address of the target device.
      * <p>
-     * BlueGiga API type is <i>bd_addr</i> - Java type is {@link long}
+     * BlueGiga API type is <i>bd_addr</i> - Java type is {@link String}
      */
-    private long address;
+    private String address;
 
     /**
      * see: Bluetooth Address Types.
@@ -90,9 +90,9 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
     /**
      * Bluetooth address of the target device.
      *
-     * @param address the address to set as {@link long}
+     * @param address the address to set as {@link String}
      */
-    public void setAddress(long address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 

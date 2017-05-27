@@ -12,9 +12,12 @@ import java.util.TreeMap;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaCommand;
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaSerialHandler;
+import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaDiscoverCommand;
+import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaSetScanParametersCommand;
+import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaAddressGetCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetCountersCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetInfoCommand;
-import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaResetCommand;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapDiscoverMode;
 
 /**
  *
@@ -50,7 +53,7 @@ public final class BlueGigaConsole {
 
         commands.put("info", new GetInfoCommand());
         commands.put("counters", new GetCountersCommand());
-        commands.put("reset", new ResetCommand());
+        commands.put("discover", new DiscoverCommand());
 
         commands.put("quit", new QuitCommand());
         commands.put("help", new HelpCommand());
@@ -299,9 +302,14 @@ public final class BlueGigaConsole {
          */
         @Override
         public boolean process(final String[] args, PrintStream out) throws Exception {
-            BlueGigaCommand infoCommand = new BlueGigaGetInfoCommand();
+            BlueGigaCommand command;
 
-            bleHandler.sendBleRequestAsync(infoCommand);
+            command = new BlueGigaGetInfoCommand();
+            bleHandler.sendBleRequestAsync(command);
+
+            command = new BlueGigaAddressGetCommand();
+            bleHandler.sendBleRequestAsync(command);
+
             return true;
         }
     }
@@ -328,20 +336,21 @@ public final class BlueGigaConsole {
          */
         @Override
         public boolean process(final String[] args, PrintStream out) throws Exception {
-            BlueGigaCommand countersCommand = new BlueGigaGetCountersCommand();
+            BlueGigaCommand command;
 
-            bleHandler.sendBleRequestAsync(countersCommand);
+            command = new BlueGigaGetCountersCommand();
+            bleHandler.sendBleRequestAsync(command);
             return true;
         }
     }
 
-    private class ResetCommand implements ConsoleCommand {
+    private class DiscoverCommand implements ConsoleCommand {
         /**
          * {@inheritDoc}
          */
         @Override
         public String getDescription() {
-            return "Resets the dongle";
+            return "Discovery";
         }
 
         /**
@@ -349,7 +358,7 @@ public final class BlueGigaConsole {
          */
         @Override
         public String getSyntax() {
-            return "reset";
+            return "discover";
         }
 
         /**
@@ -357,9 +366,16 @@ public final class BlueGigaConsole {
          */
         @Override
         public boolean process(final String[] args, PrintStream out) throws Exception {
-            BlueGigaCommand resetCommand = new BlueGigaResetCommand();
+            BlueGigaSetScanParametersCommand scanCommand = new BlueGigaSetScanParametersCommand();
+            scanCommand.setActive(1);
+            scanCommand.setScan_interval(0x40);
+            scanCommand.setScan_window(0x30);
+            bleHandler.sendBleRequestAsync(scanCommand);
 
-            bleHandler.sendBleRequestAsync(resetCommand);
+            BlueGigaDiscoverCommand discoverCommand = new BlueGigaDiscoverCommand();
+            discoverCommand.setMode(GapDiscoverMode.gap_discover_generic);
+            bleHandler.sendBleRequestAsync(discoverCommand);
+
             return true;
         }
     }

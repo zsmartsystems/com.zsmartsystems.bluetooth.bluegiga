@@ -21,7 +21,7 @@ import com.zsmartsystems.bluetooth.bluegiga.ember.autocode.xml.Value;
  */
 public class CommandGenerator extends ClassGenerator {
     final String commandPackage = "com.zsmartsystems.bluetooth.bluegiga.command";
-    final String structurePackage = "com.zsmartsystems.bluetooth.bluegiga.structure";
+    final String enumPackage = "com.zsmartsystems.bluetooth.bluegiga.enumeration";
 
     public void go(Protocol protocol) throws FileNotFoundException {
         String packageName;
@@ -301,7 +301,7 @@ public class CommandGenerator extends ClassGenerator {
         addImport("java.util.HashMap");
 
         out.println("/**");
-        out.println(" * Class to implement the Ember Enumeration <b>" + enumeration.name + "</b>.");
+        out.println(" * Class to implement the BlueGiga Enumeration <b>" + enumeration.name + "</b>.");
         if (enumeration.description != null && enumeration.description.trim().length() > 0) {
             out.println(" * <p>");
             outputWithLinebreak(out, "", enumeration.description);
@@ -359,12 +359,11 @@ public class CommandGenerator extends ClassGenerator {
         out.println();
 
         out.println("    /**");
-        out.println("     * Lookup function based on the EmberStatus type code. Returns null if the");
-        out.println("     * code does not exist.");
+        out.println("     * Lookup function based on the type code. Returns null if the code does not exist.");
         out.println("     *");
         out.println("     * @param i");
         out.println("     *            the code to lookup");
-        out.println("     * @return enumeration value of the alarm type.");
+        out.println("     * @return enumeration value.");
         out.println("     */");
         out.println("    public static " + className + " get" + className + "(int i) {");
         out.println("        if (codeMapping == null) {");
@@ -381,9 +380,9 @@ public class CommandGenerator extends ClassGenerator {
         out.println("    }");
         out.println();
         out.println("    /**");
-        out.println("     * Returns the EZSP protocol defined value for this enum");
+        out.println("     * Returns the BlueGiga protocol defined value for this enum");
         out.println("     *");
-        out.println("     * @return the EZSP protocol key");
+        out.println("     * @return the BGAPI enumeration key");
         out.println("     */");
         out.println("    public int getKey() {");
         out.println("        return key;");
@@ -393,11 +392,11 @@ public class CommandGenerator extends ClassGenerator {
 
         out.flush();
 
-        File packageFile = new File(sourceRootPath + structurePackage.replace(".", "/"));
+        File packageFile = new File(sourceRootPath + enumPackage.replace(".", "/"));
         PrintWriter outFile = getClassOut(packageFile, className);
 
         outputCopywrite(outFile);
-        outFile.println("package " + structurePackage + ";");
+        outFile.println("package " + enumPackage + ";");
 
         outFile.println();
 
@@ -427,9 +426,10 @@ public class CommandGenerator extends ClassGenerator {
             case "uint8array":
                 return "int[]";
             case "bd_addr":
-                return "long";
+                return "String";
             default:
-                return "UNKNOWN";
+                addImport(enumPackage + "." + dataTypeLocal);
+                return dataTypeLocal;
         }
     }
 
@@ -450,7 +450,7 @@ public class CommandGenerator extends ClassGenerator {
             case "bd_addr":
                 return "Address";
             default:
-                return "UNKNOWN";
+                return dataTypeLocal;
         }
     }
 }

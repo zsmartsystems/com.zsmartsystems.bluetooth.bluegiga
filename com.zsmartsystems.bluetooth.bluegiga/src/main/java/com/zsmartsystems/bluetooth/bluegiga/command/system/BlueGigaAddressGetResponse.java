@@ -28,9 +28,9 @@ public class BlueGigaAddressGetResponse extends BlueGigaResponse {
     /**
      * Bluetooth address of the local device
      * <p>
-     * BlueGiga API type is <i>bd_addr</i> - Java type is {@link long}
+     * BlueGiga API type is <i>bd_addr</i> - Java type is {@link String}
      */
-    private long address;
+    private String address;
 
     /**
      * Response constructor
@@ -46,11 +46,11 @@ public class BlueGigaAddressGetResponse extends BlueGigaResponse {
     /**
      * Bluetooth address of the local device
      * <p>
-     * BlueGiga API type is <i>bd_addr</i> - Java type is {@link long}
+     * BlueGiga API type is <i>bd_addr</i> - Java type is {@link String}
      *
-     * @return the current address as {@link long}
+     * @return the current address as {@link String}
      */
-    public long getAddress() {
+    public String getAddress() {
         return address;
     }
 

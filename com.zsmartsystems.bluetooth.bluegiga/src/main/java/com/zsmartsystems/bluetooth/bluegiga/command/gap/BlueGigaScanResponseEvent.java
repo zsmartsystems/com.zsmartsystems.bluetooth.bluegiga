@@ -44,9 +44,9 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
     /**
      * Advertiser address type. 1: random address. 0: public address
      * <p>
-     * BlueGiga API type is <i>bd_addr</i> - Java type is {@link long}
+     * BlueGiga API type is <i>bd_addr</i> - Java type is {@link String}
      */
-    private long sender;
+    private String sender;
 
     /**
      * Bond handle if there is known bond for this device, 0xff otherwise
@@ -103,11 +103,11 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
     /**
      * Advertiser address type. 1: random address. 0: public address
      * <p>
-     * BlueGiga API type is <i>bd_addr</i> - Java type is {@link long}
+     * BlueGiga API type is <i>bd_addr</i> - Java type is {@link String}
      *
-     * @return the current sender as {@link long}
+     * @return the current sender as {@link String}
      */
-    public long getSender() {
+    public String getSender() {
         return sender;
     }
 

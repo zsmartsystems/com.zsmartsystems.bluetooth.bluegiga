@@ -9,6 +9,7 @@
 package com.zsmartsystems.bluetooth.bluegiga.command.attributedb;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.BgApiResponse;
 
 /**
  * Class to implement the BlueGiga command <b>write</b>.
@@ -28,9 +29,9 @@ public class BlueGigaWriteResponse extends BlueGigaResponse {
     /**
      * 0: the write was successful. Non-zero: An error occurred
      * <p>
-     * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
+     * BlueGiga API type is <i>BgApiResponse</i> - Java type is {@link BgApiResponse}
      */
-    private int result;
+    private BgApiResponse result;
 
     /**
      * Response constructor
@@ -40,17 +41,17 @@ public class BlueGigaWriteResponse extends BlueGigaResponse {
         super(inputBuffer);
 
         // Deserialize the fields
-        result = deserializeUInt16();
+        result = deserializeBgApiResponse();
     }
 
     /**
      * 0: the write was successful. Non-zero: An error occurred
      * <p>
-     * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
+     * BlueGiga API type is <i>BgApiResponse</i> - Java type is {@link BgApiResponse}
      *
-     * @return the current result as {@link int}
+     * @return the current result as {@link BgApiResponse}
      */
-    public int getResult() {
+    public BgApiResponse getResult() {
         return result;
     }
 

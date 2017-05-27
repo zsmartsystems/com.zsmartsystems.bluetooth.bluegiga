@@ -38,7 +38,7 @@ public class BlueGigaGetRssiResponse extends BlueGigaResponse {
      * <p>
      * BlueGiga API type is <i>int8</i> - Java type is {@link int}
      */
-    private int result;
+    private int rssi;
 
     /**
      * Response constructor
@@ -49,7 +49,7 @@ public class BlueGigaGetRssiResponse extends BlueGigaResponse {
 
         // Deserialize the fields
         connection = deserializeUInt8();
-        result = deserializeInt8();
+        rssi = deserializeInt8();
     }
 
     /**
@@ -68,10 +68,10 @@ public class BlueGigaGetRssiResponse extends BlueGigaResponse {
      * <p>
      * BlueGiga API type is <i>int8</i> - Java type is {@link int}
      *
-     * @return the current result as {@link int}
+     * @return the current rssi as {@link int}
      */
-    public int getResult() {
-        return result;
+    public int getRssi() {
+        return rssi;
     }
 
 
@@ -80,8 +80,8 @@ public class BlueGigaGetRssiResponse extends BlueGigaResponse {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaGetRssiResponse [connection=");
         builder.append(connection);
-        builder.append(", result=");
-        builder.append(result);
+        builder.append(", rssi=");
+        builder.append(rssi);
         builder.append("]");
         return builder.toString();
     }

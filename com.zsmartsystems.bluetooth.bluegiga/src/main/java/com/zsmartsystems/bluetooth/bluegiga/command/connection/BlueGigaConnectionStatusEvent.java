@@ -42,9 +42,9 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
     /**
      * Remote devices Bluetooth address
      * <p>
-     * BlueGiga API type is <i>bd_addr</i> - Java type is {@link long}
+     * BlueGiga API type is <i>bd_addr</i> - Java type is {@link String}
      */
-    private long address;
+    private String address;
 
     /**
      * Remote address type see: Bluetooth Address Types--gap
@@ -124,11 +124,11 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
     /**
      * Remote devices Bluetooth address
      * <p>
-     * BlueGiga API type is <i>bd_addr</i> - Java type is {@link long}
+     * BlueGiga API type is <i>bd_addr</i> - Java type is {@link String}
      *
-     * @return the current address as {@link long}
+     * @return the current address as {@link String}
      */
-    public long getAddress() {
+    public String getAddress() {
         return address;
     }
 

@@ -2,6 +2,10 @@ package com.zsmartsystems.bluetooth.bluegiga;
 
 import java.util.Arrays;
 
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapConnectableMode;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapDiscoverMode;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapDiscoverableMode;
+
 /**
  * 
  * @author Chris Jackson
@@ -66,8 +70,34 @@ public abstract class BlueGigaCommand extends BlueGigaPacket {
         }
     }
 
-    protected void serializeAddress(long address) {
-        serializeUInt32(0);
+    protected void serializeAddress(String address) {
+        String[] bytes = address.split(":");
+        if (bytes.length != 0) {
+            serializeUInt8(0);
+            serializeUInt8(0);
+            serializeUInt8(0);
+            serializeUInt8(0);
+            serializeUInt8(0);
+            serializeUInt8(0);
+
+            return;
+        }
+
+        for (String value : bytes) {
+            serializeUInt8(Integer.parseInt(value, 16));
+        }
+    }
+
+    protected void serializeGapDiscoverableMode(GapDiscoverableMode mode) {
+        serializeUInt8(mode.getKey());
+    }
+
+    protected void serializeGapConnectableMode(GapConnectableMode mode) {
+        serializeUInt8(mode.getKey());
+    }
+
+    protected void serializeGapDiscoverMode(GapDiscoverMode mode) {
+        serializeUInt8(mode.getKey());
     }
 
     protected int[] getPayload() {

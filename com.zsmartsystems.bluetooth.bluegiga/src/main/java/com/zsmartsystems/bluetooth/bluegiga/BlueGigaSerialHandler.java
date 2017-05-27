@@ -85,6 +85,7 @@ public class BlueGigaSerialHandler {
                             // End of packet reached - process
                             BlueGigaResponse responsePacket = BlueGigaResponsePackets.getPacket(inputBuffer);
 
+                            logger.debug("BLE RX: {}", printHex(inputBuffer, inputLength));
                             logger.debug("BLE RX: {}", responsePacket);
                             if (responsePacket != null) {
                                 notifyTransactionComplete(responsePacket);
@@ -139,6 +140,8 @@ public class BlueGigaSerialHandler {
         // Send the data
         try {
             int[] payload = bleFrame.serialize();
+            logger.debug("TX BLE frame: {}", printHex(payload, payload.length));
+
             // outputStream.write(payload.length);
             for (int b : payload) {
                 // result.append(" ");
@@ -317,6 +320,16 @@ public class BlueGigaSerialHandler {
         }
 
         return null;
+    }
+
+    private String printHex(int[] data, int len) {
+        StringBuilder builder = new StringBuilder();
+
+        for (int cnt = 0; cnt < len; cnt++) {
+            builder.append(String.format("%02X ", data[cnt]));
+        }
+
+        return builder.toString();
     }
 
     interface BleListener {

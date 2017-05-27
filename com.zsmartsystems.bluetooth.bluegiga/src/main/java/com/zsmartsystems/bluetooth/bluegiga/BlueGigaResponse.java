@@ -1,5 +1,7 @@
 package com.zsmartsystems.bluetooth.bluegiga;
 
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.BgApiResponse;
+
 public class BlueGigaResponse extends BlueGigaPacket {
     private int[] buffer = new int[131];
     private int position = 0;
@@ -37,6 +39,10 @@ public class BlueGigaResponse extends BlueGigaPacket {
         return buffer[position++] + (buffer[position++] << 8);
     }
 
+    protected BgApiResponse deserializeBgApiResponse() {
+        return BgApiResponse.getBgApiResponse(deserializeUInt16());
+    }
+
     protected long deserializeUInt32() {
         return buffer[position++] + (buffer[position++] << 8) + (buffer[position++] << 16) + (buffer[position++] << 24);
     }
@@ -52,8 +58,16 @@ public class BlueGigaResponse extends BlueGigaPacket {
         return val;
     }
 
-    protected Integer deserializeAddress() {
-        // TODO Auto-generated method stub
-        return null;
+    protected String deserializeAddress() {
+        StringBuilder builder = new StringBuilder();
+
+        for (int cnt = 0; cnt < 6; cnt++) {
+            if (cnt > 0) {
+                builder.append(":");
+            }
+            builder.append(String.format("%02x", buffer[position++]));
+        }
+
+        return builder.toString();
     }
 }

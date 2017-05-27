@@ -77,8 +77,8 @@ public class PacketProcessing extends ClassGenerator {
 
         out.println("    public static BlueGigaResponse getPacket(int[] data) {");
 
-        out.println("        int cmdClass = data[3];");
-        out.println("        int cmdMethod = data[4];");
+        out.println("        int cmdClass = data[2];");
+        out.println("        int cmdMethod = data[3];");
         out.println("        boolean isEvent = (data[0] & 0x80) != 0;");
         out.println();
 

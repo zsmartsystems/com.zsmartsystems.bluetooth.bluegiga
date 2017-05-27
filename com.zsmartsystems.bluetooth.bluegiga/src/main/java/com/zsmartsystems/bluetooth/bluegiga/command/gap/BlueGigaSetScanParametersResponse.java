@@ -6,15 +6,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package com.zsmartsystems.bluetooth.bluegiga.command.attributeclient;
+package com.zsmartsystems.bluetooth.bluegiga.command.gap;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.BgApiResponse;
 
 /**
- * Class to implement the BlueGiga command <b>readMultiple</b>.
+ * Class to implement the BlueGiga command <b>setScanParameters</b>.
  * <p>
- * This command can be used to read multiple attributes from a server.
+ * This command sets the scan parameters which affect how other Smart devices are discovered.
  * <p>
  * This class provides methods for processing BlueGiga API commands.
  * <p>
@@ -22,19 +22,12 @@ import com.zsmartsystems.bluetooth.bluegiga.enumeration.BgApiResponse;
  *
  * @author Chris Jackson - Initial contribution of Java code generator
  */
-public class BlueGigaReadMultipleResponse extends BlueGigaResponse {
-    public static int COMMAND_CLASS = 0x04;
-    public static int COMMAND_METHOD = 0x0B;
+public class BlueGigaSetScanParametersResponse extends BlueGigaResponse {
+    public static int COMMAND_CLASS = 0x06;
+    public static int COMMAND_METHOD = 0x07;
 
     /**
-     * Connection handle
-     * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
-     */
-    private int connection;
-
-    /**
-     * 0 : the command was successful. Otherwise an error occurred
+     *  0: The command was executed successfully. Non-zero: An error occurred
      * <p>
      * BlueGiga API type is <i>BgApiResponse</i> - Java type is {@link BgApiResponse}
      */
@@ -43,28 +36,16 @@ public class BlueGigaReadMultipleResponse extends BlueGigaResponse {
     /**
      * Response constructor
      */
-    public BlueGigaReadMultipleResponse(int[] inputBuffer) {
+    public BlueGigaSetScanParametersResponse(int[] inputBuffer) {
         // Super creates deserializer and reads header fields
         super(inputBuffer);
 
         // Deserialize the fields
-        connection = deserializeUInt8();
         result = deserializeBgApiResponse();
     }
 
     /**
-     * Connection handle
-     * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
-     *
-     * @return the current connection as {@link int}
-     */
-    public int getConnection() {
-        return connection;
-    }
-
-    /**
-     * 0 : the command was successful. Otherwise an error occurred
+     *  0: The command was executed successfully. Non-zero: An error occurred
      * <p>
      * BlueGiga API type is <i>BgApiResponse</i> - Java type is {@link BgApiResponse}
      *
@@ -78,9 +59,7 @@ public class BlueGigaReadMultipleResponse extends BlueGigaResponse {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("BlueGigaReadMultipleResponse [connection=");
-        builder.append(connection);
-        builder.append(", result=");
+        builder.append("BlueGigaSetScanParametersResponse [result=");
         builder.append(result);
         builder.append("]");
         return builder.toString();
