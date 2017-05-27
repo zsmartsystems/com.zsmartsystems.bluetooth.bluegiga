@@ -11,7 +11,7 @@ package com.zsmartsystems.bluetooth.bluegiga.command.system;
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
 
 /**
- * Class to implement the BlueGiga command <b>getConnextions</b>.
+ * Class to implement the BlueGiga command <b>getConnections</b>.
  * <p>
  * This command reads the number of supported connections from the local device.
  * <p>
@@ -21,7 +21,7 @@ import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
  *
  * @author Chris Jackson - Initial contribution of Java code generator
  */
-public class BlueGigaGetConnextionsResponse extends BlueGigaResponse {
+public class BlueGigaGetConnectionsResponse extends BlueGigaResponse {
     public static int COMMAND_CLASS = 0x00;
     public static int COMMAND_METHOD = 0x06;
 
@@ -35,7 +35,7 @@ public class BlueGigaGetConnextionsResponse extends BlueGigaResponse {
     /**
      * Response constructor
      */
-    public BlueGigaGetConnextionsResponse(int[] inputBuffer) {
+    public BlueGigaGetConnectionsResponse(int[] inputBuffer) {
         // Super creates deserializer and reads header fields
         super(inputBuffer);
 
@@ -58,7 +58,7 @@ public class BlueGigaGetConnextionsResponse extends BlueGigaResponse {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("BlueGigaGetConnextionsResponse [maxconn=");
+        builder.append("BlueGigaGetConnectionsResponse [maxconn=");
         builder.append(maxconn);
         builder.append("]");
         return builder.toString();

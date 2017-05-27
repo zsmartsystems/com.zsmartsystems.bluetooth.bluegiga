@@ -83,8 +83,8 @@ public abstract class BlueGigaCommand extends BlueGigaPacket {
             return;
         }
 
-        for (String value : bytes) {
-            serializeUInt8(Integer.parseInt(value, 16));
+        for (int cnt = 5; cnt > 0; cnt--) {
+            serializeUInt8(Integer.parseInt(bytes[cnt], 16));
         }
     }
 

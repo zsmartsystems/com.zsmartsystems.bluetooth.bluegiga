@@ -49,6 +49,8 @@ import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaConnectSelective
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaDiscoverResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaEndProcedureResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaScanResponseEvent;
+import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaSetAdvDataResponse;
+import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaSetAdvParametersResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaSetModeResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaSetScanParametersResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.security.BlueGigaBondStatusEvent;
@@ -64,7 +66,7 @@ import com.zsmartsystems.bluetooth.bluegiga.command.security.BlueGigaSetParamete
 import com.zsmartsystems.bluetooth.bluegiga.command.security.BlueGigaWhitelistBondsResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaAddressGetResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaBootEvent;
-import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetConnextionsResponse;
+import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetConnectionsResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetCountersResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetInfoResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaHelloResponse;
@@ -134,6 +136,8 @@ class BlueGigaResponsePackets {
         packetMap.put(Objects.hash(0x06, 0x03, false), BlueGigaConnectDirectResponse.class);
         packetMap.put(Objects.hash(0x06, 0x05, false), BlueGigaConnectSelectiveResponse.class);
         packetMap.put(Objects.hash(0x06, 0x02, false), BlueGigaDiscoverResponse.class);
+        packetMap.put(Objects.hash(0x06, 0x08, false), BlueGigaSetAdvParametersResponse.class);
+        packetMap.put(Objects.hash(0x06, 0x09, false), BlueGigaSetAdvDataResponse.class);
         packetMap.put(Objects.hash(0x06, 0x04, false), BlueGigaEndProcedureResponse.class);
         packetMap.put(Objects.hash(0x06, 0x01, false), BlueGigaSetModeResponse.class);
         packetMap.put(Objects.hash(0x06, 0x00, true), BlueGigaScanResponseEvent.class);
@@ -151,7 +155,7 @@ class BlueGigaResponsePackets {
         packetMap.put(Objects.hash(0x00, 0x02, false), BlueGigaAddressGetResponse.class);
         packetMap.put(Objects.hash(0x00, 0x01, false), BlueGigaHelloResponse.class);
         packetMap.put(Objects.hash(0x00, 0x00, false), BlueGigaResetResponse.class);
-        packetMap.put(Objects.hash(0x00, 0x06, false), BlueGigaGetConnextionsResponse.class);
+        packetMap.put(Objects.hash(0x00, 0x06, false), BlueGigaGetConnectionsResponse.class);
         packetMap.put(Objects.hash(0x00, 0x05, false), BlueGigaGetCountersResponse.class);
         packetMap.put(Objects.hash(0x00, 0x08, false), BlueGigaGetInfoResponse.class);
         packetMap.put(Objects.hash(0x00, 0x00, true), BlueGigaBootEvent.class);

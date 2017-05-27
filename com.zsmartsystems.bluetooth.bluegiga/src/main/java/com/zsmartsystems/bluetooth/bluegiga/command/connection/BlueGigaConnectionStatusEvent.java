@@ -9,6 +9,8 @@
 package com.zsmartsystems.bluetooth.bluegiga.command.connection;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.BluetoothAddressType;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.ConnectionStatusFlags;
 
 /**
  * Class to implement the BlueGiga command <b>connectionStatusEvent</b>.
@@ -35,9 +37,9 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
     /**
      * Connection status flags use connstatus-enumerator
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>ConnectionStatusFlags</i> - Java type is {@link ConnectionStatusFlags}
      */
-    private int flags;
+    private ConnectionStatusFlags flags;
 
     /**
      * Remote devices Bluetooth address
@@ -49,9 +51,9 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
     /**
      * Remote address type see: Bluetooth Address Types--gap
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>BluetoothAddressType</i> - Java type is {@link BluetoothAddressType}
      */
-    private int address_type;
+    private BluetoothAddressType address_type;
 
     /**
      * Current connection interval (units of 1.25ms)
@@ -90,9 +92,9 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
 
         // Deserialize the fields
         connection = deserializeUInt8();
-        flags = deserializeUInt8();
+        flags = deserializeConnectionStatusFlags();
         address = deserializeAddress();
-        address_type = deserializeUInt8();
+        address_type = deserializeBluetoothAddressType();
         conn_interval = deserializeUInt16();
         timeout = deserializeUInt16();
         latency = deserializeUInt16();
@@ -113,11 +115,11 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
     /**
      * Connection status flags use connstatus-enumerator
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>ConnectionStatusFlags</i> - Java type is {@link ConnectionStatusFlags}
      *
-     * @return the current flags as {@link int}
+     * @return the current flags as {@link ConnectionStatusFlags}
      */
-    public int getFlags() {
+    public ConnectionStatusFlags getFlags() {
         return flags;
     }
 
@@ -135,11 +137,11 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
     /**
      * Remote address type see: Bluetooth Address Types--gap
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>BluetoothAddressType</i> - Java type is {@link BluetoothAddressType}
      *
-     * @return the current address_type as {@link int}
+     * @return the current address_type as {@link BluetoothAddressType}
      */
-    public int getAddress_type() {
+    public BluetoothAddressType getAddress_type() {
         return address_type;
     }
 

@@ -13,11 +13,15 @@ import java.util.TreeMap;
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaCommand;
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaSerialHandler;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaDiscoverCommand;
+import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaSetModeCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaSetScanParametersCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaAddressGetCommand;
+import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetConnectionsCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetCountersCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetInfoCommand;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapConnectableMode;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapDiscoverMode;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapDiscoverableMode;
 
 /**
  *
@@ -53,6 +57,7 @@ public final class BlueGigaConsole {
 
         commands.put("info", new GetInfoCommand());
         commands.put("counters", new GetCountersCommand());
+        commands.put("connections", new GetConnectionsCommand());
         commands.put("discover", new DiscoverCommand());
 
         commands.put("quit", new QuitCommand());
@@ -366,15 +371,49 @@ public final class BlueGigaConsole {
          */
         @Override
         public boolean process(final String[] args, PrintStream out) throws Exception {
+            BlueGigaSetModeCommand modeCommand = new BlueGigaSetModeCommand();
+            modeCommand.setConnect(GapConnectableMode.gap_directed_connectable);
+            modeCommand.setDiscover(GapDiscoverableMode.gap_general_discoverable);
+            bleHandler.sendTransaction(modeCommand);
+
             BlueGigaSetScanParametersCommand scanCommand = new BlueGigaSetScanParametersCommand();
             scanCommand.setActive(1);
             scanCommand.setScan_interval(0x40);
             scanCommand.setScan_window(0x30);
-            bleHandler.sendBleRequestAsync(scanCommand);
+            bleHandler.sendTransaction(scanCommand);
 
             BlueGigaDiscoverCommand discoverCommand = new BlueGigaDiscoverCommand();
             discoverCommand.setMode(GapDiscoverMode.gap_discover_generic);
-            bleHandler.sendBleRequestAsync(discoverCommand);
+            bleHandler.sendTransaction(discoverCommand);
+
+            return true;
+        }
+    }
+
+    private class GetConnectionsCommand implements ConsoleCommand {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getDescription() {
+            return "connections";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getSyntax() {
+            return "connections";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean process(final String[] args, PrintStream out) throws Exception {
+            BlueGigaCommand command = new BlueGigaGetConnectionsCommand();
+            bleHandler.sendTransaction(command);
 
             return true;
         }
