@@ -84,7 +84,7 @@ public class BlueGigaBondingFailEvent extends BlueGigaResponse {
         builder.append(handle);
         builder.append(", result=");
         builder.append(result);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

@@ -80,7 +80,7 @@ public class BlueGigaSetModeCommand extends BlueGigaCommand {
         builder.append(discover);
         builder.append(", connect=");
         builder.append(connect);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

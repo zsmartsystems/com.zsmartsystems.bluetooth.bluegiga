@@ -83,7 +83,7 @@ public class BlueGigaIndicatedEvent extends BlueGigaResponse {
         builder.append(connection);
         builder.append(", attrhandle=");
         builder.append(attrhandle);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

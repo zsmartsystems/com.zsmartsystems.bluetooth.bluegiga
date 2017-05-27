@@ -57,7 +57,7 @@ public class BlueGigaReadTypeCommand extends BlueGigaCommand {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaReadTypeCommand [handle=");
         builder.append(handle);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

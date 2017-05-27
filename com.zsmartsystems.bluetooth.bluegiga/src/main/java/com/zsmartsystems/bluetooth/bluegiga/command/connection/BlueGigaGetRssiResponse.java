@@ -82,7 +82,7 @@ public class BlueGigaGetRssiResponse extends BlueGigaResponse {
         builder.append(connection);
         builder.append(", rssi=");
         builder.append(rssi);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

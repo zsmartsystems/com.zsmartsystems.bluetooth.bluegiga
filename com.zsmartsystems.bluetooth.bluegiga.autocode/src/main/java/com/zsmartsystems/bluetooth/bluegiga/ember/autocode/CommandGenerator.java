@@ -102,7 +102,8 @@ public class CommandGenerator extends ClassGenerator {
             out.println("     * BlueGiga API type is <i>" + parameter.data_type + "</i> - Java type is {@link "
                     + getTypeClass(parameter.data_type) + "}");
             out.println("     */");
-            out.println("    private " + getTypeClass(parameter.data_type) + " " + parameter.name + ";");
+            out.println("    private " + getTypeClass(parameter.data_type) + " "
+                    + stringToLowerCamelCase(parameter.name) + ";");
         }
 
         if (className.endsWith("Command")) {
@@ -141,7 +142,7 @@ public class CommandGenerator extends ClassGenerator {
             Map<String, String> autoSizers = new HashMap<String, String>();
             for (Parameter parameter : parameters) {
                 if (parameter.auto_size != null) {
-                    out.println("        int " + parameter.name + " = deserialize"
+                    out.println("        int " + stringToLowerCamelCase(parameter.name) + " = deserialize"
                             + getTypeSerializer(parameter.data_type) + "();");
                     autoSizers.put(parameter.auto_size, parameter.name);
                     continue;
@@ -155,12 +156,12 @@ public class CommandGenerator extends ClassGenerator {
                         && !parameter.data_type.contains("[]")) {
                     int length = Integer.parseInt(parameter.data_type.substring(parameter.data_type.indexOf("[") + 1,
                             parameter.data_type.indexOf("]")));
-                    out.println("        " + parameter.name + " = deserialize" + getTypeSerializer(parameter.data_type)
-                            + "(" + length + ");");
+                    out.println("        " + stringToLowerCamelCase(parameter.name) + " = deserialize"
+                            + getTypeSerializer(parameter.data_type) + "(" + length + ");");
                     continue;
                 }
-                out.println("        " + parameter.name + " = deserialize" + getTypeSerializer(parameter.data_type)
-                        + "();");
+                out.println("        " + stringToLowerCamelCase(parameter.name) + " = deserialize"
+                        + getTypeSerializer(parameter.data_type) + "();");
             }
             out.println("    }");
             out.println();
@@ -175,12 +176,14 @@ public class CommandGenerator extends ClassGenerator {
                 out.println("    /**");
                 outputWithLinebreak(out, "    ", parameter.description);
                 out.println("     *");
-                out.println("     * @param " + parameter.name + " the " + parameter.name + " to set as {@link "
+                out.println("     * @param " + stringToLowerCamelCase(parameter.name) + " the "
+                        + stringToLowerCamelCase(parameter.name) + " to set as {@link "
                         + getTypeClass(parameter.data_type) + "}");
                 out.println("     */");
-                out.println("    public void set" + upperCaseFirstCharacter(parameter.name) + "("
-                        + getTypeClass(parameter.data_type) + " " + parameter.name + ") {");
-                out.println("        this." + parameter.name + " = " + parameter.name + ";");
+                out.println("    public void set" + stringToUpperCamelCase(parameter.name) + "("
+                        + getTypeClass(parameter.data_type) + " " + stringToLowerCamelCase(parameter.name) + ") {");
+                out.println("        this." + stringToLowerCamelCase(parameter.name) + " = "
+                        + stringToLowerCamelCase(parameter.name) + ";");
                 out.println("    }");
                 out.println();
             } else {
@@ -194,8 +197,8 @@ public class CommandGenerator extends ClassGenerator {
                         + getTypeClass(parameter.data_type) + "}");
                 out.println("     */");
                 out.println("    public " + getTypeClass(parameter.data_type) + " get"
-                        + upperCaseFirstCharacter(parameter.name) + "() {");
-                out.println("        return " + parameter.name + ";");
+                        + stringToUpperCamelCase(parameter.name) + "() {");
+                out.println("        return " + stringToLowerCamelCase(parameter.name) + ";");
                 out.println("    }");
                 out.println();
             }
@@ -217,8 +220,8 @@ public class CommandGenerator extends ClassGenerator {
                                 + parameter.auto_size + ".length);");
                         continue;
                     }
-                    out.println(
-                            "        serialize" + getTypeSerializer(parameter.data_type) + "(" + parameter.name + ");");
+                    out.println("        serialize" + getTypeSerializer(parameter.data_type) + "("
+                            + stringToLowerCamelCase(parameter.name) + ");");
                 }
                 out.println();
             }
@@ -243,13 +246,15 @@ public class CommandGenerator extends ClassGenerator {
                 }
 
                 if (first) {
-                    out.println("        builder.append(\"" + className + " [" + parameter.name + "=\");");
+                    out.println("        builder.append(\"" + className + " [" + stringToLowerCamelCase(parameter.name)
+                            + "=\");");
                 } else {
-                    out.println("        builder.append(\", " + parameter.name + "=\");");
+                    out.println("        builder.append(\", " + stringToLowerCamelCase(parameter.name) + "=\");");
                 }
                 first = false;
                 if (parameter.data_type.contains("[")) {
-                    out.println("        for (int c = 0; c < " + parameter.name + ".length; c++) {");
+                    out.println("        for (int c = 0; c < " + stringToLowerCamelCase(parameter.name)
+                            + ".length; c++) {");
                     out.println("            if (c > 0) {");
                     out.println("                builder.append(\" \");");
                     out.println("            }");
@@ -260,7 +265,7 @@ public class CommandGenerator extends ClassGenerator {
                     out.println("        builder.append(" + formatParameterString(parameter) + ");");
                 }
             }
-            out.println("        builder.append(\"]\");");
+            out.println("        builder.append(']');");
             out.println("        return builder.toString();");
         }
         out.println("    }");

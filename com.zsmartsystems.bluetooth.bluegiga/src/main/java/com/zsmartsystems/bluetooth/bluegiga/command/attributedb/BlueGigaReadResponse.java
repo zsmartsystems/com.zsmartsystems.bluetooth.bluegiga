@@ -126,7 +126,7 @@ public class BlueGigaReadResponse extends BlueGigaResponse {
         builder.append(result);
         builder.append(", value=");
         builder.append(value);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

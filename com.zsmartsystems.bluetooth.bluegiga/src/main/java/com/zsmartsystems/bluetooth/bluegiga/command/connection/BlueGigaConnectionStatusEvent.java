@@ -53,14 +53,14 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
      * <p>
      * BlueGiga API type is <i>BluetoothAddressType</i> - Java type is {@link BluetoothAddressType}
      */
-    private BluetoothAddressType address_type;
+    private BluetoothAddressType addressType;
 
     /**
      * Current connection interval (units of 1.25ms)
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int conn_interval;
+    private int connInterval;
 
     /**
      * Current supervision timeout (units of 10ms)
@@ -94,8 +94,8 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
         connection = deserializeUInt8();
         flags = deserializeConnectionStatusFlags();
         address = deserializeAddress();
-        address_type = deserializeBluetoothAddressType();
-        conn_interval = deserializeUInt16();
+        addressType = deserializeBluetoothAddressType();
+        connInterval = deserializeUInt16();
         timeout = deserializeUInt16();
         latency = deserializeUInt16();
         bonding = deserializeUInt8();
@@ -141,8 +141,8 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
      *
      * @return the current address_type as {@link BluetoothAddressType}
      */
-    public BluetoothAddressType getAddress_type() {
-        return address_type;
+    public BluetoothAddressType getAddressType() {
+        return addressType;
     }
 
     /**
@@ -152,8 +152,8 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
      *
      * @return the current conn_interval as {@link int}
      */
-    public int getConn_interval() {
-        return conn_interval;
+    public int getConnInterval() {
+        return connInterval;
     }
 
     /**
@@ -199,17 +199,17 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
         builder.append(flags);
         builder.append(", address=");
         builder.append(address);
-        builder.append(", address_type=");
-        builder.append(address_type);
-        builder.append(", conn_interval=");
-        builder.append(conn_interval);
+        builder.append(", addressType=");
+        builder.append(addressType);
+        builder.append(", connInterval=");
+        builder.append(connInterval);
         builder.append(", timeout=");
         builder.append(timeout);
         builder.append(", latency=");
         builder.append(latency);
         builder.append(", bonding=");
         builder.append(bonding);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

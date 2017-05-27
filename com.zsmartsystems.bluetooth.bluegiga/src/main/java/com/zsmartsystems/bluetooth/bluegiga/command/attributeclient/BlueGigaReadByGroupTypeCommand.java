@@ -117,7 +117,7 @@ public class BlueGigaReadByGroupTypeCommand extends BlueGigaCommand {
         builder.append(end);
         builder.append(", uuid=");
         builder.append(uuid);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

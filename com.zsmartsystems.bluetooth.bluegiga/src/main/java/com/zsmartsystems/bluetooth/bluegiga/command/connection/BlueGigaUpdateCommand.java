@@ -43,14 +43,14 @@ public class BlueGigaUpdateCommand extends BlueGigaCommand {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int interval_min;
+    private int intervalMin;
 
     /**
      * Maximum connection interval (units of 1.25ms)
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int interval_max;
+    private int intervalMax;
 
     /**
      * Slave latency which defines how many connections intervals a slave may skip.
@@ -77,19 +77,19 @@ public class BlueGigaUpdateCommand extends BlueGigaCommand {
     /**
      * Minimum connection interval (units of 1.25ms)
      *
-     * @param interval_min the interval_min to set as {@link int}
+     * @param intervalMin the intervalMin to set as {@link int}
      */
-    public void setInterval_min(int interval_min) {
-        this.interval_min = interval_min;
+    public void setIntervalMin(int intervalMin) {
+        this.intervalMin = intervalMin;
     }
 
     /**
      * Maximum connection interval (units of 1.25ms)
      *
-     * @param interval_max the interval_max to set as {@link int}
+     * @param intervalMax the intervalMax to set as {@link int}
      */
-    public void setInterval_max(int interval_max) {
-        this.interval_max = interval_max;
+    public void setIntervalMax(int intervalMax) {
+        this.intervalMax = intervalMax;
     }
 
     /**
@@ -118,8 +118,8 @@ public class BlueGigaUpdateCommand extends BlueGigaCommand {
 
         // Serialize the fields
         serializeUInt8(connection);
-        serializeUInt16(interval_min);
-        serializeUInt16(interval_max);
+        serializeUInt16(intervalMin);
+        serializeUInt16(intervalMax);
         serializeUInt16(latency);
         serializeUInt16(timeout);
 
@@ -131,15 +131,15 @@ public class BlueGigaUpdateCommand extends BlueGigaCommand {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaUpdateCommand [connection=");
         builder.append(connection);
-        builder.append(", interval_min=");
-        builder.append(interval_min);
-        builder.append(", interval_max=");
-        builder.append(interval_max);
+        builder.append(", intervalMin=");
+        builder.append(intervalMin);
+        builder.append(", intervalMax=");
+        builder.append(intervalMax);
         builder.append(", latency=");
         builder.append(latency);
         builder.append(", timeout=");
         builder.append(timeout);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

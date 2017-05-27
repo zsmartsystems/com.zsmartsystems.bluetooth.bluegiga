@@ -144,7 +144,7 @@ public class BlueGigaGetCountersResponse extends BlueGigaResponse {
         builder.append(rxfail);
         builder.append(", mbuf=");
         builder.append(mbuf);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

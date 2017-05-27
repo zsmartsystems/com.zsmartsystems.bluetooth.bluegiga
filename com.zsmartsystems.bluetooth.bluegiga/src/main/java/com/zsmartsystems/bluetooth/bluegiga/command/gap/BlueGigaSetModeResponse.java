@@ -63,7 +63,7 @@ public class BlueGigaSetModeResponse extends BlueGigaResponse {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaSetModeResponse [result=");
         builder.append(result);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

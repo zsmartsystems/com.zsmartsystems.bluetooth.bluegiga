@@ -80,7 +80,7 @@ public class BlueGigaEncryptStartCommand extends BlueGigaCommand {
         builder.append(handle);
         builder.append(", bonding=");
         builder.append(bonding);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

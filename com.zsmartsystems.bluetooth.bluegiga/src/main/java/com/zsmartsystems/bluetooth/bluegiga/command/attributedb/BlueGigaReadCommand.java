@@ -78,7 +78,7 @@ public class BlueGigaReadCommand extends BlueGigaCommand {
         builder.append(handle);
         builder.append(", offset=");
         builder.append(offset);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

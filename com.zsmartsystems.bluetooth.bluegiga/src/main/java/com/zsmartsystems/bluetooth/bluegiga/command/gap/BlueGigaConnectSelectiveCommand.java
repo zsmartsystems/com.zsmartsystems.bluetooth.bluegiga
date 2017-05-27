@@ -38,7 +38,7 @@ public class BlueGigaConnectSelectiveCommand extends BlueGigaCommand {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int conn_interval_min;
+    private int connIntervalMin;
 
     /**
      * Maximum Connection Interval (in units of 1.25ms). Range: 6 - 3200 Must be equal or bigger than
@@ -46,7 +46,7 @@ public class BlueGigaConnectSelectiveCommand extends BlueGigaCommand {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int conn_interval_max;
+    private int connIntervalMax;
 
     /**
      * Supervision Timeout (in units of 10ms). The Supervision Timeout defines how long the
@@ -74,20 +74,20 @@ public class BlueGigaConnectSelectiveCommand extends BlueGigaCommand {
      * Minimum Connection Interval (in units of 1.25ms). Range: 6 - 3200 The lowest possible
      * Connection Interval is 7.50ms and the largest is 4000ms.
      *
-     * @param conn_interval_min the conn_interval_min to set as {@link int}
+     * @param connIntervalMin the connIntervalMin to set as {@link int}
      */
-    public void setConn_interval_min(int conn_interval_min) {
-        this.conn_interval_min = conn_interval_min;
+    public void setConnIntervalMin(int connIntervalMin) {
+        this.connIntervalMin = connIntervalMin;
     }
 
     /**
      * Maximum Connection Interval (in units of 1.25ms). Range: 6 - 3200 Must be equal or bigger than
      * minimum Connection Interval.
      *
-     * @param conn_interval_max the conn_interval_max to set as {@link int}
+     * @param connIntervalMax the connIntervalMax to set as {@link int}
      */
-    public void setConn_interval_max(int conn_interval_max) {
-        this.conn_interval_max = conn_interval_max;
+    public void setConnIntervalMax(int connIntervalMax) {
+        this.connIntervalMax = connIntervalMax;
     }
 
     /**
@@ -124,8 +124,8 @@ public class BlueGigaConnectSelectiveCommand extends BlueGigaCommand {
         serializeHeader(COMMAND_CLASS, COMMAND_METHOD);
 
         // Serialize the fields
-        serializeUInt16(conn_interval_min);
-        serializeUInt16(conn_interval_max);
+        serializeUInt16(connIntervalMin);
+        serializeUInt16(connIntervalMax);
         serializeUInt16(timeout);
         serializeUInt16(latency);
 
@@ -135,15 +135,15 @@ public class BlueGigaConnectSelectiveCommand extends BlueGigaCommand {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("BlueGigaConnectSelectiveCommand [conn_interval_min=");
-        builder.append(conn_interval_min);
-        builder.append(", conn_interval_max=");
-        builder.append(conn_interval_max);
+        builder.append("BlueGigaConnectSelectiveCommand [connIntervalMin=");
+        builder.append(connIntervalMin);
+        builder.append(", connIntervalMax=");
+        builder.append(connIntervalMax);
         builder.append(", timeout=");
         builder.append(timeout);
         builder.append(", latency=");
         builder.append(latency);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

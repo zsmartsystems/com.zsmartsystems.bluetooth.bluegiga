@@ -58,7 +58,7 @@ public class BlueGigaGetRssiCommand extends BlueGigaCommand {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaGetRssiCommand [connection=");
         builder.append(connection);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

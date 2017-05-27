@@ -378,8 +378,8 @@ public final class BlueGigaConsole {
 
             BlueGigaSetScanParametersCommand scanCommand = new BlueGigaSetScanParametersCommand();
             scanCommand.setActive(1);
-            scanCommand.setScan_interval(0x40);
-            scanCommand.setScan_window(0x30);
+            scanCommand.setScanInterval(0x40);
+            scanCommand.setScanWindow(0x30);
             bleHandler.sendTransaction(scanCommand);
 
             BlueGigaDiscoverCommand discoverCommand = new BlueGigaDiscoverCommand();

@@ -47,7 +47,7 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
      * <p>
      * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
      */
-    private int addr_type;
+    private int addrType;
 
     /**
      * Minimum Connection Interval (in units of 1.25ms). Range: 6 - 3200 The lowest possible
@@ -55,7 +55,7 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int conn_interval_min;
+    private int connIntervalMin;
 
     /**
      * Maximum Connection Interval (in units of 1.25ms). Range: 6 - 3200 Must be equal or bigger than
@@ -63,7 +63,7 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int conn_interval_max;
+    private int connIntervalMax;
 
     /**
      * Supervision Timeout (in units of 10ms). The Supervision Timeout defines how long the
@@ -99,30 +99,30 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
     /**
      * see: Bluetooth Address Types.
      *
-     * @param addr_type the addr_type to set as {@link int}
+     * @param addrType the addrType to set as {@link int}
      */
-    public void setAddr_type(int addr_type) {
-        this.addr_type = addr_type;
+    public void setAddrType(int addrType) {
+        this.addrType = addrType;
     }
 
     /**
      * Minimum Connection Interval (in units of 1.25ms). Range: 6 - 3200 The lowest possible
      * Connection Interval is 7.50ms and the largest is 4000ms.
      *
-     * @param conn_interval_min the conn_interval_min to set as {@link int}
+     * @param connIntervalMin the connIntervalMin to set as {@link int}
      */
-    public void setConn_interval_min(int conn_interval_min) {
-        this.conn_interval_min = conn_interval_min;
+    public void setConnIntervalMin(int connIntervalMin) {
+        this.connIntervalMin = connIntervalMin;
     }
 
     /**
      * Maximum Connection Interval (in units of 1.25ms). Range: 6 - 3200 Must be equal or bigger than
      * minimum Connection Interval.
      *
-     * @param conn_interval_max the conn_interval_max to set as {@link int}
+     * @param connIntervalMax the connIntervalMax to set as {@link int}
      */
-    public void setConn_interval_max(int conn_interval_max) {
-        this.conn_interval_max = conn_interval_max;
+    public void setConnIntervalMax(int connIntervalMax) {
+        this.connIntervalMax = connIntervalMax;
     }
 
     /**
@@ -160,9 +160,9 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
 
         // Serialize the fields
         serializeAddress(address);
-        serializeUInt8(addr_type);
-        serializeUInt16(conn_interval_min);
-        serializeUInt16(conn_interval_max);
+        serializeUInt8(addrType);
+        serializeUInt16(connIntervalMin);
+        serializeUInt16(connIntervalMax);
         serializeUInt16(timeout);
         serializeUInt16(latency);
 
@@ -174,17 +174,17 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaConnectDirectCommand [address=");
         builder.append(address);
-        builder.append(", addr_type=");
-        builder.append(addr_type);
-        builder.append(", conn_interval_min=");
-        builder.append(conn_interval_min);
-        builder.append(", conn_interval_max=");
-        builder.append(conn_interval_max);
+        builder.append(", addrType=");
+        builder.append(addrType);
+        builder.append(", connIntervalMin=");
+        builder.append(connIntervalMin);
+        builder.append(", connIntervalMax=");
+        builder.append(connIntervalMax);
         builder.append(", timeout=");
         builder.append(timeout);
         builder.append(", latency=");
         builder.append(latency);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

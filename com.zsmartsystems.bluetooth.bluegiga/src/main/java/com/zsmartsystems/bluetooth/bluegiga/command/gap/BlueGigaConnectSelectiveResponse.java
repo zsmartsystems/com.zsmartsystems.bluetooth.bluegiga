@@ -45,7 +45,7 @@ public class BlueGigaConnectSelectiveResponse extends BlueGigaResponse {
      * <p>
      * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
      */
-    private int connection_handle;
+    private int connectionHandle;
 
     /**
      * Response constructor
@@ -56,7 +56,7 @@ public class BlueGigaConnectSelectiveResponse extends BlueGigaResponse {
 
         // Deserialize the fields
         result = deserializeBgApiResponse();
-        connection_handle = deserializeUInt8();
+        connectionHandle = deserializeUInt8();
     }
 
     /**
@@ -77,8 +77,8 @@ public class BlueGigaConnectSelectiveResponse extends BlueGigaResponse {
      *
      * @return the current connection_handle as {@link int}
      */
-    public int getConnection_handle() {
-        return connection_handle;
+    public int getConnectionHandle() {
+        return connectionHandle;
     }
 
 
@@ -87,9 +87,9 @@ public class BlueGigaConnectSelectiveResponse extends BlueGigaResponse {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaConnectSelectiveResponse [result=");
         builder.append(result);
-        builder.append(", connection_handle=");
-        builder.append(connection_handle);
-        builder.append("]");
+        builder.append(", connectionHandle=");
+        builder.append(connectionHandle);
+        builder.append(']');
         return builder.toString();
     }
 }

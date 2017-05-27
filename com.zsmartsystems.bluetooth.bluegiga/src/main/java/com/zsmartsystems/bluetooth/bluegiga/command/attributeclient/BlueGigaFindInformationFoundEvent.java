@@ -104,7 +104,7 @@ public class BlueGigaFindInformationFoundEvent extends BlueGigaResponse {
         builder.append(chrhandle);
         builder.append(", uuid=");
         builder.append(uuid);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

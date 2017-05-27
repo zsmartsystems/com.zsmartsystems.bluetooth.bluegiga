@@ -45,7 +45,7 @@ public class BlueGigaProcedureCompletedEvent extends BlueGigaResponse {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int chrHandle;
+    private int chrhandle;
 
     /**
      * Event constructor
@@ -57,7 +57,7 @@ public class BlueGigaProcedureCompletedEvent extends BlueGigaResponse {
         // Deserialize the fields
         connection = deserializeUInt8();
         result = deserializeUInt16();
-        chrHandle = deserializeUInt16();
+        chrhandle = deserializeUInt16();
     }
 
     /**
@@ -89,8 +89,8 @@ public class BlueGigaProcedureCompletedEvent extends BlueGigaResponse {
      *
      * @return the current chrHandle as {@link int}
      */
-    public int getChrHandle() {
-        return chrHandle;
+    public int getChrhandle() {
+        return chrhandle;
     }
 
 
@@ -101,9 +101,9 @@ public class BlueGigaProcedureCompletedEvent extends BlueGigaResponse {
         builder.append(connection);
         builder.append(", result=");
         builder.append(result);
-        builder.append(", chrHandle=");
-        builder.append(chrHandle);
-        builder.append("]");
+        builder.append(", chrhandle=");
+        builder.append(chrhandle);
+        builder.append(']');
         return builder.toString();
     }
 }

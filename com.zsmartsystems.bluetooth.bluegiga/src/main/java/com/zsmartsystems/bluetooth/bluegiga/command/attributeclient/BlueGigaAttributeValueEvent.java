@@ -125,7 +125,7 @@ public class BlueGigaAttributeValueEvent extends BlueGigaResponse {
         builder.append(type);
         builder.append(", value=");
         builder.append(value);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

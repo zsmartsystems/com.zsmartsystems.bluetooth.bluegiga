@@ -145,7 +145,7 @@ public class BlueGigaValueEvent extends BlueGigaResponse {
         builder.append(offset);
         builder.append(", value=");
         builder.append(value);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

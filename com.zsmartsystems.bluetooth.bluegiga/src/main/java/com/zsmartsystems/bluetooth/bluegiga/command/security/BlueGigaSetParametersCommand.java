@@ -38,7 +38,7 @@ public class BlueGigaSetParametersCommand extends BlueGigaCommand {
      * <p>
      * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
      */
-    private int min_key_size;
+    private int minKeySize;
 
     /**
      * Configures the local devices I/O capabilities. See: SMP IO Capabilities for options.
@@ -46,7 +46,7 @@ public class BlueGigaSetParametersCommand extends BlueGigaCommand {
      * <p>
      * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
      */
-    private int io_capabilities;
+    private int ioCapabilities;
     /**
      * 1: Man-in-the-middle protection required. 0: No Man-in-the-middle protection. Default:
      * 0
@@ -60,20 +60,20 @@ public class BlueGigaSetParametersCommand extends BlueGigaCommand {
     /**
      * Minimum key size in Bytes. Range: 7-16. Default: 7 (56bits)
      *
-     * @param min_key_size the min_key_size to set as {@link int}
+     * @param minKeySize the minKeySize to set as {@link int}
      */
-    public void setMin_key_size(int min_key_size) {
-        this.min_key_size = min_key_size;
+    public void setMinKeySize(int minKeySize) {
+        this.minKeySize = minKeySize;
     }
 
     /**
      * Configures the local devices I/O capabilities. See: SMP IO Capabilities for options.
      * Default: No Input and No Output
      *
-     * @param io_capabilities the io_capabilities to set as {@link int}
+     * @param ioCapabilities the ioCapabilities to set as {@link int}
      */
-    public void setIo_capabilities(int io_capabilities) {
-        this.io_capabilities = io_capabilities;
+    public void setIoCapabilities(int ioCapabilities) {
+        this.ioCapabilities = ioCapabilities;
     }
 
 
@@ -84,8 +84,8 @@ public class BlueGigaSetParametersCommand extends BlueGigaCommand {
 
         // Serialize the fields
         serializeUInt8(mitm);
-        serializeUInt8(min_key_size);
-        serializeUInt8(io_capabilities);
+        serializeUInt8(minKeySize);
+        serializeUInt8(ioCapabilities);
 
         return getPayload();
     }
@@ -95,11 +95,11 @@ public class BlueGigaSetParametersCommand extends BlueGigaCommand {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaSetParametersCommand [mitm=");
         builder.append(mitm);
-        builder.append(", min_key_size=");
-        builder.append(min_key_size);
-        builder.append(", io_capabilities=");
-        builder.append(io_capabilities);
-        builder.append("]");
+        builder.append(", minKeySize=");
+        builder.append(minKeySize);
+        builder.append(", ioCapabilities=");
+        builder.append(ioCapabilities);
+        builder.append(']');
         return builder.toString();
     }
 }

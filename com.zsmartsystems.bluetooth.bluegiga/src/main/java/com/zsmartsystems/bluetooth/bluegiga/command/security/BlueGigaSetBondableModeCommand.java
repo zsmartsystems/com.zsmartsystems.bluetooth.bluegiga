@@ -58,7 +58,7 @@ public class BlueGigaSetBondableModeCommand extends BlueGigaCommand {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaSetBondableModeCommand [bondable=");
         builder.append(bondable);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

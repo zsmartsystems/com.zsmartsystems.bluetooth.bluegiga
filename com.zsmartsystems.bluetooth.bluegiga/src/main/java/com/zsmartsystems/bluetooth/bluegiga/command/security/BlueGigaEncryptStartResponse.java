@@ -82,7 +82,7 @@ public class BlueGigaEncryptStartResponse extends BlueGigaResponse {
         builder.append(handle);
         builder.append(", result=");
         builder.append(result);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

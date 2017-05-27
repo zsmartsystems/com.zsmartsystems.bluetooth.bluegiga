@@ -62,7 +62,7 @@ public class BlueGigaGetBondsResponse extends BlueGigaResponse {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaGetBondsResponse [bonds=");
         builder.append(bonds);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

@@ -123,7 +123,7 @@ public class BlueGigaBondStatusEvent extends BlueGigaResponse {
         builder.append(mitm);
         builder.append(", keys=");
         builder.append(keys);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

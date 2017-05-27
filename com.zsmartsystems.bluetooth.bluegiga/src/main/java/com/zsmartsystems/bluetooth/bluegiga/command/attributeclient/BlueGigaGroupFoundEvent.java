@@ -124,7 +124,7 @@ public class BlueGigaGroupFoundEvent extends BlueGigaResponse {
         builder.append(end);
         builder.append(", uuid=");
         builder.append(uuid);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

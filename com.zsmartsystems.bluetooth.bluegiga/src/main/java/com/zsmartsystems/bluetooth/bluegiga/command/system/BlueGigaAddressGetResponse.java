@@ -60,7 +60,7 @@ public class BlueGigaAddressGetResponse extends BlueGigaResponse {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaAddressGetResponse [address=");
         builder.append(address);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

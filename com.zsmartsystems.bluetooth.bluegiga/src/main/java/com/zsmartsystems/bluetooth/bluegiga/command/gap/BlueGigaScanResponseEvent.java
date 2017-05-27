@@ -39,7 +39,7 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
      * <p>
      * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
      */
-    private int packet_type;
+    private int packetType;
 
     /**
      * Advertiser address type. 1: random address. 0: public address
@@ -71,7 +71,7 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
 
         // Deserialize the fields
         rssi = deserializeUInt8();
-        packet_type = deserializeUInt8();
+        packetType = deserializeUInt8();
         sender = deserializeAddress();
         bond = deserializeUInt8();
         data = deserializeUInt8Array();
@@ -96,8 +96,8 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
      *
      * @return the current packet_type as {@link int}
      */
-    public int getPacket_type() {
-        return packet_type;
+    public int getPacketType() {
+        return packetType;
     }
 
     /**
@@ -139,15 +139,15 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaScanResponseEvent [rssi=");
         builder.append(rssi);
-        builder.append(", packet_type=");
-        builder.append(packet_type);
+        builder.append(", packetType=");
+        builder.append(packetType);
         builder.append(", sender=");
         builder.append(sender);
         builder.append(", bond=");
         builder.append(bond);
         builder.append(", data=");
         builder.append(data);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

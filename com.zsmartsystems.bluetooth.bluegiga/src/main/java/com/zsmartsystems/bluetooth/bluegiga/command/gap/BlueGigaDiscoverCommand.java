@@ -61,7 +61,7 @@ public class BlueGigaDiscoverCommand extends BlueGigaCommand {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaDiscoverCommand [mode=");
         builder.append(mode);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

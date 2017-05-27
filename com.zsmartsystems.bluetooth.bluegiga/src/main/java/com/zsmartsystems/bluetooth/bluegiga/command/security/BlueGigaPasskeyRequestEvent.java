@@ -62,7 +62,7 @@ public class BlueGigaPasskeyRequestEvent extends BlueGigaResponse {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaPasskeyRequestEvent [handle=");
         builder.append(handle);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

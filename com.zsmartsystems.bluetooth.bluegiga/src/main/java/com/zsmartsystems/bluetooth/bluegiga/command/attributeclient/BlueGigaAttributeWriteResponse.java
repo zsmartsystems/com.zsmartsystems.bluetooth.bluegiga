@@ -84,7 +84,7 @@ public class BlueGigaAttributeWriteResponse extends BlueGigaResponse {
         builder.append(connection);
         builder.append(", result=");
         builder.append(result);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

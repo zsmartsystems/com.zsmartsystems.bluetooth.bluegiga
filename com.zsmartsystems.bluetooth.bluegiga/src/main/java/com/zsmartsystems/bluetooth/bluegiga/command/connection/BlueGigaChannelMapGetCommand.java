@@ -57,7 +57,7 @@ public class BlueGigaChannelMapGetCommand extends BlueGigaCommand {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaChannelMapGetCommand [connection=");
         builder.append(connection);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

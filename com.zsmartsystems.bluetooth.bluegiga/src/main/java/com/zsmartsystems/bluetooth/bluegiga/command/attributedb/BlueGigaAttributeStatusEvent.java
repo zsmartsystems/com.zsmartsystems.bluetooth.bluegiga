@@ -84,7 +84,7 @@ public class BlueGigaAttributeStatusEvent extends BlueGigaResponse {
         builder.append(handle);
         builder.append(", flags=");
         builder.append(flags);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

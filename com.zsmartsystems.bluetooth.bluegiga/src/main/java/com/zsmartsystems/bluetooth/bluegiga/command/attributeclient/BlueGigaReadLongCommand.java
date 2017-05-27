@@ -80,7 +80,7 @@ public class BlueGigaReadLongCommand extends BlueGigaCommand {
         builder.append(connection);
         builder.append(", chrhandle=");
         builder.append(chrhandle);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

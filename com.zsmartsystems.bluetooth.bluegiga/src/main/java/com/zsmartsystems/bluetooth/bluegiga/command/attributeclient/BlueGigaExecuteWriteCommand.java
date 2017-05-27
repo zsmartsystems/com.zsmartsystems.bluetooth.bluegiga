@@ -77,7 +77,7 @@ public class BlueGigaExecuteWriteCommand extends BlueGigaCommand {
         builder.append(connection);
         builder.append(", commit=");
         builder.append(commit);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

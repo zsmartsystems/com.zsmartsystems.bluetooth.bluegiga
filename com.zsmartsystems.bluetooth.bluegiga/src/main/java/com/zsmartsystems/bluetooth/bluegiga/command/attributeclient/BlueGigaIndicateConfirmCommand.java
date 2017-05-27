@@ -61,7 +61,7 @@ public class BlueGigaIndicateConfirmCommand extends BlueGigaCommand {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaIndicateConfirmCommand [connection=");
         builder.append(connection);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

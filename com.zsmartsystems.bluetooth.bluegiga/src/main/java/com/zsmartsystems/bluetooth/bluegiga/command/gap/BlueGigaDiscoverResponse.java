@@ -64,7 +64,7 @@ public class BlueGigaDiscoverResponse extends BlueGigaResponse {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaDiscoverResponse [result=");
         builder.append(result);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

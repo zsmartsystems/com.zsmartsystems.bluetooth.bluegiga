@@ -96,7 +96,7 @@ public class BlueGigaWriteCommandCommand extends BlueGigaCommand {
         builder.append(atthandle);
         builder.append(", data=");
         builder.append(data);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

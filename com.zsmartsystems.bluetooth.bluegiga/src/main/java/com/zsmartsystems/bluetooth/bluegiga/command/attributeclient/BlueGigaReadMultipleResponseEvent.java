@@ -83,7 +83,7 @@ public class BlueGigaReadMultipleResponseEvent extends BlueGigaResponse {
         builder.append(connection);
         builder.append(", handles=");
         builder.append(handles);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

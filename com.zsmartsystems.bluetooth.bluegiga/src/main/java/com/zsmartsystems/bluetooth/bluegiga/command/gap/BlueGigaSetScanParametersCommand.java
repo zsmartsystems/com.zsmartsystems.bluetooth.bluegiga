@@ -34,7 +34,7 @@ public class BlueGigaSetScanParametersCommand extends BlueGigaCommand {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int scan_interval;
+    private int scanInterval;
 
     /**
      * Scan Window defines how long time the scanner will listen on a certain frequency and try to
@@ -46,7 +46,7 @@ public class BlueGigaSetScanParametersCommand extends BlueGigaCommand {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int scan_window;
+    private int scanWindow;
 
     /**
      * 1: Active scanning is used. When an advertisement packet is received the Bluetooth stack
@@ -63,10 +63,10 @@ public class BlueGigaSetScanParametersCommand extends BlueGigaCommand {
      * round robin fashion. According to the specification all three channels must be Bluetooth
      * used by a scanner.
      *
-     * @param scan_interval the scan_interval to set as {@link int}
+     * @param scanInterval the scanInterval to set as {@link int}
      */
-    public void setScan_interval(int scan_interval) {
-        this.scan_interval = scan_interval;
+    public void setScanInterval(int scanInterval) {
+        this.scanInterval = scanInterval;
     }
 
     /**
@@ -77,10 +77,10 @@ public class BlueGigaSetScanParametersCommand extends BlueGigaCommand {
      * 100% duty cycle. If scan window is half of the scan interval value, then the module Bluetooth
      * will be scanning at a 50% duty cycle.
      *
-     * @param scan_window the scan_window to set as {@link int}
+     * @param scanWindow the scanWindow to set as {@link int}
      */
-    public void setScan_window(int scan_window) {
-        this.scan_window = scan_window;
+    public void setScanWindow(int scanWindow) {
+        this.scanWindow = scanWindow;
     }
 
     /**
@@ -101,8 +101,8 @@ public class BlueGigaSetScanParametersCommand extends BlueGigaCommand {
         serializeHeader(COMMAND_CLASS, COMMAND_METHOD);
 
         // Serialize the fields
-        serializeUInt16(scan_interval);
-        serializeUInt16(scan_window);
+        serializeUInt16(scanInterval);
+        serializeUInt16(scanWindow);
         serializeUInt8(active);
 
         return getPayload();
@@ -111,13 +111,13 @@ public class BlueGigaSetScanParametersCommand extends BlueGigaCommand {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("BlueGigaSetScanParametersCommand [scan_interval=");
-        builder.append(scan_interval);
-        builder.append(", scan_window=");
-        builder.append(scan_window);
+        builder.append("BlueGigaSetScanParametersCommand [scanInterval=");
+        builder.append(scanInterval);
+        builder.append(", scanWindow=");
+        builder.append(scanWindow);
         builder.append(", active=");
         builder.append(active);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

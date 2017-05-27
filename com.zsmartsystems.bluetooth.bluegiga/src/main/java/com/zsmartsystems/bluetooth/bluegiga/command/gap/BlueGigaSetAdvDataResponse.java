@@ -66,7 +66,7 @@ public class BlueGigaSetAdvDataResponse extends BlueGigaResponse {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaSetAdvDataResponse [result=");
         builder.append(result);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

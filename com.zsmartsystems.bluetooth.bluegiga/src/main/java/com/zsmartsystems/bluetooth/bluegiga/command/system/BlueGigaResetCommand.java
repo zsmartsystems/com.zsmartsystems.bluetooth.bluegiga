@@ -30,14 +30,14 @@ public class BlueGigaResetCommand extends BlueGigaCommand {
      * <p>
      * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
      */
-    private int boot_in_dfu;
+    private int bootInDfu;
     /**
      * Selects the boot mode. 0 : boot to main program. 1 : boot to DFU
      *
-     * @param boot_in_dfu the boot_in_dfu to set as {@link int}
+     * @param bootInDfu the bootInDfu to set as {@link int}
      */
-    public void setBoot_in_dfu(int boot_in_dfu) {
-        this.boot_in_dfu = boot_in_dfu;
+    public void setBootInDfu(int bootInDfu) {
+        this.bootInDfu = bootInDfu;
     }
 
 
@@ -47,7 +47,7 @@ public class BlueGigaResetCommand extends BlueGigaCommand {
         serializeHeader(COMMAND_CLASS, COMMAND_METHOD);
 
         // Serialize the fields
-        serializeUInt8(boot_in_dfu);
+        serializeUInt8(bootInDfu);
 
         return getPayload();
     }
@@ -55,9 +55,9 @@ public class BlueGigaResetCommand extends BlueGigaCommand {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("BlueGigaResetCommand [boot_in_dfu=");
-        builder.append(boot_in_dfu);
-        builder.append("]");
+        builder.append("BlueGigaResetCommand [bootInDfu=");
+        builder.append(bootInDfu);
+        builder.append(']');
         return builder.toString();
     }
 }

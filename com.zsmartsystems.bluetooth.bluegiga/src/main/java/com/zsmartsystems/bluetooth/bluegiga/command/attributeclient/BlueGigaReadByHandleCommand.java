@@ -77,7 +77,7 @@ public class BlueGigaReadByHandleCommand extends BlueGigaCommand {
         builder.append(connection);
         builder.append(", chrhandle=");
         builder.append(chrhandle);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

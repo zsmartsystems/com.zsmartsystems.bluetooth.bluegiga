@@ -37,21 +37,21 @@ public class BlueGigaVersionIndEvent extends BlueGigaResponse {
      * <p>
      * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
      */
-    private int vers_nr;
+    private int versNr;
 
     /**
      * Manufacturer of the controller
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int comp_id;
+    private int compId;
 
     /**
      * Bluetooth controller version
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int sub_vers_nr;
+    private int subVersNr;
 
     /**
      * Event constructor
@@ -62,9 +62,9 @@ public class BlueGigaVersionIndEvent extends BlueGigaResponse {
 
         // Deserialize the fields
         connection = deserializeUInt8();
-        vers_nr = deserializeUInt8();
-        comp_id = deserializeUInt16();
-        sub_vers_nr = deserializeUInt16();
+        versNr = deserializeUInt8();
+        compId = deserializeUInt16();
+        subVersNr = deserializeUInt16();
     }
 
     /**
@@ -85,8 +85,8 @@ public class BlueGigaVersionIndEvent extends BlueGigaResponse {
      *
      * @return the current vers_nr as {@link int}
      */
-    public int getVers_nr() {
-        return vers_nr;
+    public int getVersNr() {
+        return versNr;
     }
 
     /**
@@ -96,8 +96,8 @@ public class BlueGigaVersionIndEvent extends BlueGigaResponse {
      *
      * @return the current comp_id as {@link int}
      */
-    public int getComp_id() {
-        return comp_id;
+    public int getCompId() {
+        return compId;
     }
 
     /**
@@ -107,8 +107,8 @@ public class BlueGigaVersionIndEvent extends BlueGigaResponse {
      *
      * @return the current sub_vers_nr as {@link int}
      */
-    public int getSub_vers_nr() {
-        return sub_vers_nr;
+    public int getSubVersNr() {
+        return subVersNr;
     }
 
 
@@ -117,13 +117,13 @@ public class BlueGigaVersionIndEvent extends BlueGigaResponse {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaVersionIndEvent [connection=");
         builder.append(connection);
-        builder.append(", vers_nr=");
-        builder.append(vers_nr);
-        builder.append(", comp_id=");
-        builder.append(comp_id);
-        builder.append(", sub_vers_nr=");
-        builder.append(sub_vers_nr);
-        builder.append("]");
+        builder.append(", versNr=");
+        builder.append(versNr);
+        builder.append(", compId=");
+        builder.append(compId);
+        builder.append(", subVersNr=");
+        builder.append(subVersNr);
+        builder.append(']');
         return builder.toString();
     }
 }

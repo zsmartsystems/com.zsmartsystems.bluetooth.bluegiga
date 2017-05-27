@@ -144,10 +144,10 @@ public abstract class ClassGenerator {
                     if (parameter.displayLength != 0) {
                         size = "0" + parameter.displayLength;
                     }
-                    return "String.format(\"%" + size + "X\", " + parameter.name + ")";
+                    return "String.format(\"%" + size + "X\", " + stringToLowerCamelCase(parameter.name) + ")";
             }
         }
-        return parameter.name;
+        return stringToLowerCamelCase(parameter.name);
     }
 
     protected String getClassName(int classId) {

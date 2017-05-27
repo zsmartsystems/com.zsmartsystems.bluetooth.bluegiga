@@ -35,30 +35,30 @@ public class BlueGigaSetAdvDataCommand extends BlueGigaCommand {
      * <p>
      * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
      */
-    private int set_scanrsp;
+    private int setScanrsp;
 
     /**
      * Advertisement data to send
      * <p>
      * BlueGiga API type is <i>uint8array</i> - Java type is {@link int[]}
      */
-    private int[] adv_data;
+    private int[] advData;
     /**
      * Advertisement data type. 0 : sets advertisement data. 1 : sets scan response data
      *
-     * @param set_scanrsp the set_scanrsp to set as {@link int}
+     * @param setScanrsp the setScanrsp to set as {@link int}
      */
-    public void setSet_scanrsp(int set_scanrsp) {
-        this.set_scanrsp = set_scanrsp;
+    public void setSetScanrsp(int setScanrsp) {
+        this.setScanrsp = setScanrsp;
     }
 
     /**
      * Advertisement data to send
      *
-     * @param adv_data the adv_data to set as {@link int[]}
+     * @param advData the advData to set as {@link int[]}
      */
-    public void setAdv_data(int[] adv_data) {
-        this.adv_data = adv_data;
+    public void setAdvData(int[] advData) {
+        this.advData = advData;
     }
 
 
@@ -68,8 +68,8 @@ public class BlueGigaSetAdvDataCommand extends BlueGigaCommand {
         serializeHeader(COMMAND_CLASS, COMMAND_METHOD);
 
         // Serialize the fields
-        serializeUInt8(set_scanrsp);
-        serializeUInt8Array(adv_data);
+        serializeUInt8(setScanrsp);
+        serializeUInt8Array(advData);
 
         return getPayload();
     }
@@ -77,11 +77,11 @@ public class BlueGigaSetAdvDataCommand extends BlueGigaCommand {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("BlueGigaSetAdvDataCommand [set_scanrsp=");
-        builder.append(set_scanrsp);
-        builder.append(", adv_data=");
-        builder.append(adv_data);
-        builder.append("]");
+        builder.append("BlueGigaSetAdvDataCommand [setScanrsp=");
+        builder.append(setScanrsp);
+        builder.append(", advData=");
+        builder.append(advData);
+        builder.append(']');
         return builder.toString();
     }
 }

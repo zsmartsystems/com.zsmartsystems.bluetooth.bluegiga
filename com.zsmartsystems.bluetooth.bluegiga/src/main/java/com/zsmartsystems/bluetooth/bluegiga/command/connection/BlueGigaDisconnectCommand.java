@@ -58,7 +58,7 @@ public class BlueGigaDisconnectCommand extends BlueGigaCommand {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaDisconnectCommand [connection=");
         builder.append(connection);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

@@ -45,7 +45,7 @@ public class BlueGigaUserReadResponseCommand extends BlueGigaCommand {
      * <p>
      * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
      */
-    private int att_error;
+    private int attError;
 
     /**
      * Data to send
@@ -66,10 +66,10 @@ public class BlueGigaUserReadResponseCommand extends BlueGigaCommand {
      * 0: User Read Request is responded with data. In case of an error an application specific error
      * code can be sent.
      *
-     * @param att_error the att_error to set as {@link int}
+     * @param attError the attError to set as {@link int}
      */
-    public void setAtt_error(int att_error) {
-        this.att_error = att_error;
+    public void setAttError(int attError) {
+        this.attError = attError;
     }
 
     /**
@@ -89,7 +89,7 @@ public class BlueGigaUserReadResponseCommand extends BlueGigaCommand {
 
         // Serialize the fields
         serializeUInt8(connection);
-        serializeUInt8(att_error);
+        serializeUInt8(attError);
         serializeUInt8Array(value);
 
         return getPayload();
@@ -100,11 +100,11 @@ public class BlueGigaUserReadResponseCommand extends BlueGigaCommand {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaUserReadResponseCommand [connection=");
         builder.append(connection);
-        builder.append(", att_error=");
-        builder.append(att_error);
+        builder.append(", attError=");
+        builder.append(attError);
         builder.append(", value=");
         builder.append(value);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

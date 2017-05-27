@@ -82,7 +82,7 @@ public class BlueGigaPasskeyDisplayEvent extends BlueGigaResponse {
         builder.append(handle);
         builder.append(", passkey=");
         builder.append(passkey);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

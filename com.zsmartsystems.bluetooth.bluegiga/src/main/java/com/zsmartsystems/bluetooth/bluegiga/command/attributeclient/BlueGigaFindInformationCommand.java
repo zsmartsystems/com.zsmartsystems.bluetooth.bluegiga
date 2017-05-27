@@ -96,7 +96,7 @@ public class BlueGigaFindInformationCommand extends BlueGigaCommand {
         builder.append(start);
         builder.append(", end=");
         builder.append(end);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

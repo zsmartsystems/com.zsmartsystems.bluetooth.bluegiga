@@ -1756,7 +1756,7 @@
 			</parameter>
 			<parameter>
 				<data_type>uint16</data_type>
-				<name>hw</name>
+				<name>hardware</name>
 				<description>Hardware version</description>
 			</parameter>
 		</response_parameters>
@@ -1800,7 +1800,7 @@
 			</parameter>
 			<parameter>
 				<data_type>uint16</data_type>
-				<name>hw</name>
+				<name>hardware</name>
 				<description>Hardware version</description>
 			</parameter>
 		</response_parameters>

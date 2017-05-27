@@ -83,7 +83,7 @@ public class BlueGigaChannelMapGetResponse extends BlueGigaResponse {
         builder.append(connection);
         builder.append(", map=");
         builder.append(map);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

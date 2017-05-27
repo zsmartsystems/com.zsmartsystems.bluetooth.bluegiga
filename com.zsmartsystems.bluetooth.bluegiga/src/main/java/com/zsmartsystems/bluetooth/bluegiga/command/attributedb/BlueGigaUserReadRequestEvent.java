@@ -127,7 +127,7 @@ public class BlueGigaUserReadRequestEvent extends BlueGigaResponse {
         builder.append(offset);
         builder.append(", maxsize=");
         builder.append(maxsize);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

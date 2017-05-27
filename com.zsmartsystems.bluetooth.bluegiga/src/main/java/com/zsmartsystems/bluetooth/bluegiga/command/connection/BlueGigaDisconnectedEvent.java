@@ -81,7 +81,7 @@ public class BlueGigaDisconnectedEvent extends BlueGigaResponse {
         builder.append(connection);
         builder.append(", reason=");
         builder.append(reason);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

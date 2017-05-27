@@ -60,7 +60,7 @@ public class BlueGigaGetConnectionsResponse extends BlueGigaResponse {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaGetConnectionsResponse [maxconn=");
         builder.append(maxconn);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

@@ -84,7 +84,7 @@ public class BlueGigaWhitelistBondsResponse extends BlueGigaResponse {
         builder.append(result);
         builder.append(", count=");
         builder.append(count);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

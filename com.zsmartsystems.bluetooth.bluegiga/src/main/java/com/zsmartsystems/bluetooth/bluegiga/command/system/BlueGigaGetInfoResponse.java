@@ -58,21 +58,21 @@ public class BlueGigaGetInfoResponse extends BlueGigaResponse {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int ll_version;
+    private int llVersion;
 
     /**
      * Protocol version
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int protocol_version;
+    private int protocolVersion;
 
     /**
      * Hardware version
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int hw;
+    private int hardware;
 
     /**
      * Response constructor
@@ -86,9 +86,9 @@ public class BlueGigaGetInfoResponse extends BlueGigaResponse {
         minor = deserializeUInt16();
         patch = deserializeUInt16();
         build = deserializeUInt16();
-        ll_version = deserializeUInt16();
-        protocol_version = deserializeUInt16();
-        hw = deserializeUInt16();
+        llVersion = deserializeUInt16();
+        protocolVersion = deserializeUInt16();
+        hardware = deserializeUInt16();
     }
 
     /**
@@ -142,8 +142,8 @@ public class BlueGigaGetInfoResponse extends BlueGigaResponse {
      *
      * @return the current ll_version as {@link int}
      */
-    public int getLl_version() {
-        return ll_version;
+    public int getLlVersion() {
+        return llVersion;
     }
 
     /**
@@ -153,8 +153,8 @@ public class BlueGigaGetInfoResponse extends BlueGigaResponse {
      *
      * @return the current protocol_version as {@link int}
      */
-    public int getProtocol_version() {
-        return protocol_version;
+    public int getProtocolVersion() {
+        return protocolVersion;
     }
 
     /**
@@ -162,10 +162,10 @@ public class BlueGigaGetInfoResponse extends BlueGigaResponse {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      *
-     * @return the current hw as {@link int}
+     * @return the current hardware as {@link int}
      */
-    public int getHw() {
-        return hw;
+    public int getHardware() {
+        return hardware;
     }
 
 
@@ -180,13 +180,13 @@ public class BlueGigaGetInfoResponse extends BlueGigaResponse {
         builder.append(patch);
         builder.append(", build=");
         builder.append(build);
-        builder.append(", ll_version=");
-        builder.append(ll_version);
-        builder.append(", protocol_version=");
-        builder.append(protocol_version);
-        builder.append(", hw=");
-        builder.append(hw);
-        builder.append("]");
+        builder.append(", llVersion=");
+        builder.append(llVersion);
+        builder.append(", protocolVersion=");
+        builder.append(protocolVersion);
+        builder.append(", hardware=");
+        builder.append(hardware);
+        builder.append(']');
         return builder.toString();
     }
 }

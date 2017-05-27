@@ -60,7 +60,7 @@ public class BlueGigaGetStatusResponse extends BlueGigaResponse {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaGetStatusResponse [connection=");
         builder.append(connection);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

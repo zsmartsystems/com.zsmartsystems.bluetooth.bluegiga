@@ -77,7 +77,7 @@ public class BlueGigaPassKeyCommand extends BlueGigaCommand {
         builder.append(handle);
         builder.append(", passkey=");
         builder.append(passkey);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

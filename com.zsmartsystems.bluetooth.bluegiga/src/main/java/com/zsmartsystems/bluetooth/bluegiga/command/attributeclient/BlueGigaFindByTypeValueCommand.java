@@ -134,7 +134,7 @@ public class BlueGigaFindByTypeValueCommand extends BlueGigaCommand {
         builder.append(uuid);
         builder.append(", value=");
         builder.append(value);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }

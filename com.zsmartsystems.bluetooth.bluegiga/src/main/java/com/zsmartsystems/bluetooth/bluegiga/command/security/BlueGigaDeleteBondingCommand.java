@@ -61,7 +61,7 @@ public class BlueGigaDeleteBondingCommand extends BlueGigaCommand {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaDeleteBondingCommand [handle=");
         builder.append(handle);
-        builder.append("]");
+        builder.append(']');
         return builder.toString();
     }
 }
