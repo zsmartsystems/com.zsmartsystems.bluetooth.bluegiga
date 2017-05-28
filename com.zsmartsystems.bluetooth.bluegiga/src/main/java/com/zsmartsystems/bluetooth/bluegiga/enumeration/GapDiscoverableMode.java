@@ -31,38 +31,38 @@ public enum GapDiscoverableMode {
      * Mode bits are NOT set in the AD Flags type. A master can still connect to the advertising slave
      * in this mode.
      */
-    gap_non_discoverable(0x0000),
+    GAP_NON_DISCOVERABLE(0x0000),
 
     /**
      * Discoverable using limited scanning mode: the advertisement packets will carry the LE
      * Limited Discoverable Mode bit set in the Flags AD type.
      */
-    gap_limited_discoverable(0x0001),
+    GAP_LIMITED_DISCOVERABLE(0x0001),
 
     /**
      * Discoverable using general scanning mode: the advertisement packets will carry the LE
      * General Discoverable Mode bit set in the Flags AD type.
      */
-    gap_general_discoverable(0x0002),
+    GAP_GENERAL_DISCOVERABLE(0x0002),
 
     /**
      * Same as gap_non_discoverable.
      */
-    gap_broadcast(0x0003),
+    GAP_BROADCAST(0x0003),
 
     /**
      * In this advertisement the advertisement and scan response data defined by user will be used.
      * The user is responsible of building the advertisement data so that it also contains the
      * appropriate desired Flags AD type.
      */
-    gap_user_data(0x0004),
+    GAP_USER_DATA(0x0004),
 
     /**
      * When turning the most highest bit on in GAP discoverable mode, the remote devices that send
      * scan request packets to the advertiser are reported back to the application through Scan
      * Response event. This is so called Enhanced Broadcasting mode.
      */
-    gap_enhanced_broadcasting(0x0080);
+    GAP_ENHANCED_BROADCASTING(0x0080);
 
     /**
      * A mapping between the integer code and its corresponding type to

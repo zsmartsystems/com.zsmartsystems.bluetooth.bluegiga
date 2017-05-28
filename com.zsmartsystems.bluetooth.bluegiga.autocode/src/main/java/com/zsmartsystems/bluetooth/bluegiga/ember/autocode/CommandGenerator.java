@@ -334,7 +334,7 @@ public class CommandGenerator extends ClassGenerator {
             out.println("    /**");
             outputWithLinebreak(out, "    ", value.description);
             out.println("     */");
-            out.print("    " + value.name + "(0x" + String.format("%04X", value.enum_value) + ")");
+            out.print("    " + value.name.toUpperCase() + "(0x" + String.format("%04X", value.enum_value) + ")");
         }
 
         out.println(";");

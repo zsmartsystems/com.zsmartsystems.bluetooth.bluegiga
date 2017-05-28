@@ -31,23 +31,23 @@ public enum ConnectionStatusFlags {
     /**
      * This status flag tells the connection exists to a remote device.
      */
-    connection_connected(0x0001),
+    CONNECTION_CONNECTED(0x0001),
 
     /**
      * This flag tells the connection is encrypted.
      */
-    connection_encrypted(0x0002),
+    CONNECTION_ENCRYPTED(0x0002),
 
     /**
      * Connection completed flag, which is used to tell a new connection has been created.
      */
-    connection_completed(0x0004),
+    CONNECTION_COMPLETED(0x0004),
 
     /**
      * This flag tells that connection parameters have changed and. It is set when connection
      * parameters have changed due to a link layer operation.
      */
-    connection_parameters_change(0x0008);
+    CONNECTION_PARAMETERS_CHANGE(0x0008);
 
     /**
      * A mapping between the integer code and its corresponding type to

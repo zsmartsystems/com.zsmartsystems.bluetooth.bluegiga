@@ -29,42 +29,188 @@ public enum BgApiResponse {
     /**
      * Completed successfully.
      */
-    success(0x0000),
+    SUCCESS(0x0000),
 
     /**
      * Invalid GATT connection handle.
      */
-    invalid_conn_handle(0x0101),
+    INVALID_CONN_HANDLE(0x0101),
 
     /**
      * Waiting response from GATT server to previous procedure.
      */
-    waiting_response(0x0102),
+    WAITING_RESPONSE(0x0102),
 
     /**
      * Command contained invalid parameter
      */
-    invalid_param(0x0180),
+    INVALID_PARAM(0x0180),
 
     /**
      * Device is in wrong state to receive command
      */
-    wrong_state(0x0181),
+    WRONG_STATE(0x0181),
+
+    /**
+     * Device has run out of memory
+     */
+    OUT_OF_MEMORY(0x0182),
+
+    /**
+     * Feature is not implemented
+     */
+    NOT_IMPLEMENTED(0x0183),
+
+    /**
+     * Command was not recognized
+     */
+    INVALID_COMMAND(0x0184),
+
+    /**
+     * Command or Procedure failed due to timeout
+     */
+    TIMEOUT(0x0185),
+
+    /**
+     * Connection handle passed is to command is not a valid handle
+     */
+    NOT_CONNECTED(0x0186),
+
+    /**
+     * Command would cause either underflow or overflow error
+     */
+    FLOW(0x0187),
+
+    /**
+     * User attribute was accessed through API which is not supported
+     */
+    USER_ATTRIBUTE(0x0188),
+
+    /**
+     * No valid license key found
+     */
+    INVALID_LICENSE_KEY(0x0189),
+
+    /**
+     * Command maximum length exceeded
+     */
+    COMMAND_TOO_LONG(0x018A),
+
+    /**
+     * Bonding procedure can't be started because device has no space left for bond.
+     */
+    OUT_OF_BONDS(0x018B),
+
+    /**
+     * Unspecified error
+     */
+    UNSPECIFIED(0x018C),
+
+    /**
+     * Hardware failure
+     */
+    HARDWARE(0x018D),
+
+    /**
+     * Command not accepted, because internal buffers are full
+     */
+    BUFFERS_FULL(0x018E),
+
+    /**
+     * Command or Procedure failed due to disconnection
+     */
+    DISCONNECTED(0x018F),
+
+    /**
+     * Too many Simultaneous Requests
+     */
+    TOO_MANY_REQUESTS(0x0190),
+
+    /**
+     * Feature is not supported in this firmware build
+     */
+    NOT_SUPPORTED(0x0191),
+
+    /**
+     * The bonding does not exist.
+     */
+    NO_BONDING(0x0192),
+
+    /**
+     * Error using crypto functions
+     */
+    CRYPTO(0x0193),
+
+    /**
+     * A command was sent from the Host that should identify a connection, but that connection does
+     * not exist.
+     */
+    UNKNOWN_CONNECTION_IDENTIFIER(0x0202),
+
+    /**
+     * The user input of passkey failed, for example, the user cancelled the operation
+     */
+    PASSKEY_ENTRY_FAILED(0x0301),
+
+    /**
+     * The attribute handle given was not valid on this server
+     */
+    INVALID_HANDLE(0x0401),
+
+    /**
+     * The attribute cannot be read
+     */
+    READ_NOT_PERMITTED(0x0402),
+
+    /**
+     * The attribute cannot be written
+     */
+    WRITE_NOT_PERMITTED(0x0403),
+
+    /**
+     * Service Record not found
+     */
+    RECORD_NOT_FOUND(0x0601),
+
+    /**
+     * Service Record with this handle already exist
+     */
+    RECORD_ALREADY_EXIST(0x0602),
+
+    /**
+     * File not found.
+     */
+    FILE_NOT_FOUND(0x0901),
 
     /**
      * File open failed.
      */
-    file_open_failed(0x0A01),
+    FILE_OPEN_FAILED(0x0A01),
 
     /**
      * XML parsing failed.
      */
-    xml_parse_failed(0x0A02),
+    XML_PARSE_FAILED(0x0A02),
 
     /**
      * Device connection failed.
      */
-    device_connection_failed(0x0A03);
+    DEVICE_CONNECTION_FAILED(0x0A03),
+
+    /**
+     * Device firmware signature verification failed.
+     */
+    IMAGE_SIGNATURE_VERIFICATION_FAILED(0x0B01),
+
+    /**
+     * File signature verification failed.
+     */
+    FILE_SIGNATURE_VERIFICATION_FAILED(0x0B02),
+
+    /**
+     * Device firmware checksum is not valid.
+     */
+    IMAGE_CHECKSUM_ERROR(0x0B03);
 
     /**
      * A mapping between the integer code and its corresponding type to

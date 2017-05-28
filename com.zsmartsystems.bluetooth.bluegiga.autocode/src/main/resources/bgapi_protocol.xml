@@ -2031,6 +2031,144 @@
 				<description>Device is in wrong state to receive command</description>
 			</value>
 			<value>
+				<name>out_of_memory</name>
+				<enum_value>0x0182</enum_value>
+				<description>Device has run out of memory</description>
+			</value>
+			<value>
+				<name>not_implemented</name>
+				<enum_value>0x0183</enum_value>
+				<description>Feature is not implemented</description>
+			</value>
+			<value>
+				<name>invalid_command</name>
+				<enum_value>0x0184</enum_value>
+				<description>Command was not recognized</description>
+			</value>
+			<value>
+				<name>timeout</name>
+				<enum_value>0x0185</enum_value>
+				<description>Command or Procedure failed due to timeout</description>
+			</value>
+			<value>
+				<name>not_connected</name>
+				<enum_value>0x0186</enum_value>
+				<description>Connection handle passed is to command is not a valid handle</description>
+			</value>
+			<value>
+				<name>flow</name>
+				<enum_value>0x0187</enum_value>
+				<description>Command would cause either underflow or overflow error</description>
+			</value>
+			<value>
+				<name>user_attribute</name>
+				<enum_value>0x0188</enum_value>
+				<description>User attribute was accessed through API which is not supported</description>
+			</value>
+			<value>
+				<name>invalid_license_key</name>
+				<enum_value>0x0189</enum_value>
+				<description>No valid license key found</description>
+			</value>
+			<value>
+				<name>command_too_long</name>
+				<enum_value>0x018a</enum_value>
+				<description>Command maximum length exceeded</description>
+			</value>
+			<value>
+				<name>out_of_bonds</name>
+				<enum_value>0x018b</enum_value>
+				<description>Bonding procedure can't be started because device has no space left for bond.</description>
+			</value>
+			<value>
+				<name>unspecified</name>
+				<enum_value>0x018c</enum_value>
+				<description>Unspecified error</description>
+			</value>
+			<value>
+				<name>hardware</name>
+				<enum_value>0x018d</enum_value>
+				<description>Hardware failure</description>
+			</value>
+			<value>
+				<name>buffers_full</name>
+				<enum_value>0x018e</enum_value>
+				<description>Command not accepted, because internal buffers are full</description>
+			</value>
+			<value>
+				<name>disconnected</name>
+				<enum_value>0x018f</enum_value>
+				<description>Command or Procedure failed due to disconnection</description>
+			</value>
+			<value>
+				<name>too_many_requests</name>
+				<enum_value>0x0190</enum_value>
+				<description>Too many Simultaneous Requests</description>
+			</value>
+			<value>
+				<name>not_supported</name>
+				<enum_value>0x0191</enum_value>
+				<description>Feature is not supported in this firmware build</description>
+			</value>
+			<value>
+				<name>no_bonding</name>
+				<enum_value>0x0192</enum_value>
+				<description>The bonding does not exist.</description>
+			</value>
+			<value>
+				<name>crypto</name>
+				<enum_value>0x0193</enum_value>
+				<description>Error using crypto functions</description>
+			</value>
+
+			
+			<value>
+				<name>unknown_connection_identifier</name>
+				<enum_value>0x0202</enum_value>
+				<description>A command was sent from the Host that should identify a connection, but that connection does not exist.</description>
+			</value>
+
+			
+			<value>
+				<name>passkey_entry_failed</name>
+				<enum_value>0x0301</enum_value>
+				<description>The user input of passkey failed, for example, the user cancelled the operation</description>
+			</value>
+
+			<value>
+				<name>invalid_handle</name>
+				<enum_value>0x0401</enum_value>
+				<description>The attribute handle given was not valid on this server</description>
+			</value>
+			<value>
+				<name>read_not_permitted</name>
+				<enum_value>0x0402</enum_value>
+				<description>The attribute cannot be read</description>
+			</value>
+			<value>
+				<name>write_not_permitted</name>
+				<enum_value>0x0403</enum_value>
+				<description>The attribute cannot be written</description>
+			</value>
+			
+			<value>
+				<name>record_not_found</name>
+				<enum_value>0x0601</enum_value>
+				<description>Service Record not found</description>
+			</value>
+			<value>
+				<name>record_already_exist</name>
+				<enum_value>0x0602</enum_value>
+				<description>Service Record with this handle already exist</description>
+			</value>
+
+			<value>
+				<name>file_not_found</name>
+				<enum_value>0x0901</enum_value>
+				<description>File not found.</description>
+			</value>
+			
+			<value>
 				<name>file_open_failed</name>
 				<enum_value>0x0a01</enum_value>
 				<description>File open failed.</description>
@@ -2045,6 +2183,23 @@
 				<enum_value>0x0a03</enum_value>
 				<description>Device connection failed.</description>
 			</value>
+
+			<value>
+				<name>image_signature_verification_failed</name>
+				<enum_value>0x0b01</enum_value>
+				<description>Device firmware signature verification failed.</description>
+			</value>
+			<value>
+				<name>file_signature_verification_failed</name>
+				<enum_value>0x0b02</enum_value>
+				<description>File signature verification failed.</description>
+			</value>
+			<value>
+				<name>image_checksum_error</name>
+				<enum_value>0x0b03</enum_value>
+				<description>Device firmware checksum is not valid.</description>
+			</value>
+			
 		</values>
 	</enum>
 

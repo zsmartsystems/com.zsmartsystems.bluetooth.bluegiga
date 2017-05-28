@@ -29,23 +29,23 @@ public enum GapConnectableMode {
     /**
      * Not connectable
      */
-    gap_non_connectable(0x0000),
+    GAP_NON_CONNECTABLE(0x0000),
 
     /**
      * Directed Connectable
      */
-    gap_directed_connectable(0x0001),
+    GAP_DIRECTED_CONNECTABLE(0x0001),
 
     /**
      * Undirected connectable
      */
-    gap_undirected_connectable(0x0002),
+    GAP_UNDIRECTED_CONNECTABLE(0x0002),
 
     /**
      * Same as non-connectable, but also supports ADV_SCAN_IND packets. Device accepts scan
      * requests (active scanning) but is not connectable.
      */
-    gap_scannable_non_connectable(0x0003);
+    GAP_SCANNABLE_NON_CONNECTABLE(0x0003);
 
     /**
      * A mapping between the integer code and its corresponding type to

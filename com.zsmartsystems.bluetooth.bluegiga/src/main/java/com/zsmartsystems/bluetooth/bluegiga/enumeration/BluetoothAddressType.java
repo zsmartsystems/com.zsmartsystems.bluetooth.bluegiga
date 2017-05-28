@@ -29,12 +29,12 @@ public enum BluetoothAddressType {
     /**
      * Public Address
      */
-    gap_address_type_public(0x0000),
+    GAP_ADDRESS_TYPE_PUBLIC(0x0000),
 
     /**
      * Random Address
      */
-    gap_address_type_random(0x0001);
+    GAP_ADDRESS_TYPE_RANDOM(0x0001);
 
     /**
      * A mapping between the integer code and its corresponding type to
