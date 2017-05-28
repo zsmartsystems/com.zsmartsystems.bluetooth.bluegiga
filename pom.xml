@@ -41,7 +41,6 @@
     <modules>
         <module>com.zsmartsystems.bluetooth.bluegiga</module>
         <module>com.zsmartsystems.bluetooth.bluegiga.console</module>
-        <module>com.zsmartsystems.bluetooth.bluegiga.serial</module>
         <module>com.zsmartsystems.bluetooth.bluegiga.test</module>
     </modules>
 
