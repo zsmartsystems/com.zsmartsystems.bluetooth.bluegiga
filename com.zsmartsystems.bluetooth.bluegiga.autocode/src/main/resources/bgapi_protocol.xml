@@ -888,7 +888,7 @@
 	<command>
 		<name>getRssi</name>
 		<class>0x03</class>
-		<id>0x00</id>
+		<id>0x01</id>
 		<description>This command disconnects an active connection. Bluetooth When link is disconnected a Disconnected event is produced.</description>
 		<command_parameters>
 			<parameter>

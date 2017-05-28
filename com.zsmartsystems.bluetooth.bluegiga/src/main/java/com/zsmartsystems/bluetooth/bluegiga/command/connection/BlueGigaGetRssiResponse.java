@@ -24,7 +24,7 @@ import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
  */
 public class BlueGigaGetRssiResponse extends BlueGigaResponse {
     public static int COMMAND_CLASS = 0x03;
-    public static int COMMAND_METHOD = 0x00;
+    public static int COMMAND_METHOD = 0x01;
 
     /**
      * Connection handle.
