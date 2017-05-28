@@ -58,20 +58,20 @@ public enum BluetoothAddressType {
     /**
      * Lookup function based on the type code. Returns null if the code does not exist.
      *
-     * @param i
+     * @param bluetoothAddressType
      *            the code to lookup
      * @return enumeration value.
      */
-    public static BluetoothAddressType getBluetoothAddressType(int i) {
+    public static BluetoothAddressType getBluetoothAddressType(int bluetoothAddressType) {
         if (codeMapping == null) {
             initMapping();
         }
 
-        if (codeMapping.get(i) == null) {
+        if (codeMapping.get(bluetoothAddressType) == null) {
             return UNKNOWN;
         }
 
-        return codeMapping.get(i);
+        return codeMapping.get(bluetoothAddressType);
     }
 
     /**

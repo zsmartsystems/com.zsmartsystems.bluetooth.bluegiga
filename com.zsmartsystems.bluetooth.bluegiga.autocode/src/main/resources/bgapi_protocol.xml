@@ -1349,7 +1349,7 @@
 				<description>RSSI value (dBm). Range: -103 to -38</description>
 			</parameter>
 			<parameter>
-				<data_type>uint8</data_type>
+				<data_type>ScanResponseType</data_type>
 				<name>packet_type</name>
 				<description>Scan response header. 0: Connectable Advertisement packet. 2: Non Connectable Advertisement packet. 4: Scan response packet. 6: Discoverable advertisement packet</description>
 			</parameter>
@@ -2006,6 +2006,33 @@
 		</values>
 	</enum>
 
+	<enum>
+		<name>ScanResponseType</name>
+		<description>Defines the packet types received during a scan response</description>
+		<values>
+			<value>
+				<name>connectable_advertisement</name>
+				<enum_value>0x00</enum_value>
+				<description>Connectable Advertisement packet</description>
+			</value>
+			<value>
+				<name>non_connectable_advertisement</name>
+				<enum_value>0x02</enum_value>
+				<description>Non Connectable Advertisement packet</description>
+			</value>
+			<value>
+				<name>scan_response</name>
+				<enum_value>0x04</enum_value>
+				<description>Scan response packet</description>
+			</value>
+			<value>
+				<name>discoverable_advertisement</name>
+				<enum_value>0x06</enum_value>
+				<description>Discoverable advertisement packet</description>
+			</value>
+		</values>
+	</enum>
+	
 	<enum>
 		<name>BgApiResponse</name>
 		<description>Response codes</description>

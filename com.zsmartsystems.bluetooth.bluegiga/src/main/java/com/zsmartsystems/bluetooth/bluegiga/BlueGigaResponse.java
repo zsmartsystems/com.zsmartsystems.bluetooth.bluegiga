@@ -3,6 +3,7 @@ package com.zsmartsystems.bluetooth.bluegiga;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.BgApiResponse;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.BluetoothAddressType;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.ConnectionStatusFlags;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.ScanResponseType;
 
 public class BlueGigaResponse extends BlueGigaPacket {
     private int[] buffer = new int[131];
@@ -51,6 +52,10 @@ public class BlueGigaResponse extends BlueGigaPacket {
 
     protected BluetoothAddressType deserializeBluetoothAddressType() {
         return BluetoothAddressType.getBluetoothAddressType(deserializeUInt8());
+    }
+
+    protected ScanResponseType deserializeScanResponseType() {
+        return ScanResponseType.getScanResponseType(deserializeUInt8());
     }
 
     protected long deserializeUInt32() {

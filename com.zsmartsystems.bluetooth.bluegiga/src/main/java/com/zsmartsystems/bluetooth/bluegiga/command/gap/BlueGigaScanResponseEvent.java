@@ -9,6 +9,7 @@
 package com.zsmartsystems.bluetooth.bluegiga.command.gap;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.ScanResponseType;
 
 /**
  * Class to implement the BlueGiga command <b>scanResponseEvent</b>.
@@ -37,9 +38,9 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
      * Scan response header. 0: Connectable Advertisement packet. 2: Non Connectable
      * Advertisement packet. 4: Scan response packet. 6: Discoverable advertisement packet
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>ScanResponseType</i> - Java type is {@link ScanResponseType}
      */
-    private int packetType;
+    private ScanResponseType packetType;
 
     /**
      * Advertiser address type. 1: random address. 0: public address
@@ -78,7 +79,7 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
 
         // Deserialize the fields
         rssi = deserializeUInt8();
-        packetType = deserializeUInt8();
+        packetType = deserializeScanResponseType();
         sender = deserializeAddress();
         addressType = deserializeUInt8();
         bond = deserializeUInt8();
@@ -100,11 +101,11 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
      * Scan response header. 0: Connectable Advertisement packet. 2: Non Connectable
      * Advertisement packet. 4: Scan response packet. 6: Discoverable advertisement packet
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>ScanResponseType</i> - Java type is {@link ScanResponseType}
      *
-     * @return the current packet_type as {@link int}
+     * @return the current packet_type as {@link ScanResponseType}
      */
-    public int getPacketType() {
+    public ScanResponseType getPacketType() {
         return packetType;
     }
 

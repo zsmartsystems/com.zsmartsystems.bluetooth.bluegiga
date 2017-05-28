@@ -13,6 +13,7 @@ import java.util.TreeMap;
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaCommand;
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaSerialHandler;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaDiscoverCommand;
+import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaEndProcedureCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaSetModeCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaSetScanParametersCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaAddressGetCommand;
@@ -363,7 +364,7 @@ public final class BlueGigaConsole {
          */
         @Override
         public String getSyntax() {
-            return "discover";
+            return "discover [stop]";
         }
 
         /**
@@ -371,6 +372,13 @@ public final class BlueGigaConsole {
          */
         @Override
         public boolean process(final String[] args, PrintStream out) throws Exception {
+            if (args.length == 2 && args[1].toLowerCase().equals("stop")) {
+                BlueGigaEndProcedureCommand command = new BlueGigaEndProcedureCommand();
+                bleHandler.sendTransaction(command);
+
+                return true;
+            }
+
             BlueGigaSetModeCommand modeCommand = new BlueGigaSetModeCommand();
             modeCommand.setConnect(GapConnectableMode.GAP_DIRECTED_CONNECTABLE);
             modeCommand.setDiscover(GapDiscoverableMode.GAP_GENERAL_DISCOVERABLE);

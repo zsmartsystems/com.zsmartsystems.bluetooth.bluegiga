@@ -1,12 +1,12 @@
-package com.zsmartsystems.bluetooth.bluegiga.ember.autocode;
+package com.zsmartsystems.bluetooth.bluegiga.autocode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import com.zsmartsystems.bluetooth.bluegiga.ember.autocode.xml.Command;
-import com.zsmartsystems.bluetooth.bluegiga.ember.autocode.xml.Protocol;
+import com.zsmartsystems.bluetooth.bluegiga.autocode.xml.Command;
+import com.zsmartsystems.bluetooth.bluegiga.autocode.xml.Protocol;
 
 public class PacketProcessing extends ClassGenerator {
     final String mainPackage = "com.zsmartsystems.bluetooth.bluegiga";

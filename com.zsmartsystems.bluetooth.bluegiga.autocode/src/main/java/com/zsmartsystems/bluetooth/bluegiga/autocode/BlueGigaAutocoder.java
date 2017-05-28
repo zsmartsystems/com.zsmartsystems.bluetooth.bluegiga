@@ -1,4 +1,4 @@
-package com.zsmartsystems.bluetooth.bluegiga.ember.autocode;
+package com.zsmartsystems.bluetooth.bluegiga.autocode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,12 +13,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.zsmartsystems.bluetooth.bluegiga.ember.autocode.xml.Command;
-import com.zsmartsystems.bluetooth.bluegiga.ember.autocode.xml.Enumeration;
-import com.zsmartsystems.bluetooth.bluegiga.ember.autocode.xml.Parameter;
-import com.zsmartsystems.bluetooth.bluegiga.ember.autocode.xml.Protocol;
-import com.zsmartsystems.bluetooth.bluegiga.ember.autocode.xml.Structure;
-import com.zsmartsystems.bluetooth.bluegiga.ember.autocode.xml.Value;
+import com.zsmartsystems.bluetooth.bluegiga.autocode.xml.Command;
+import com.zsmartsystems.bluetooth.bluegiga.autocode.xml.Enumeration;
+import com.zsmartsystems.bluetooth.bluegiga.autocode.xml.Parameter;
+import com.zsmartsystems.bluetooth.bluegiga.autocode.xml.Protocol;
+import com.zsmartsystems.bluetooth.bluegiga.autocode.xml.Structure;
+import com.zsmartsystems.bluetooth.bluegiga.autocode.xml.Value;
 
 
 /**

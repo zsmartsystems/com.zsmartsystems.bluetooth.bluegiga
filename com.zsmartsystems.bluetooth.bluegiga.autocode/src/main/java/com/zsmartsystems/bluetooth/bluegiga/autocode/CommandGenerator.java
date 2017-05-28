@@ -1,4 +1,4 @@
-package com.zsmartsystems.bluetooth.bluegiga.ember.autocode;
+package com.zsmartsystems.bluetooth.bluegiga.autocode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.zsmartsystems.bluetooth.bluegiga.ember.autocode.xml.Command;
-import com.zsmartsystems.bluetooth.bluegiga.ember.autocode.xml.Enumeration;
-import com.zsmartsystems.bluetooth.bluegiga.ember.autocode.xml.Parameter;
-import com.zsmartsystems.bluetooth.bluegiga.ember.autocode.xml.Protocol;
-import com.zsmartsystems.bluetooth.bluegiga.ember.autocode.xml.Value;
+import com.zsmartsystems.bluetooth.bluegiga.autocode.xml.Command;
+import com.zsmartsystems.bluetooth.bluegiga.autocode.xml.Enumeration;
+import com.zsmartsystems.bluetooth.bluegiga.autocode.xml.Parameter;
+import com.zsmartsystems.bluetooth.bluegiga.autocode.xml.Protocol;
+import com.zsmartsystems.bluetooth.bluegiga.autocode.xml.Value;
 
 /**
  *
@@ -366,22 +366,23 @@ public class CommandGenerator extends ClassGenerator {
         out.println("    /**");
         out.println("     * Lookup function based on the type code. Returns null if the code does not exist.");
         out.println("     *");
-        out.println("     * @param i");
+        out.println("     * @param " + lowerCaseFirstCharacter(className));
         out.println("     *            the code to lookup");
         out.println("     * @return enumeration value.");
         out.println("     */");
-        out.println("    public static " + className + " get" + className + "(int i) {");
+        out.println("    public static " + className + " get" + className + "(int " + lowerCaseFirstCharacter(className)
+                + ") {");
         out.println("        if (codeMapping == null) {");
         out.println("            initMapping();");
         out.println("        }");
         out.println();
 
-        out.println("        if (codeMapping.get(i) == null) {");
+        out.println("        if (codeMapping.get(" + lowerCaseFirstCharacter(className) + ") == null) {");
         out.println("            return UNKNOWN;");
         out.println("        }");
         out.println();
 
-        out.println("        return codeMapping.get(i);");
+        out.println("        return codeMapping.get(" + lowerCaseFirstCharacter(className) + ");");
         out.println("    }");
         out.println();
         out.println("    /**");

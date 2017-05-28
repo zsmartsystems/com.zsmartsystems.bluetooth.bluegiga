@@ -1,4 +1,4 @@
-package com.zsmartsystems.bluetooth.bluegiga.ember.autocode.xml;
+package com.zsmartsystems.bluetooth.bluegiga.autocode.xml;
 
 import java.util.List;
 

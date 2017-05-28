@@ -1,4 +1,4 @@
-package com.zsmartsystems.bluetooth.bluegiga.ember.autocode;
+package com.zsmartsystems.bluetooth.bluegiga.autocode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.zsmartsystems.bluetooth.bluegiga.ember.autocode.xml.Parameter;
+import com.zsmartsystems.bluetooth.bluegiga.autocode.xml.Parameter;
 
 /**
  *
@@ -64,6 +64,10 @@ public abstract class ClassGenerator {
 
     protected String upperCaseFirstCharacter(String val) {
         return val.substring(0, 1).toUpperCase() + val.substring(1);
+    }
+
+    protected String lowerCaseFirstCharacter(String val) {
+        return val.substring(0, 1).toLowerCase() + val.substring(1);
     }
 
     protected PrintWriter getClassOut(File packageFile, String className) throws FileNotFoundException {

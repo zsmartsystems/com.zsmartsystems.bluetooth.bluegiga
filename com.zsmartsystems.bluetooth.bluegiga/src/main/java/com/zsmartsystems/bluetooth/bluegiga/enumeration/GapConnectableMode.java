@@ -69,20 +69,20 @@ public enum GapConnectableMode {
     /**
      * Lookup function based on the type code. Returns null if the code does not exist.
      *
-     * @param i
+     * @param gapConnectableMode
      *            the code to lookup
      * @return enumeration value.
      */
-    public static GapConnectableMode getGapConnectableMode(int i) {
+    public static GapConnectableMode getGapConnectableMode(int gapConnectableMode) {
         if (codeMapping == null) {
             initMapping();
         }
 
-        if (codeMapping.get(i) == null) {
+        if (codeMapping.get(gapConnectableMode) == null) {
             return UNKNOWN;
         }
 
-        return codeMapping.get(i);
+        return codeMapping.get(gapConnectableMode);
     }
 
     /**

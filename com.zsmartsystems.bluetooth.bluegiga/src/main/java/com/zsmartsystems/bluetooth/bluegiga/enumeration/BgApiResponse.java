@@ -234,20 +234,20 @@ public enum BgApiResponse {
     /**
      * Lookup function based on the type code. Returns null if the code does not exist.
      *
-     * @param i
+     * @param bgApiResponse
      *            the code to lookup
      * @return enumeration value.
      */
-    public static BgApiResponse getBgApiResponse(int i) {
+    public static BgApiResponse getBgApiResponse(int bgApiResponse) {
         if (codeMapping == null) {
             initMapping();
         }
 
-        if (codeMapping.get(i) == null) {
+        if (codeMapping.get(bgApiResponse) == null) {
             return UNKNOWN;
         }
 
-        return codeMapping.get(i);
+        return codeMapping.get(bgApiResponse);
     }
 
     /**

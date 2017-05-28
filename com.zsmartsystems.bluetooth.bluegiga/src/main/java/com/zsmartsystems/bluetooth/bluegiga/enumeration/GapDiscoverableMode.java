@@ -86,20 +86,20 @@ public enum GapDiscoverableMode {
     /**
      * Lookup function based on the type code. Returns null if the code does not exist.
      *
-     * @param i
+     * @param gapDiscoverableMode
      *            the code to lookup
      * @return enumeration value.
      */
-    public static GapDiscoverableMode getGapDiscoverableMode(int i) {
+    public static GapDiscoverableMode getGapDiscoverableMode(int gapDiscoverableMode) {
         if (codeMapping == null) {
             initMapping();
         }
 
-        if (codeMapping.get(i) == null) {
+        if (codeMapping.get(gapDiscoverableMode) == null) {
             return UNKNOWN;
         }
 
-        return codeMapping.get(i);
+        return codeMapping.get(gapDiscoverableMode);
     }
 
     /**
