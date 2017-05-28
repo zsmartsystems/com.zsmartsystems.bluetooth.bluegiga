@@ -144,7 +144,12 @@ public class BlueGigaValueEvent extends BlueGigaResponse {
         builder.append(", offset=");
         builder.append(offset);
         builder.append(", value=");
-        builder.append(value);
+        for (int c = 0; c < value.length; c++) {
+            if (c > 0) {
+                builder.append(' ');
+            }
+            builder.append(String.format("%02X", value[c]));
+        }
         builder.append(']');
         return builder.toString();
     }

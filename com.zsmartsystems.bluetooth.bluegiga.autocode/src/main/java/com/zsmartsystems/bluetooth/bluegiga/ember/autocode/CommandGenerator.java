@@ -252,11 +252,11 @@ public class CommandGenerator extends ClassGenerator {
                     out.println("        builder.append(\", " + stringToLowerCamelCase(parameter.name) + "=\");");
                 }
                 first = false;
-                if (parameter.data_type.contains("[")) {
+                if (parameter.data_type.equals("uint8array")) {
                     out.println("        for (int c = 0; c < " + stringToLowerCamelCase(parameter.name)
                             + ".length; c++) {");
                     out.println("            if (c > 0) {");
-                    out.println("                builder.append(\" \");");
+                    out.println("                builder.append(' ');");
                     out.println("            }");
                     out.println("            builder.append(String.format(\"%02X\", " + formatParameterString(parameter)
                             + "[c]));");

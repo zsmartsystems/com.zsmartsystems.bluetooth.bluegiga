@@ -372,8 +372,8 @@ public final class BlueGigaConsole {
         @Override
         public boolean process(final String[] args, PrintStream out) throws Exception {
             BlueGigaSetModeCommand modeCommand = new BlueGigaSetModeCommand();
-            modeCommand.setConnect(GapConnectableMode.gap_directed_connectable);
-            modeCommand.setDiscover(GapDiscoverableMode.gap_general_discoverable);
+            modeCommand.setConnect(GapConnectableMode.GAP_DIRECTED_CONNECTABLE);
+            modeCommand.setDiscover(GapDiscoverableMode.GAP_GENERAL_DISCOVERABLE);
             bleHandler.sendTransaction(modeCommand);
 
             BlueGigaSetScanParametersCommand scanCommand = new BlueGigaSetScanParametersCommand();
@@ -383,7 +383,7 @@ public final class BlueGigaConsole {
             bleHandler.sendTransaction(scanCommand);
 
             BlueGigaDiscoverCommand discoverCommand = new BlueGigaDiscoverCommand();
-            discoverCommand.setMode(GapDiscoverMode.gap_discover_generic);
+            discoverCommand.setMode(GapDiscoverMode.GAP_DISCOVER_GENERIC);
             bleHandler.sendTransaction(discoverCommand);
 
             return true;

@@ -115,7 +115,12 @@ public class BlueGigaReadByTypeCommand extends BlueGigaCommand {
         builder.append(", end=");
         builder.append(end);
         builder.append(", uint8array=");
-        builder.append(uint8array);
+        for (int c = 0; c < uint8array.length; c++) {
+            if (c > 0) {
+                builder.append(' ');
+            }
+            builder.append(String.format("%02X", uint8array[c]));
+        }
         builder.append(']');
         return builder.toString();
     }

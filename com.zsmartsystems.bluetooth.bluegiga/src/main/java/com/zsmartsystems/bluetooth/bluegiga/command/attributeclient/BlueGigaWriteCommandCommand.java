@@ -95,7 +95,12 @@ public class BlueGigaWriteCommandCommand extends BlueGigaCommand {
         builder.append(", atthandle=");
         builder.append(atthandle);
         builder.append(", data=");
-        builder.append(data);
+        for (int c = 0; c < data.length; c++) {
+            if (c > 0) {
+                builder.append(' ');
+            }
+            builder.append(String.format("%02X", data[c]));
+        }
         builder.append(']');
         return builder.toString();
     }

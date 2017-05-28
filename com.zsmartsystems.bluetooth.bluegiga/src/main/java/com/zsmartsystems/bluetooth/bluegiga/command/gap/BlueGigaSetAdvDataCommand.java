@@ -80,7 +80,12 @@ public class BlueGigaSetAdvDataCommand extends BlueGigaCommand {
         builder.append("BlueGigaSetAdvDataCommand [setScanrsp=");
         builder.append(setScanrsp);
         builder.append(", advData=");
-        builder.append(advData);
+        for (int c = 0; c < advData.length; c++) {
+            if (c > 0) {
+                builder.append(' ');
+            }
+            builder.append(String.format("%02X", advData[c]));
+        }
         builder.append(']');
         return builder.toString();
     }

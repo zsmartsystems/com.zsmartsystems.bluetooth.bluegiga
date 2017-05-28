@@ -80,7 +80,12 @@ public class BlueGigaFeatureIndEvent extends BlueGigaResponse {
         builder.append("BlueGigaFeatureIndEvent [connection=");
         builder.append(connection);
         builder.append(", features=");
-        builder.append(features);
+        for (int c = 0; c < features.length; c++) {
+            if (c > 0) {
+                builder.append(' ');
+            }
+            builder.append(String.format("%02X", features[c]));
+        }
         builder.append(']');
         return builder.toString();
     }

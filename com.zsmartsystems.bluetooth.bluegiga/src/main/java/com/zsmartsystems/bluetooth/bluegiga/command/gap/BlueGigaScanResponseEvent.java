@@ -27,7 +27,7 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
     public static int COMMAND_METHOD = 0x00;
 
     /**
-     * Connection handle
+     * RSSI value (dBm). Range: -103 to -38
      * <p>
      * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
      */
@@ -47,6 +47,13 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
      * BlueGiga API type is <i>bd_addr</i> - Java type is {@link String}
      */
     private String sender;
+
+    /**
+     * Advertiser address type. 1: random address. 0: public address
+     * <p>
+     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     */
+    private int addressType;
 
     /**
      * Bond handle if there is known bond for this device, 0xff otherwise
@@ -73,12 +80,13 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
         rssi = deserializeUInt8();
         packetType = deserializeUInt8();
         sender = deserializeAddress();
+        addressType = deserializeUInt8();
         bond = deserializeUInt8();
         data = deserializeUInt8Array();
     }
 
     /**
-     * Connection handle
+     * RSSI value (dBm). Range: -103 to -38
      * <p>
      * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
      *
@@ -109,6 +117,17 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
      */
     public String getSender() {
         return sender;
+    }
+
+    /**
+     * Advertiser address type. 1: random address. 0: public address
+     * <p>
+     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     *
+     * @return the current address_type as {@link int}
+     */
+    public int getAddressType() {
+        return addressType;
     }
 
     /**
@@ -143,10 +162,17 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
         builder.append(packetType);
         builder.append(", sender=");
         builder.append(sender);
+        builder.append(", addressType=");
+        builder.append(addressType);
         builder.append(", bond=");
         builder.append(bond);
         builder.append(", data=");
-        builder.append(data);
+        for (int c = 0; c < data.length; c++) {
+            if (c > 0) {
+                builder.append(' ');
+            }
+            builder.append(String.format("%02X", data[c]));
+        }
         builder.append(']');
         return builder.toString();
     }

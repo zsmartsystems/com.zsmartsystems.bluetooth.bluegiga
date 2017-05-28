@@ -1346,7 +1346,7 @@
 			<parameter>
 				<data_type>uint8</data_type>
 				<name>rssi</name>
-				<description>Connection handle</description>
+				<description>RSSI value (dBm). Range: -103 to -38</description>
 			</parameter>
 			<parameter>
 				<data_type>uint8</data_type>
@@ -1356,6 +1356,11 @@
 			<parameter>
 				<data_type>bd_addr</data_type>
 				<name>sender</name>
+				<description>Advertiser address type. 1: random address. 0: public address</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>address_type</name>
 				<description>Advertiser address type. 1: random address. 0: public address</description>
 			</parameter>
 			<parameter>
