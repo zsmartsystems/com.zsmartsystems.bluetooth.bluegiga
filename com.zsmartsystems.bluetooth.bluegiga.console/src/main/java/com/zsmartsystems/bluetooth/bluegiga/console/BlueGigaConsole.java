@@ -22,9 +22,7 @@ import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaEndProcedureComm
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaScanResponseEvent;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaSetModeCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaSetScanParametersCommand;
-import com.zsmartsystems.bluetooth.bluegiga.command.security.BlueGigaEncryptStartCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.security.BlueGigaGetBondsCommand;
-import com.zsmartsystems.bluetooth.bluegiga.command.security.BlueGigaSetBondableModeCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaAddressGetCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaAddressGetResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetConnectionsCommand;
@@ -452,9 +450,9 @@ public final class BlueGigaConsole implements BlueGigaEventListener {
 
             String address = args[1];
             int connIntervalMin = 10;
-            int connIntervalMax = 1000;
+            int connIntervalMax = 100;
             int latency = 0;
-            int timeout = 2000;
+            int timeout = 200;
 
             BlueGigaSetModeCommand modeCommand = new BlueGigaSetModeCommand();
             modeCommand.setConnect(GapConnectableMode.GAP_NON_CONNECTABLE);
@@ -473,19 +471,19 @@ public final class BlueGigaConsole implements BlueGigaEventListener {
             if (connectResponse.getResult() != BgApiResponse.SUCCESS) {
                 return false;
             }
-
-            BlueGigaSetBondableModeCommand bondMode = new BlueGigaSetBondableModeCommand();
-            bondMode.setBondable(true);
-            bleHandler.sendTransaction(bondMode);
-
-            // sm_set_parameters(0, 7, sm_io_capability_noinputnooutput)
-            // ble_cmd_sm_encrypt_start(connectHandle, 1)
-
-            BlueGigaEncryptStartCommand encryptStart = new BlueGigaEncryptStartCommand();
-            encryptStart.setHandle(0);
-            encryptStart.setBonding(true);
-            bleHandler.sendTransaction(encryptStart);
-
+            /*
+             * BlueGigaSetBondableModeCommand bondMode = new BlueGigaSetBondableModeCommand();
+             * bondMode.setBondable(true);
+             * bleHandler.sendTransaction(bondMode);
+             * 
+             * // sm_set_parameters(0, 7, sm_io_capability_noinputnooutput)
+             * // ble_cmd_sm_encrypt_start(connectHandle, 1)
+             * 
+             * BlueGigaEncryptStartCommand encryptStart = new BlueGigaEncryptStartCommand();
+             * encryptStart.setHandle(0);
+             * encryptStart.setBonding(true);
+             * bleHandler.sendTransaction(encryptStart);
+             */
             return true;
         }
     }

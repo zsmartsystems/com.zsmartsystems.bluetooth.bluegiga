@@ -1,4 +1,66 @@
 <protocol>
+
+	<command>
+		<name>protocolErrorEvent</name>
+		<class>0x00</class>
+		<id>0x06</id>
+		<description>A protocol error was detected in BGAPI command parser. This event is triggered if a BGAPI command from the host contains syntax error(s), or if a command is only partially sent. Then the BGAPI parser has a 1 second command timeout and if a valid command is not transmitted within this timeout an error is raised and the partial or wrong command will be ignored.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>BgApiResponse</data_type>
+				<name>reason</name>
+				<description>Reason for failure</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>endpointWatermarkRxEvent</name>
+		<class>0x00</class>
+		<id>0x02</id>
+		<description>This event is generated if the receive (incoming) buffer of the endpoint has been filled with a number of bytes equal or higher than the value defined by the command Endpoint Set Watermarks. Data from the receive buffer can then be read (and consequently cleared) with the command Endpoint Rx</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>endpoint</name>
+				<description>Endpoint index where data was received</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>data</name>
+				<description>Space available</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>endpointWatermarkTxEvent</name>
+		<class>0x00</class>
+		<id>0x03</id>
+		<description>This event is generated when the transmit (outgoing) buffer of the endpoint has free space for a number of bytes equal or higher than the value defined by the command Endpoint Set Watermarks. When there is enough free space, data can be sent out of the endpoint by the command Endpoint Tx.</description>
+		<response_parameters>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>endpoint</name>
+				<description>Endpoint index where data was sent</description>
+			</parameter>
+			<parameter>
+				<data_type>uint8</data_type>
+				<name>data</name>
+				<description>Space available</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>noLicenseKeyEvent</name>
+		<class>0x00</class>
+		<id>0x05</id>
+		<description>This error is produced when no valid license key found form the Smart hardware. When there is no Bluetooth valid license key the Bluetooth radio will not be operational. A new license key can be requested from the Bluegiga Technical Support.</description>
+		<response_parameters>
+		</response_parameters>
+	</command>
+
 	<command>
 		<name>attributeWrite</name>
 		<class>0x04</class>

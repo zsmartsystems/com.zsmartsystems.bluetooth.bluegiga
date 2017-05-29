@@ -66,10 +66,14 @@ import com.zsmartsystems.bluetooth.bluegiga.command.security.BlueGigaSetParamete
 import com.zsmartsystems.bluetooth.bluegiga.command.security.BlueGigaWhitelistBondsResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaAddressGetResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaBootEvent;
+import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaEndpointWatermarkRxEvent;
+import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaEndpointWatermarkTxEvent;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetConnectionsResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetCountersResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetInfoResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaHelloResponse;
+import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaNoLicenseKeyEvent;
+import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaProtocolErrorEvent;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaResetResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaWhitelistAppendResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaWhitelistClearResponse;
@@ -99,6 +103,10 @@ class BlueGigaResponsePackets {
     final private static Map<Integer, Class<?>> packetMap = new HashMap<Integer, Class<?>>();
 
     static {
+        packetMap.put(Objects.hash(0x00, 0x06, true), BlueGigaProtocolErrorEvent.class);
+        packetMap.put(Objects.hash(0x00, 0x02, true), BlueGigaEndpointWatermarkRxEvent.class);
+        packetMap.put(Objects.hash(0x00, 0x03, true), BlueGigaEndpointWatermarkTxEvent.class);
+        packetMap.put(Objects.hash(0x00, 0x05, true), BlueGigaNoLicenseKeyEvent.class);
         packetMap.put(Objects.hash(0x04, 0x05, false), BlueGigaAttributeWriteResponse.class);
         packetMap.put(Objects.hash(0x04, 0x0A, false), BlueGigaExecuteWriteResponse.class);
         packetMap.put(Objects.hash(0x04, 0x00, false), BlueGigaFindByTypeValueResponse.class);

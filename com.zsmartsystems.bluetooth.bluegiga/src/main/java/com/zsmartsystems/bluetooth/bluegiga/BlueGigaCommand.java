@@ -77,7 +77,7 @@ public abstract class BlueGigaCommand extends BlueGigaPacket {
 
     protected void serializeAddress(String address) {
         String[] bytes = address.split(":");
-        if (bytes.length != 0) {
+        if (bytes.length == 0) {
             serializeUInt8(0);
             serializeUInt8(0);
             serializeUInt8(0);
@@ -88,7 +88,7 @@ public abstract class BlueGigaCommand extends BlueGigaPacket {
             return;
         }
 
-        for (int cnt = 5; cnt > 0; cnt--) {
+        for (int cnt = 5; cnt >= 0; cnt--) {
             serializeUInt8(Integer.parseInt(bytes[cnt], 16));
         }
     }

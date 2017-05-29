@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class processes the Extended Inquiry Response data
+ * This class processes the Extended Inquiry Response data used in the BLE advertisement frame
  * 
  * @author Chris Jackson
  *

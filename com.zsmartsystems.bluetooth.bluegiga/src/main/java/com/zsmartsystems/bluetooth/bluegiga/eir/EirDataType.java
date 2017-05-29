@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Assigned numbers are used in GAP for inquiry response, EIR data type values, manufacturer-specific data, advertising
+ * data, low energy UUIDs and appearance characteristics, and class of device.
+ * 
+ * https://www.bluetooth.com/specifications/assigned-numbers/generic-access-profile
  * 
  * @author Chris Jackson
  *
@@ -25,8 +29,29 @@ public enum EirDataType {
     EIR_NAME_SHORT(0x08),
     EIR_NAME_LONG(0x09),
     EIR_TXPOWER(0x0A),
-    EIR_DEVICEID(0x10),
-    EIR_SLAVEINTERVALRANGE(0x12);
+    EIR_DEVICE_CLASS(0x0D),
+    EIR_SIMPLE_PAIRING_HASH(0x0E),
+    EIR_SIMPLE_PAIRING_RANDOMIZER(0x0F),
+    EIR_SECMAN_TK_VALUE(0x10),
+    EIR_SECMAN_OOB_FLAGS(0x11),
+    EIR_SLAVEINTERVALRANGE(0x12),
+    EIR_SVC_SOLICIT_UUID16(0x14),
+    EIR_SVC_SOLICIT_UUID128(0x15),
+    EIR_SVC_DATA_UUID16(0x16),
+    EIR_PUBLIC_TARGET_ADDR(0x17),
+    EIR_RANDOM_TARGET_ADDR(0x18),
+    EIR_ADVERTISING_INTERVAL(0x1A),
+    EIR_LE_DEVICE_ADDRESS(0x1B),
+    EIR_LE_ROLE(0x1C),
+    EIR_SVC_SOLICIT_UUID32(0x1F),
+    EIR_SVC_DATA_UUID32(0x20),
+    EIR_SVC_DATA_UUID128(0x21),
+    EIR_LE_SEC_CONFIRMATION_VALUE(0x22),
+    EIR_LE_CONNECTION_RANDOM_VALUE(0x23),
+    EIR_URI(0x24),
+    EIR_INDOOR_POSITIONING(0x25),
+    EIR_LE_SUPPORTED_FEATURES(0x27),
+    EIR_MANUFACTURER_SPECIFIC(0xFF);
 
     /**
      * A mapping between the integer code and its corresponding type to

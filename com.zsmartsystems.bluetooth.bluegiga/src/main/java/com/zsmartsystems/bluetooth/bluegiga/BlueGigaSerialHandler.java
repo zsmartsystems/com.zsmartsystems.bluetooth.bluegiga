@@ -89,9 +89,10 @@ public class BlueGigaSerialHandler {
                         int val = inputStream.read();
                         // logger.debug("BLE RX: " + String.format("%02X", val));
 
-                        if (inputCount == inputBuffer.length) {
-                            // Buffer overrun - shouldn't ever happen and probably means we've lost packet sync!
-                        }
+                        // TODO - how to handle synchronisation issues?
+                        // if (inputCount == inputBuffer.length) {
+                        // Buffer overrun - shouldn't ever happen and probably means we've lost packet sync!
+                        // }
 
                         inputBuffer[inputCount++] = val;
                         if (inputCount == 4) {
@@ -347,6 +348,7 @@ public class BlueGigaSerialHandler {
         return null;
     }
 
+    // TODO: Add a timeout mechanism
     private synchronized void startTransactionTimer() {
         // Stop any existing timer
         resetTransactionTimer();
