@@ -8,6 +8,7 @@ import com.zsmartsystems.bluetooth.bluegiga.enumeration.ScanResponseType;
 public class BlueGigaResponse extends BlueGigaPacket {
     private int[] buffer = new int[131];
     private int position = 0;
+    protected boolean event = false;
 
     protected BlueGigaResponse(int[] inputBuffer) {
         // TODO Auto-generated constructor stub
@@ -16,12 +17,25 @@ public class BlueGigaResponse extends BlueGigaPacket {
     }
 
     /**
+     * Returns true if this response is an event, or false if it is a response to a command
+     * 
+     * @return true if this is an event
+     */
+    public boolean isEvent() {
+        return event;
+    }
+
+    /**
      * Reads a int8 from the output stream
      *
      * @return value read from input
      */
     protected int deserializeInt8() {
-        return buffer[position++];
+        if (buffer[position] >= 128) {
+            return buffer[position++] - 256;
+        } else {
+            return buffer[position++];
+        }
     }
 
     /**
@@ -31,6 +45,10 @@ public class BlueGigaResponse extends BlueGigaPacket {
      */
     protected int deserializeUInt8() {
         return buffer[position++];
+    }
+
+    protected boolean deserializeBoolean() {
+        return buffer[position++] != 0;
     }
 
     /**
@@ -80,7 +98,7 @@ public class BlueGigaResponse extends BlueGigaPacket {
             if (cnt < 5) {
                 builder.append(":");
             }
-            builder.append(String.format("%02x", buffer[position + cnt]));
+            builder.append(String.format("%02X", buffer[position + cnt]));
         }
         position += 6;
 

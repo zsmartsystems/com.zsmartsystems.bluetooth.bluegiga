@@ -159,7 +159,7 @@ public abstract class ClassGenerator {
             case 0:
                 return "system";
             case 1:
-                return "ersistence";
+                return "persistence";
             case 2:
                 return "attributedb";
             case 3:
@@ -172,6 +172,29 @@ public abstract class ClassGenerator {
                 return "gap";
             case 7:
                 return "hardware";
+            default:
+                return "UNKNOWN";
+        }
+    }
+
+    protected String getClassAbbr(int classId) {
+        switch (classId) {
+            case 0:
+                return "sys";
+            case 1:
+                return "per";
+            case 2:
+                return "adb";
+            case 3:
+                return "con";
+            case 4:
+                return "acl";
+            case 5:
+                return "sec";
+            case 6:
+                return "gap";
+            case 7:
+                return "hdw";
             default:
                 return "UNKNOWN";
         }

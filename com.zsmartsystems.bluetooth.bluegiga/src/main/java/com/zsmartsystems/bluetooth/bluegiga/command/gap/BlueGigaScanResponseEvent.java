@@ -9,6 +9,7 @@
 package com.zsmartsystems.bluetooth.bluegiga.command.gap;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.BluetoothAddressType;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.ScanResponseType;
 
 /**
@@ -30,7 +31,7 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
     /**
      * RSSI value (dBm). Range: -103 to -38
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>int8</i> - Java type is {@link int}
      */
     private int rssi;
 
@@ -43,7 +44,7 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
     private ScanResponseType packetType;
 
     /**
-     * Advertiser address type. 1: random address. 0: public address
+     * Advertisers address
      * <p>
      * BlueGiga API type is <i>bd_addr</i> - Java type is {@link String}
      */
@@ -52,9 +53,9 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
     /**
      * Advertiser address type. 1: random address. 0: public address
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>BluetoothAddressType</i> - Java type is {@link BluetoothAddressType}
      */
-    private int addressType;
+    private BluetoothAddressType addressType;
 
     /**
      * Bond handle if there is known bond for this device, 0xff otherwise
@@ -77,11 +78,13 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
         // Super creates deserializer and reads header fields
         super(inputBuffer);
 
+        event = (inputBuffer[0] & 0x80) != 0;
+
         // Deserialize the fields
-        rssi = deserializeUInt8();
+        rssi = deserializeInt8();
         packetType = deserializeScanResponseType();
         sender = deserializeAddress();
-        addressType = deserializeUInt8();
+        addressType = deserializeBluetoothAddressType();
         bond = deserializeUInt8();
         data = deserializeUInt8Array();
     }
@@ -89,7 +92,7 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
     /**
      * RSSI value (dBm). Range: -103 to -38
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>int8</i> - Java type is {@link int}
      *
      * @return the current rssi as {@link int}
      */
@@ -110,7 +113,7 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
     }
 
     /**
-     * Advertiser address type. 1: random address. 0: public address
+     * Advertisers address
      * <p>
      * BlueGiga API type is <i>bd_addr</i> - Java type is {@link String}
      *
@@ -123,11 +126,11 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
     /**
      * Advertiser address type. 1: random address. 0: public address
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>BluetoothAddressType</i> - Java type is {@link BluetoothAddressType}
      *
-     * @return the current address_type as {@link int}
+     * @return the current address_type as {@link BluetoothAddressType}
      */
-    public int getAddressType() {
+    public BluetoothAddressType getAddressType() {
         return addressType;
     }
 

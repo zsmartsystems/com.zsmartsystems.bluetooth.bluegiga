@@ -53,6 +53,8 @@ public class BlueGigaUpdateResponse extends BlueGigaResponse {
         // Super creates deserializer and reads header fields
         super(inputBuffer);
 
+        event = (inputBuffer[0] & 0x80) != 0;
+
         // Deserialize the fields
         connection = deserializeUInt8();
         result = deserializeBgApiResponse();

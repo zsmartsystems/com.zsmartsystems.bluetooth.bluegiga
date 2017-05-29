@@ -2,6 +2,7 @@ package com.zsmartsystems.bluetooth.bluegiga;
 
 import java.util.Arrays;
 
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.BluetoothAddressType;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapConnectableMode;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapDiscoverMode;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapDiscoverableMode;
@@ -38,6 +39,10 @@ public abstract class BlueGigaCommand extends BlueGigaPacket {
      */
     protected void serializeUInt8(int val) {
         buffer[length++] = val & 0xFF;
+    }
+
+    protected void serializeBoolean(boolean val) {
+        buffer[length++] = val ? 1 : 0;
     }
 
     /**
@@ -86,6 +91,10 @@ public abstract class BlueGigaCommand extends BlueGigaPacket {
         for (int cnt = 5; cnt > 0; cnt--) {
             serializeUInt8(Integer.parseInt(bytes[cnt], 16));
         }
+    }
+
+    protected void serializeBluetoothAddressType(BluetoothAddressType addrType) {
+        serializeUInt8(addrType.getKey());
     }
 
     protected void serializeGapDiscoverableMode(GapDiscoverableMode mode) {

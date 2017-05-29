@@ -26,7 +26,7 @@ import com.zsmartsystems.bluetooth.bluegiga.enumeration.BgApiResponse;
  */
 public class BlueGigaWhitelistBondsResponse extends BlueGigaResponse {
     public static int COMMAND_CLASS = 0x05;
-    public static int COMMAND_METHOD = 0x01;
+    public static int COMMAND_METHOD = 0x07;
 
     /**
      * Command result
@@ -48,6 +48,8 @@ public class BlueGigaWhitelistBondsResponse extends BlueGigaResponse {
     public BlueGigaWhitelistBondsResponse(int[] inputBuffer) {
         // Super creates deserializer and reads header fields
         super(inputBuffer);
+
+        event = (inputBuffer[0] & 0x80) != 0;
 
         // Deserialize the fields
         result = deserializeBgApiResponse();

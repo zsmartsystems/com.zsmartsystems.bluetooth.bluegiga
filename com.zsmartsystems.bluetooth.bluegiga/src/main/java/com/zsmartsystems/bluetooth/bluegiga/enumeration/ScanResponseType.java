@@ -27,22 +27,22 @@ public enum ScanResponseType {
     UNKNOWN(-1),
 
     /**
-     * Connectable Advertisement packet
+     * [0] Connectable Advertisement packet
      */
     CONNECTABLE_ADVERTISEMENT(0x0000),
 
     /**
-     * Non Connectable Advertisement packet
+     * [2] Non Connectable Advertisement packet
      */
     NON_CONNECTABLE_ADVERTISEMENT(0x0002),
 
     /**
-     * Scan response packet
+     * [4] Scan response packet
      */
     SCAN_RESPONSE(0x0004),
 
     /**
-     * Discoverable advertisement packet
+     * [6] Discoverable advertisement packet
      */
     DISCOVERABLE_ADVERTISEMENT(0x0006);
 

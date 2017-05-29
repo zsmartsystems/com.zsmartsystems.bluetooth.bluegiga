@@ -37,9 +37,9 @@ public class BlueGigaEncryptStartCommand extends BlueGigaCommand {
      * Create bonding if devices are not already bonded. 0: Do not create bonding. 1: Creating
      * bonding
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>boolean</i> - Java type is {@link boolean}
      */
-    private int bonding;
+    private boolean bonding;
     /**
      * Bonding handle of a device. This handle can be obtained for example from events like: Scan
      * Response Status - If handle is 0xFF, all bondings will be deleted
@@ -54,9 +54,9 @@ public class BlueGigaEncryptStartCommand extends BlueGigaCommand {
      * Create bonding if devices are not already bonded. 0: Do not create bonding. 1: Creating
      * bonding
      *
-     * @param bonding the bonding to set as {@link int}
+     * @param bonding the bonding to set as {@link boolean}
      */
-    public void setBonding(int bonding) {
+    public void setBonding(boolean bonding) {
         this.bonding = bonding;
     }
 
@@ -68,7 +68,7 @@ public class BlueGigaEncryptStartCommand extends BlueGigaCommand {
 
         // Serialize the fields
         serializeUInt8(handle);
-        serializeUInt8(bonding);
+        serializeBoolean(bonding);
 
         return getPayload();
     }

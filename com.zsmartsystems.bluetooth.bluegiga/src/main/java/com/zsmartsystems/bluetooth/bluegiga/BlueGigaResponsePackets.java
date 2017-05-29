@@ -71,6 +71,9 @@ import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetCountersRe
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetInfoResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaHelloResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaResetResponse;
+import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaWhitelistAppendResponse;
+import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaWhitelistClearResponse;
+import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaWhitelistRemoveResponse;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -146,8 +149,11 @@ class BlueGigaResponsePackets {
         packetMap.put(Objects.hash(0x05, 0x05, false), BlueGigaGetBondsResponse.class);
         packetMap.put(Objects.hash(0x05, 0x04, false), BlueGigaPassKeyResponse.class);
         packetMap.put(Objects.hash(0x05, 0x01, false), BlueGigaSetBondableModeResponse.class);
-        packetMap.put(Objects.hash(0x05, 0x01, false), BlueGigaSetParametersResponse.class);
-        packetMap.put(Objects.hash(0x05, 0x01, false), BlueGigaWhitelistBondsResponse.class);
+        packetMap.put(Objects.hash(0x05, 0x03, false), BlueGigaSetParametersResponse.class);
+        packetMap.put(Objects.hash(0x05, 0x07, false), BlueGigaWhitelistBondsResponse.class);
+        packetMap.put(Objects.hash(0x00, 0x0A, false), BlueGigaWhitelistAppendResponse.class);
+        packetMap.put(Objects.hash(0x00, 0x0B, false), BlueGigaWhitelistRemoveResponse.class);
+        packetMap.put(Objects.hash(0x00, 0x0C, false), BlueGigaWhitelistClearResponse.class);
         packetMap.put(Objects.hash(0x05, 0x01, true), BlueGigaBondingFailEvent.class);
         packetMap.put(Objects.hash(0x05, 0x04, true), BlueGigaBondStatusEvent.class);
         packetMap.put(Objects.hash(0x05, 0x02, true), BlueGigaPasskeyDisplayEvent.class);

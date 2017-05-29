@@ -11,15 +11,30 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaCommand;
+import com.zsmartsystems.bluetooth.bluegiga.BlueGigaEventListener;
+import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaSerialHandler;
+import com.zsmartsystems.bluetooth.bluegiga.command.attributeclient.BlueGigaFindInformationCommand;
+import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaConnectDirectCommand;
+import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaConnectDirectResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaDiscoverCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaEndProcedureCommand;
+import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaScanResponseEvent;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaSetModeCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaSetScanParametersCommand;
+import com.zsmartsystems.bluetooth.bluegiga.command.security.BlueGigaEncryptStartCommand;
+import com.zsmartsystems.bluetooth.bluegiga.command.security.BlueGigaGetBondsCommand;
+import com.zsmartsystems.bluetooth.bluegiga.command.security.BlueGigaSetBondableModeCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaAddressGetCommand;
+import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaAddressGetResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetConnectionsCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetCountersCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaGetInfoCommand;
+import com.zsmartsystems.bluetooth.bluegiga.command.system.BlueGigaResetCommand;
+import com.zsmartsystems.bluetooth.bluegiga.eir.EirDataType;
+import com.zsmartsystems.bluetooth.bluegiga.eir.EirPacket;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.BgApiResponse;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.BluetoothAddressType;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapConnectableMode;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapDiscoverMode;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapDiscoverableMode;
@@ -28,13 +43,15 @@ import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapDiscoverableMode;
  *
  * @author Chris Jackson
  */
-public final class BlueGigaConsole {
+public final class BlueGigaConsole implements BlueGigaEventListener {
     /**
      * The main thread.
      */
     private Thread mainThread = null;
 
     private BlueGigaSerialHandler bleHandler;
+
+    private Map<String, Map<EirDataType, Object>> deviceMap = new TreeMap<String, Map<EirDataType, Object>>();
 
     /**
      * The flag reflecting that shutdown is in process.
@@ -56,10 +73,17 @@ public final class BlueGigaConsole {
     public BlueGigaConsole(BlueGigaSerialHandler handler) {
         this.bleHandler = handler;
 
-        commands.put("info", new GetInfoCommand());
-        commands.put("counters", new GetCountersCommand());
+        handler.addEventListener(this);
+
+        commands.put("bonds", new BondsCommand());
+        commands.put("connect", new ConnectCommand());
         commands.put("connections", new GetConnectionsCommand());
+        commands.put("counters", new GetCountersCommand());
+        commands.put("devices", new DevicesCommand());
         commands.put("discover", new DiscoverCommand());
+        commands.put("find", new FindCommand());
+        commands.put("info", new GetInfoCommand());
+        commands.put("reset", new ResetCommand());
 
         commands.put("quit", new QuitCommand());
         commands.put("help", new HelpCommand());
@@ -311,10 +335,12 @@ public final class BlueGigaConsole {
             BlueGigaCommand command;
 
             command = new BlueGigaGetInfoCommand();
-            bleHandler.sendBleRequestAsync(command);
+            bleHandler.sendTransaction(command);
 
             command = new BlueGigaAddressGetCommand();
-            bleHandler.sendBleRequestAsync(command);
+            BlueGigaAddressGetResponse response = (BlueGigaAddressGetResponse) bleHandler.sendTransaction(command);
+
+            print("Local address is " + response.getAddress(), System.out);
 
             return true;
         }
@@ -345,7 +371,7 @@ public final class BlueGigaConsole {
             BlueGigaCommand command;
 
             command = new BlueGigaGetCountersCommand();
-            bleHandler.sendBleRequestAsync(command);
+            bleHandler.sendTransaction(command);
             return true;
         }
     }
@@ -391,8 +417,114 @@ public final class BlueGigaConsole {
             bleHandler.sendTransaction(scanCommand);
 
             BlueGigaDiscoverCommand discoverCommand = new BlueGigaDiscoverCommand();
-            discoverCommand.setMode(GapDiscoverMode.GAP_DISCOVER_GENERIC);
+            discoverCommand.setMode(GapDiscoverMode.GAP_DISCOVER_OBSERVATION);
             bleHandler.sendTransaction(discoverCommand);
+
+            return true;
+        }
+    }
+
+    private class ConnectCommand implements ConsoleCommand {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getDescription() {
+            return "connect to a device";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getSyntax() {
+            return "connect address [direct]";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean process(final String[] args, PrintStream out) throws Exception {
+            if (args.length < 2) {
+                return false;
+            }
+
+            String address = args[1];
+            int connIntervalMin = 10;
+            int connIntervalMax = 1000;
+            int latency = 0;
+            int timeout = 2000;
+
+            BlueGigaSetModeCommand modeCommand = new BlueGigaSetModeCommand();
+            modeCommand.setConnect(GapConnectableMode.GAP_NON_CONNECTABLE);
+            modeCommand.setDiscover(GapDiscoverableMode.GAP_NON_DISCOVERABLE);
+            bleHandler.sendTransaction(modeCommand);
+
+            BlueGigaConnectDirectCommand connect = new BlueGigaConnectDirectCommand();
+            connect.setAddress(address);
+            connect.setAddrType(BluetoothAddressType.GAP_ADDRESS_TYPE_PUBLIC);
+            connect.setConnIntervalMin(connIntervalMin);
+            connect.setConnIntervalMax(connIntervalMax);
+            connect.setLatency(latency);
+            connect.setTimeout(timeout);
+            BlueGigaConnectDirectResponse connectResponse = (BlueGigaConnectDirectResponse) bleHandler
+                    .sendTransaction(connect);
+            if (connectResponse.getResult() != BgApiResponse.SUCCESS) {
+                return false;
+            }
+
+            BlueGigaSetBondableModeCommand bondMode = new BlueGigaSetBondableModeCommand();
+            bondMode.setBondable(true);
+            bleHandler.sendTransaction(bondMode);
+
+            // sm_set_parameters(0, 7, sm_io_capability_noinputnooutput)
+            // ble_cmd_sm_encrypt_start(connectHandle, 1)
+
+            BlueGigaEncryptStartCommand encryptStart = new BlueGigaEncryptStartCommand();
+            encryptStart.setHandle(0);
+            encryptStart.setBonding(true);
+            bleHandler.sendTransaction(encryptStart);
+
+            return true;
+        }
+    }
+
+    private class FindCommand implements ConsoleCommand {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getDescription() {
+            return "find device info";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getSyntax() {
+            return "find connection";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean process(final String[] args, PrintStream out) throws Exception {
+            if (args.length < 2) {
+                return false;
+            }
+
+            int handle = Integer.parseInt(args[1]);
+
+            BlueGigaFindInformationCommand info = new BlueGigaFindInformationCommand();
+            info.setConnection(handle);
+            info.setStart(0);
+            info.setEnd(65535);
+            bleHandler.sendTransaction(info);
+
+            // connect 55:7E:CE:81:E8:9D
 
             return true;
         }
@@ -421,9 +553,114 @@ public final class BlueGigaConsole {
         @Override
         public boolean process(final String[] args, PrintStream out) throws Exception {
             BlueGigaCommand command = new BlueGigaGetConnectionsCommand();
-            bleHandler.sendTransaction(command);
+            BlueGigaResponse response = bleHandler.sendTransaction(command);
 
             return true;
+        }
+    }
+
+    private class ResetCommand implements ConsoleCommand {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getDescription() {
+            return "reset";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getSyntax() {
+            return "reset";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean process(final String[] args, PrintStream out) throws Exception {
+            BlueGigaCommand command = new BlueGigaResetCommand();
+            bleHandler.queueFrame(command);
+
+            return true;
+        }
+    }
+
+    private class BondsCommand implements ConsoleCommand {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getDescription() {
+            return "list all bonded devices";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getSyntax() {
+            return "bonds";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean process(final String[] args, PrintStream out) throws Exception {
+            BlueGigaGetBondsCommand command = new BlueGigaGetBondsCommand();
+            bleHandler.queueFrame(command);
+
+            return true;
+        }
+    }
+
+    private class DevicesCommand implements ConsoleCommand {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getDescription() {
+            return "List devices heard";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getSyntax() {
+            return "devices";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean process(final String[] args, PrintStream out) throws Exception {
+            for (String addr : deviceMap.keySet()) {
+                print(addr + "  " + deviceMap.get(addr), System.out);
+            }
+            return true;
+        }
+    }
+
+    @Override
+    public void bluegigaEventReceived(BlueGigaResponse event) {
+        print("Event received: " + event, System.out);
+
+        if (event instanceof BlueGigaScanResponseEvent) {
+            EirPacket eir = new EirPacket(((BlueGigaScanResponseEvent) event).getData());
+            print("              : " + eir, System.out);
+
+            BlueGigaScanResponseEvent scanResponse = (BlueGigaScanResponseEvent) event;
+
+            if (deviceMap.get(scanResponse.getSender()) != null) {
+                deviceMap.get(scanResponse.getSender()).putAll(eir.getRecords());
+            } else {
+                deviceMap.put(scanResponse.getSender(), eir.getRecords());
+            }
         }
     }
 

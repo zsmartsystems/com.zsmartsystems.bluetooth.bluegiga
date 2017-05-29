@@ -6,15 +6,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package com.zsmartsystems.bluetooth.bluegiga.command.security;
+package com.zsmartsystems.bluetooth.bluegiga.command.system;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaCommand;
 
 /**
- * Class to implement the BlueGiga command <b>setBondableMode</b>.
+ * Class to implement the BlueGiga command <b>whitelistRemove</b>.
  * <p>
- * This command is used to enter a passkey required for Man-in-the-Middle pairing. It should be
- * sent as a response to Passkey Request event.
+ * Remove an entry from the running white list. Do not use this command while advertising or
+ * while being connected.
  * <p>
  * This class provides methods for processing BlueGiga API commands.
  * <p>
@@ -22,23 +22,23 @@ import com.zsmartsystems.bluetooth.bluegiga.BlueGigaCommand;
  *
  * @author Chris Jackson - Initial contribution of Java code generator
  */
-public class BlueGigaSetBondableModeCommand extends BlueGigaCommand {
-    public static int COMMAND_CLASS = 0x05;
-    public static int COMMAND_METHOD = 0x01;
+public class BlueGigaWhitelistRemoveCommand extends BlueGigaCommand {
+    public static int COMMAND_CLASS = 0x00;
+    public static int COMMAND_METHOD = 0x0B;
 
     /**
-     * Enables or disables bonding mode. 0 : the device is not bondable. 1 : the device is bondable
+     * Bluetooth device address to remove from the running white list.
      * <p>
-     * BlueGiga API type is <i>boolean</i> - Java type is {@link boolean}
+     * BlueGiga API type is <i>bd_addr</i> - Java type is {@link String}
      */
-    private boolean bondable;
+    private String address;
     /**
-     * Enables or disables bonding mode. 0 : the device is not bondable. 1 : the device is bondable
+     * Bluetooth device address to remove from the running white list.
      *
-     * @param bondable the bondable to set as {@link boolean}
+     * @param address the address to set as {@link String}
      */
-    public void setBondable(boolean bondable) {
-        this.bondable = bondable;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
 
@@ -48,7 +48,7 @@ public class BlueGigaSetBondableModeCommand extends BlueGigaCommand {
         serializeHeader(COMMAND_CLASS, COMMAND_METHOD);
 
         // Serialize the fields
-        serializeBoolean(bondable);
+        serializeAddress(address);
 
         return getPayload();
     }
@@ -56,8 +56,8 @@ public class BlueGigaSetBondableModeCommand extends BlueGigaCommand {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("BlueGigaSetBondableModeCommand [bondable=");
-        builder.append(bondable);
+        builder.append("BlueGigaWhitelistRemoveCommand [address=");
+        builder.append(address);
         builder.append(']');
         return builder.toString();
     }

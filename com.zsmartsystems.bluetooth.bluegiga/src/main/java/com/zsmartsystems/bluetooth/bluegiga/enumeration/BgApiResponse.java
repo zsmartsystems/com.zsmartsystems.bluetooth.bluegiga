@@ -27,188 +27,231 @@ public enum BgApiResponse {
     UNKNOWN(-1),
 
     /**
-     * Completed successfully.
+     * [0] Completed successfully.
      */
     SUCCESS(0x0000),
 
     /**
-     * Invalid GATT connection handle.
+     * [257] Invalid GATT connection handle.
      */
     INVALID_CONN_HANDLE(0x0101),
 
     /**
-     * Waiting response from GATT server to previous procedure.
+     * [258] Waiting response from GATT server to previous procedure.
      */
     WAITING_RESPONSE(0x0102),
 
     /**
-     * Command contained invalid parameter
+     * [384] Command contained invalid parameter
      */
     INVALID_PARAM(0x0180),
 
     /**
-     * Device is in wrong state to receive command
+     * [385] Device is in wrong state to receive command
      */
     WRONG_STATE(0x0181),
 
     /**
-     * Device has run out of memory
+     * [386] Device has run out of memory
      */
     OUT_OF_MEMORY(0x0182),
 
     /**
-     * Feature is not implemented
+     * [387] Feature is not implemented
      */
     NOT_IMPLEMENTED(0x0183),
 
     /**
-     * Command was not recognized
+     * [388] Command was not recognized
      */
     INVALID_COMMAND(0x0184),
 
     /**
-     * Command or Procedure failed due to timeout
+     * [389] Command or Procedure failed due to timeout
      */
     TIMEOUT(0x0185),
 
     /**
-     * Connection handle passed is to command is not a valid handle
+     * [390] Connection handle passed is to command is not a valid handle
      */
     NOT_CONNECTED(0x0186),
 
     /**
-     * Command would cause either underflow or overflow error
+     * [391] Command would cause either underflow or overflow error
      */
     FLOW(0x0187),
 
     /**
-     * User attribute was accessed through API which is not supported
+     * [392] User attribute was accessed through API which is not supported
      */
     USER_ATTRIBUTE(0x0188),
 
     /**
-     * No valid license key found
+     * [393] No valid license key found
      */
     INVALID_LICENSE_KEY(0x0189),
 
     /**
-     * Command maximum length exceeded
+     * [394] Command maximum length exceeded
      */
     COMMAND_TOO_LONG(0x018A),
 
     /**
-     * Bonding procedure can't be started because device has no space left for bond.
+     * [395] Bonding procedure can't be started because device has no space left for bond.
      */
     OUT_OF_BONDS(0x018B),
 
     /**
-     * Unspecified error
+     * [396] Unspecified error
      */
     UNSPECIFIED(0x018C),
 
     /**
-     * Hardware failure
+     * [397] Hardware failure
      */
     HARDWARE(0x018D),
 
     /**
-     * Command not accepted, because internal buffers are full
+     * [398] Command not accepted, because internal buffers are full
      */
     BUFFERS_FULL(0x018E),
 
     /**
-     * Command or Procedure failed due to disconnection
+     * [399] Command or Procedure failed due to disconnection
      */
     DISCONNECTED(0x018F),
 
     /**
-     * Too many Simultaneous Requests
+     * [400] Too many Simultaneous Requests
      */
     TOO_MANY_REQUESTS(0x0190),
 
     /**
-     * Feature is not supported in this firmware build
+     * [401] Feature is not supported in this firmware build
      */
     NOT_SUPPORTED(0x0191),
 
     /**
-     * The bonding does not exist.
+     * [402] The bonding does not exist.
      */
     NO_BONDING(0x0192),
 
     /**
-     * Error using crypto functions
+     * [403] Error using crypto functions
      */
     CRYPTO(0x0193),
 
     /**
-     * A command was sent from the Host that should identify a connection, but that connection does
-     * not exist.
+     * [514] A command was sent from the Host that should identify a connection, but that connection
+     * does not exist.
      */
     UNKNOWN_CONNECTION_IDENTIFIER(0x0202),
 
     /**
-     * The user input of passkey failed, for example, the user cancelled the operation
+     * [520] Link supervision timeout has expired.
+     */
+    CONNECTION_TIMEOUT(0x0208),
+
+    /**
+     * [521] Controller is at limit of connections it can support.
+     */
+    CONNECTION_LIMIT_EXCEEDED(0x0209),
+
+    /**
+     * [522]
+     */
+    SYNCHRONOUS_CONNECTIONTION_LIMIT_EXCEEDED(0x020A),
+
+    /**
+     * [523] The ACL Connection Already Exists error code indicates that an attempt to create a new
+     * ACL Connection to a device when there is already a connection to this device.
+     */
+    ACL_CONNECTION_ALREADY_EXISTS(0x020B),
+
+    /**
+     * [524] Command requested cannot be executed because the Controller is in a state where it
+     * cannot process this command at this time.
+     */
+    COMMAND_DISALLOWED(0x020C),
+
+    /**
+     * [527] The Connection was rejected because this device does not accept the BD_ADDR. This may
+     * be because the device will only accept connections from specific BD_ADDRs.
+     */
+    CONNECTION_REJECTED_DUE_TO_UNACCEPTABLE_BD_ADDR(0x020F),
+
+    /**
+     * [529] A feature or parameter value in the HCI command is not supported.
+     */
+    UNSUPPORTED_FEATURE_OR_PARAMETER_VALUE(0x0211),
+
+    /**
+     * [530] Command contained invalid parameters.
+     */
+    INVALID_COMMAND_PARAMETERS(0x0212),
+
+    /**
+     * [769] The user input of passkey failed, for example, the user cancelled the operation
      */
     PASSKEY_ENTRY_FAILED(0x0301),
 
     /**
-     * The attribute handle given was not valid on this server
+     * [1025] The attribute handle given was not valid on this server
      */
     INVALID_HANDLE(0x0401),
 
     /**
-     * The attribute cannot be read
+     * [1026] The attribute cannot be read
      */
     READ_NOT_PERMITTED(0x0402),
 
     /**
-     * The attribute cannot be written
+     * [1027] The attribute cannot be written
      */
     WRITE_NOT_PERMITTED(0x0403),
 
     /**
-     * Service Record not found
+     * [1537] Service Record not found
      */
     RECORD_NOT_FOUND(0x0601),
 
     /**
-     * Service Record with this handle already exist
+     * [1538] Service Record with this handle already exist
      */
     RECORD_ALREADY_EXIST(0x0602),
 
     /**
-     * File not found.
+     * [2305] File not found.
      */
     FILE_NOT_FOUND(0x0901),
 
     /**
-     * File open failed.
+     * [2561] File open failed.
      */
     FILE_OPEN_FAILED(0x0A01),
 
     /**
-     * XML parsing failed.
+     * [2562] XML parsing failed.
      */
     XML_PARSE_FAILED(0x0A02),
 
     /**
-     * Device connection failed.
+     * [2563] Device connection failed.
      */
     DEVICE_CONNECTION_FAILED(0x0A03),
 
     /**
-     * Device firmware signature verification failed.
+     * [2817] Device firmware signature verification failed.
      */
     IMAGE_SIGNATURE_VERIFICATION_FAILED(0x0B01),
 
     /**
-     * File signature verification failed.
+     * [2818] File signature verification failed.
      */
     FILE_SIGNATURE_VERIFICATION_FAILED(0x0B02),
 
     /**
-     * Device firmware checksum is not valid.
+     * [2819] Device firmware checksum is not valid.
      */
     IMAGE_CHECKSUM_ERROR(0x0B03);
 

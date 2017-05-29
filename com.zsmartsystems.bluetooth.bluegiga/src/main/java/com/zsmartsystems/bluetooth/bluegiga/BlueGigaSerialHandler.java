@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -41,13 +43,27 @@ public class BlueGigaSerialHandler {
 
     private final Queue<BlueGigaCommand> sendQueue = new LinkedList<BlueGigaCommand>();
 
+    private final Timer timer = new Timer();
+    private TimerTask timerTask = null;
+
+    private final int TRANSACTION_TIMEOUT_PERIOD = 50;
+
     /**
      * The parser parserThread.
      */
     private Thread parserThread = null;
 
     private ExecutorService executor = Executors.newCachedThreadPool();
+
+    /**
+     * Transaction listeners are used internally to correlate the commands and responses
+     */
     private final List<BleListener> transactionListeners = new ArrayList<BleListener>();
+
+    /**
+     * The event listeners will be notified of any asynchronous events
+     */
+    private final List<BlueGigaEventListener> eventListeners = new ArrayList<BlueGigaEventListener>();
 
     /**
      * Flag reflecting that parser has been closed and parser parserThread
@@ -73,6 +89,10 @@ public class BlueGigaSerialHandler {
                         int val = inputStream.read();
                         // logger.debug("BLE RX: " + String.format("%02X", val));
 
+                        if (inputCount == inputBuffer.length) {
+                            // Buffer overrun - shouldn't ever happen and probably means we've lost packet sync!
+                        }
+
                         inputBuffer[inputCount++] = val;
                         if (inputCount == 4) {
                             // Process the header to get the length
@@ -88,7 +108,11 @@ public class BlueGigaSerialHandler {
                             logger.debug("BLE RX: {}", printHex(inputBuffer, inputLength));
                             logger.debug("BLE RX: {}", responsePacket);
                             if (responsePacket != null) {
-                                notifyTransactionComplete(responsePacket);
+                                if (responsePacket.isEvent()) {
+                                    notifyEventListeners(responsePacket);
+                                } else {
+                                    notifyTransactionComplete(responsePacket);
+                                }
                             }
 
                             inputCount = 0;
@@ -250,6 +274,7 @@ public class BlueGigaSerialHandler {
     public Future<BlueGigaResponse> sendBleRequestAsync(final BlueGigaCommand bleCommand) {
         class TransactionWaiter implements Callable<BlueGigaResponse>, BleListener {
             private boolean complete = false;
+            private BlueGigaResponse response = null;
 
             @Override
             public BlueGigaResponse call() {
@@ -265,7 +290,7 @@ public class BlueGigaSerialHandler {
                         try {
                             wait();
                         } catch (InterruptedException e) {
-                            logger.debug(e.getMessage());
+                            complete = true;
                         }
                     }
                 }
@@ -273,7 +298,7 @@ public class BlueGigaSerialHandler {
                 // Remove the listener
                 removeTransactionListener(this);
 
-                return null;// response;
+                return response;
             }
 
             @Override
@@ -283,7 +308,7 @@ public class BlueGigaSerialHandler {
                     return false;
                 }
 
-                // response = request;
+                response = bleResponse;
                 complete = true;
                 synchronized (this) {
                     notify();
@@ -320,6 +345,64 @@ public class BlueGigaSerialHandler {
         }
 
         return null;
+    }
+
+    private synchronized void startTransactionTimer() {
+        // Stop any existing timer
+        resetTransactionTimer();
+
+        // Create the timer task
+        timerTask = new TransactionTimer();
+        timer.schedule(timerTask, TRANSACTION_TIMEOUT_PERIOD);
+    }
+
+    private synchronized void resetTransactionTimer() {
+        // Stop any existing timer
+        if (timerTask != null) {
+            timerTask.cancel();
+            timerTask = null;
+        }
+    }
+
+    private class TransactionTimer extends TimerTask {
+        // private final Logger logger =
+        // LoggerFactory.getLogger(ZWaveTransactionTimer.class);
+
+        @Override
+        public void run() {
+
+        }
+    }
+
+    /**
+     * Notify any transaction listeners when we receive a response.
+     *
+     * @param response
+     *            the response data received
+     * @return true if the response was processed
+     */
+    private void notifyEventListeners(final BlueGigaResponse response) {
+        synchronized (eventListeners) {
+            for (BlueGigaEventListener listener : eventListeners) {
+                listener.bluegigaEventReceived(response);
+            }
+        }
+    }
+
+    public void addEventListener(BlueGigaEventListener listener) {
+        synchronized (eventListeners) {
+            if (eventListeners.contains(listener)) {
+                return;
+            }
+
+            eventListeners.add(listener);
+        }
+    }
+
+    public void removeEventListener(BlueGigaEventListener listener) {
+        synchronized (eventListeners) {
+            eventListeners.remove(listener);
+        }
     }
 
     private String printHex(int[] data, int len) {

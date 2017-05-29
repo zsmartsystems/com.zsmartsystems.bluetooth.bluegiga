@@ -23,7 +23,7 @@ import com.zsmartsystems.bluetooth.bluegiga.BlueGigaCommand;
  */
 public class BlueGigaSetParametersCommand extends BlueGigaCommand {
     public static int COMMAND_CLASS = 0x05;
-    public static int COMMAND_METHOD = 0x01;
+    public static int COMMAND_METHOD = 0x03;
 
     /**
      * 1: Man-in-the-middle protection required. 0: No Man-in-the-middle protection. Default:

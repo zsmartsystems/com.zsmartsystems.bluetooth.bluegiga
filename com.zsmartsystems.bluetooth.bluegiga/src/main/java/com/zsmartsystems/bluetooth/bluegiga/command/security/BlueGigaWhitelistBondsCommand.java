@@ -25,7 +25,7 @@ import com.zsmartsystems.bluetooth.bluegiga.BlueGigaCommand;
  */
 public class BlueGigaWhitelistBondsCommand extends BlueGigaCommand {
     public static int COMMAND_CLASS = 0x05;
-    public static int COMMAND_METHOD = 0x01;
+    public static int COMMAND_METHOD = 0x07;
 
     @Override
     public int[] serialize() {

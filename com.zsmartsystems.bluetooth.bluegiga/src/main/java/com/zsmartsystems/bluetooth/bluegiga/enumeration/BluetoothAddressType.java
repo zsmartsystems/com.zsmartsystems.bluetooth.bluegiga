@@ -27,12 +27,12 @@ public enum BluetoothAddressType {
     UNKNOWN(-1),
 
     /**
-     * Public Address
+     * [0] Public Address
      */
     GAP_ADDRESS_TYPE_PUBLIC(0x0000),
 
     /**
-     * Random Address
+     * [1] Random Address
      */
     GAP_ADDRESS_TYPE_RANDOM(0x0001);
 

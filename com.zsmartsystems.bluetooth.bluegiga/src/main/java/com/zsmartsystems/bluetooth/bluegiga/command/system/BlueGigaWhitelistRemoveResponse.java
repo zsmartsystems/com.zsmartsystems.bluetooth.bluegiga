@@ -6,17 +6,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package com.zsmartsystems.bluetooth.bluegiga.command.security;
+package com.zsmartsystems.bluetooth.bluegiga.command.system;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.BgApiResponse;
 
 /**
- * Class to implement the BlueGiga command <b>deleteBonding</b>.
+ * Class to implement the BlueGiga command <b>whitelistRemove</b>.
  * <p>
- * This command deletes a bonding from the local security database. There can be a maximum of 8
- * bonded devices stored at the same time, and one of them must be deleted if you need bonding with
- * a 9th device.
+ * Remove an entry from the running white list. Do not use this command while advertising or
+ * while being connected.
  * <p>
  * This class provides methods for processing BlueGiga API commands.
  * <p>
@@ -24,12 +23,12 @@ import com.zsmartsystems.bluetooth.bluegiga.enumeration.BgApiResponse;
  *
  * @author Chris Jackson - Initial contribution of Java code generator
  */
-public class BlueGigaDeleteBondingResponse extends BlueGigaResponse {
-    public static int COMMAND_CLASS = 0x05;
-    public static int COMMAND_METHOD = 0x02;
+public class BlueGigaWhitelistRemoveResponse extends BlueGigaResponse {
+    public static int COMMAND_CLASS = 0x00;
+    public static int COMMAND_METHOD = 0x0B;
 
     /**
-     * 0: the command was successful. Non-zero: An error occurred
+     * Command result
      * <p>
      * BlueGiga API type is <i>BgApiResponse</i> - Java type is {@link BgApiResponse}
      */
@@ -38,7 +37,7 @@ public class BlueGigaDeleteBondingResponse extends BlueGigaResponse {
     /**
      * Response constructor
      */
-    public BlueGigaDeleteBondingResponse(int[] inputBuffer) {
+    public BlueGigaWhitelistRemoveResponse(int[] inputBuffer) {
         // Super creates deserializer and reads header fields
         super(inputBuffer);
 
@@ -49,7 +48,7 @@ public class BlueGigaDeleteBondingResponse extends BlueGigaResponse {
     }
 
     /**
-     * 0: the command was successful. Non-zero: An error occurred
+     * Command result
      * <p>
      * BlueGiga API type is <i>BgApiResponse</i> - Java type is {@link BgApiResponse}
      *
@@ -63,7 +62,7 @@ public class BlueGigaDeleteBondingResponse extends BlueGigaResponse {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("BlueGigaDeleteBondingResponse [result=");
+        builder.append("BlueGigaWhitelistRemoveResponse [result=");
         builder.append(result);
         builder.append(']');
         return builder.toString();

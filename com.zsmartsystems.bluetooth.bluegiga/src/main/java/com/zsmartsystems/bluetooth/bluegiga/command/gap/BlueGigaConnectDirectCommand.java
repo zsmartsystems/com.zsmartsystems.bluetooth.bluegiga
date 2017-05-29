@@ -9,6 +9,7 @@
 package com.zsmartsystems.bluetooth.bluegiga.command.gap;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaCommand;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.BluetoothAddressType;
 
 /**
  * Class to implement the BlueGiga command <b>connectDirect</b>.
@@ -45,9 +46,9 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
     /**
      * see: Bluetooth Address Types.
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>BluetoothAddressType</i> - Java type is {@link BluetoothAddressType}
      */
-    private int addrType;
+    private BluetoothAddressType addrType;
 
     /**
      * Minimum Connection Interval (in units of 1.25ms). Range: 6 - 3200 The lowest possible
@@ -99,9 +100,9 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
     /**
      * see: Bluetooth Address Types.
      *
-     * @param addrType the addrType to set as {@link int}
+     * @param addrType the addrType to set as {@link BluetoothAddressType}
      */
-    public void setAddrType(int addrType) {
+    public void setAddrType(BluetoothAddressType addrType) {
         this.addrType = addrType;
     }
 
@@ -160,7 +161,7 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
 
         // Serialize the fields
         serializeAddress(address);
-        serializeUInt8(addrType);
+        serializeBluetoothAddressType(addrType);
         serializeUInt16(connIntervalMin);
         serializeUInt16(connIntervalMax);
         serializeUInt16(timeout);

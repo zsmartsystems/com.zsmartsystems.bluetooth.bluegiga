@@ -138,6 +138,8 @@ public class CommandGenerator extends ClassGenerator {
             out.println("        // Super creates deserializer and reads header fields");
             out.println("        super(inputBuffer);");
             out.println();
+            out.println("        event = (inputBuffer[0] & 0x80) != 0;");
+            out.println();
             out.println("        // Deserialize the fields");
             Map<String, String> autoSizers = new HashMap<String, String>();
             for (Parameter parameter : parameters) {
@@ -332,7 +334,7 @@ public class CommandGenerator extends ClassGenerator {
             first = false;
             out.println();
             out.println("    /**");
-            outputWithLinebreak(out, "    ", value.description);
+            outputWithLinebreak(out, "    ", "[" + value.enum_value + "] " + value.description);
             out.println("     */");
             out.print("    " + value.name.toUpperCase() + "(0x" + String.format("%04X", value.enum_value) + ")");
         }
@@ -421,6 +423,8 @@ public class CommandGenerator extends ClassGenerator {
         String dataTypeLocal = new String(dataType);
 
         switch (dataTypeLocal) {
+            case "boolean":
+                return "boolean";
             case "int8":
                 return "int";
             case "uint8":
@@ -443,6 +447,8 @@ public class CommandGenerator extends ClassGenerator {
         String dataTypeLocal = new String(dataType);
 
         switch (dataTypeLocal) {
+            case "boolean":
+                return "Boolean";
             case "int8":
                 return "Int8";
             case "uint8":

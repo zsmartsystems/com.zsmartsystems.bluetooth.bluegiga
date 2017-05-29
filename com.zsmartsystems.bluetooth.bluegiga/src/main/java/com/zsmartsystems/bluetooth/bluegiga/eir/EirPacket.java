@@ -8,9 +8,9 @@
  */
 package com.zsmartsystems.bluetooth.bluegiga.eir;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class processes the Extended Inquiry Response data
@@ -19,7 +19,7 @@ import java.util.List;
  *
  */
 public class EirPacket {
-    private List<EirRecord> records = new ArrayList<EirRecord>();
+    private Map<EirDataType, Object> records = new HashMap<EirDataType, Object>();
 
     public EirPacket(int[] data) {
         if (data == null || data.length == 0) {
@@ -32,8 +32,12 @@ public class EirPacket {
 
             cnt += data[cnt] + 1;
 
-            records.add(record);
+            records.put(record.getType(), record.getRecord());
         }
+    }
+
+    public Map<EirDataType, Object> getRecords() {
+        return records;
     }
 
     @Override

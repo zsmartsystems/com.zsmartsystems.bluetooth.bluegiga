@@ -1137,7 +1137,7 @@
 				<description>Bluetooth address of the target device.</description>
 			</parameter>
 			<parameter>
-				<data_type>uint8</data_type>
+				<data_type>BluetoothAddressType</data_type>
 				<name>addr_type</name>
 				<description>see: Bluetooth Address Types.</description>
 			</parameter>
@@ -1344,7 +1344,7 @@
 		<description>This is a scan response event. This event is normally received by a Master which is scanning for advertisement and scan response packets from Slaves.</description>
 		<response_parameters>
 			<parameter>
-				<data_type>uint8</data_type>
+				<data_type>int8</data_type>
 				<name>rssi</name>
 				<description>RSSI value (dBm). Range: -103 to -38</description>
 			</parameter>
@@ -1356,10 +1356,10 @@
 			<parameter>
 				<data_type>bd_addr</data_type>
 				<name>sender</name>
-				<description>Advertiser address type. 1: random address. 0: public address</description>
+				<description>Advertisers address</description>
 			</parameter>
 			<parameter>
-				<data_type>uint8</data_type>
+				<data_type>BluetoothAddressType</data_type>
 				<name>address_type</name>
 				<description>Advertiser address type. 1: random address. 0: public address</description>
 			</parameter>
@@ -1409,7 +1409,7 @@
 				<description>Bonding handle of a device. This handle can be obtained for example from events like: Scan Response Status - If handle is 0xFF, all bondings will be deleted</description>
 			</parameter>
 			<parameter>
-				<data_type>uint8</data_type>
+				<data_type>boolean</data_type>
 				<name>bonding</name>
 				<description>Create bonding if devices are not already bonded. 0: Do not create bonding. 1: Creating bonding</description>
 			</parameter>
@@ -1477,7 +1477,7 @@
 		<description>This command is used to enter a passkey required for Man-in-the-Middle pairing. It should be sent as a response to Passkey Request event.</description>
 		<command_parameters>
 			<parameter>
-				<data_type>uint8</data_type>
+				<data_type>boolean</data_type>
 				<name>bondable</name>
 				<description>Enables or disables bonding mode. 0 : the device is not bondable. 1 : the device is bondable</description>
 			</parameter>
@@ -1489,7 +1489,7 @@
 	<command>
 		<name>setParameters</name>
 		<class>0x05</class>
-		<id>0x01</id>
+		<id>0x03</id>
 		<description>This command is used to configure the local Security Manager and its features</description>
 		<command_parameters>
 			<parameter>
@@ -1515,7 +1515,7 @@
 	<command>
 		<name>whitelistBonds</name>
 		<class>0x05</class>
-		<id>0x01</id>
+		<id>0x07</id>
 		<description>This command will add all bonded devices with a known public or static address to the local devices white list. Previous entries in the white list will be first cleared. This command can't be used while advertising, scanning or being connected.</description>
 		<command_parameters>
 		</command_parameters>
@@ -1530,6 +1530,59 @@
 				<name>count</name>
 				<description>Number of whitelisted bonds</description>
 			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>whitelistAppend</name>
+		<class>0x00</class>
+		<id>0x0A</id>
+		<description>Add an entry to the running white list. By the white list you can define for example the remote devices which are allowed to establish a connection. See also Set Filtering Connect Selective and (if the white list is empty they will not be active). Do not use this command while advertising, scanning, or while being connected. The current list is discarded upon reset or power-cycle.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>bd_addr</data_type>
+				<name>address</name>
+				<description>Bluetooth device address to add to the running white list. Maximum of 8 can be stored before you must clear or remove entries.</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>BgApiResponse</data_type>
+				<name>result</name>
+				<description>Command result</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>whitelistRemove</name>
+		<class>0x00</class>
+		<id>0x0B</id>
+		<description>Remove an entry from the running white list. Do not use this command while advertising or while being connected.</description>
+		<command_parameters>
+			<parameter>
+				<data_type>bd_addr</data_type>
+				<name>address</name>
+				<description>Bluetooth device address to remove from the running white list.</description>
+			</parameter>
+		</command_parameters>
+		<response_parameters>
+			<parameter>
+				<data_type>BgApiResponse</data_type>
+				<name>result</name>
+				<description>Command result</description>
+			</parameter>
+		</response_parameters>
+	</command>
+
+	<command>
+		<name>whitelistClear</name>
+		<class>0x00</class>
+		<id>0x0C</id>
+		<description>Delete all entries on the white list at once. Do not use this command while advertising or while being connected.</description>
+		<command_parameters>
+		</command_parameters>
+		<response_parameters>
 		</response_parameters>
 	</command>
 
@@ -2158,6 +2211,46 @@
 				<name>unknown_connection_identifier</name>
 				<enum_value>0x0202</enum_value>
 				<description>A command was sent from the Host that should identify a connection, but that connection does not exist.</description>
+			</value>
+			<value>
+				<name>connection_timeout</name>
+				<enum_value>0x0208</enum_value>
+				<description>Link supervision timeout has expired.</description>
+			</value>
+			<value>
+				<name>connection_limit_exceeded</name>
+				<enum_value>0x0209</enum_value>
+				<description>Controller is at limit of connections it can support.</description>
+			</value>
+			<value>
+				<name>synchronous_connectiontion_limit_exceeded</name>
+				<enum_value>0x020a</enum_value>
+				<description></description>
+			</value>
+			<value>
+				<name>acl_connection_already_exists</name>
+				<enum_value>0x020b</enum_value>
+				<description>The ACL Connection Already Exists error code indicates that an attempt to create a new ACL Connection to a device when there is already a connection to this device.</description>
+			</value>
+			<value>
+				<name>command_disallowed</name>
+				<enum_value>0x020c</enum_value>
+				<description>Command requested cannot be executed because the Controller is in a state where it cannot process this command at this time.</description>
+			</value>
+			<value>
+				<name>connection_rejected_due_to_unacceptable_bd_addr</name>
+				<enum_value>0x020f</enum_value>
+				<description>The Connection was rejected because this device does not accept the BD_ADDR. This may be because the device will only accept connections from specific BD_ADDRs.</description>
+			</value>
+			<value>
+				<name>unsupported_feature_or_parameter_value</name>
+				<enum_value>0x0211</enum_value>
+				<description>A feature or parameter value in the HCI command is not supported.</description>
+			</value>
+			<value>
+				<name>invalid_command_parameters</name>
+				<enum_value>0x0212</enum_value>
+				<description>Command contained invalid parameters.</description>
 			</value>
 
 			

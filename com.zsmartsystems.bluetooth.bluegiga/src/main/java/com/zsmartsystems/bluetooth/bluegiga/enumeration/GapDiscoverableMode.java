@@ -27,40 +27,40 @@ public enum GapDiscoverableMode {
     UNKNOWN(-1),
 
     /**
-     * Non-discoverable mode: the LE Limited Discoverable Mode and the LE General Discoverable
-     * Mode bits are NOT set in the AD Flags type. A master can still connect to the advertising slave
-     * in this mode.
+     * [0] Non-discoverable mode: the LE Limited Discoverable Mode and the LE General
+     * Discoverable Mode bits are NOT set in the AD Flags type. A master can still connect to the
+     * advertising slave in this mode.
      */
     GAP_NON_DISCOVERABLE(0x0000),
 
     /**
-     * Discoverable using limited scanning mode: the advertisement packets will carry the LE
+     * [1] Discoverable using limited scanning mode: the advertisement packets will carry the LE
      * Limited Discoverable Mode bit set in the Flags AD type.
      */
     GAP_LIMITED_DISCOVERABLE(0x0001),
 
     /**
-     * Discoverable using general scanning mode: the advertisement packets will carry the LE
+     * [2] Discoverable using general scanning mode: the advertisement packets will carry the LE
      * General Discoverable Mode bit set in the Flags AD type.
      */
     GAP_GENERAL_DISCOVERABLE(0x0002),
 
     /**
-     * Same as gap_non_discoverable.
+     * [3] Same as gap_non_discoverable.
      */
     GAP_BROADCAST(0x0003),
 
     /**
-     * In this advertisement the advertisement and scan response data defined by user will be used.
-     * The user is responsible of building the advertisement data so that it also contains the
+     * [4] In this advertisement the advertisement and scan response data defined by user will be
+     * used. The user is responsible of building the advertisement data so that it also contains the
      * appropriate desired Flags AD type.
      */
     GAP_USER_DATA(0x0004),
 
     /**
-     * When turning the most highest bit on in GAP discoverable mode, the remote devices that send
-     * scan request packets to the advertiser are reported back to the application through Scan
-     * Response event. This is so called Enhanced Broadcasting mode.
+     * [128] When turning the most highest bit on in GAP discoverable mode, the remote devices that
+     * send scan request packets to the advertiser are reported back to the application through
+     * Scan Response event. This is so called Enhanced Broadcasting mode.
      */
     GAP_ENHANCED_BROADCASTING(0x0080);
 

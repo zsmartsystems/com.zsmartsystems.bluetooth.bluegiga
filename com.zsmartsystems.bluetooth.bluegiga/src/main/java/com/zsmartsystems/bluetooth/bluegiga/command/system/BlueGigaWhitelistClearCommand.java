@@ -8,13 +8,13 @@
  */
 package com.zsmartsystems.bluetooth.bluegiga.command.system;
 
-import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
+import com.zsmartsystems.bluetooth.bluegiga.BlueGigaCommand;
 
 /**
- * Class to implement the BlueGiga command <b>hello</b>.
+ * Class to implement the BlueGiga command <b>whitelistClear</b>.
  * <p>
- * This command can be used to test if the local device is functional. Similar to a typical "AT" ->
- * "OK" test.
+ * Delete all entries on the white list at once. Do not use this command while advertising or
+ * while being connected.
  * <p>
  * This class provides methods for processing BlueGiga API commands.
  * <p>
@@ -22,25 +22,20 @@ import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
  *
  * @author Chris Jackson - Initial contribution of Java code generator
  */
-public class BlueGigaHelloResponse extends BlueGigaResponse {
+public class BlueGigaWhitelistClearCommand extends BlueGigaCommand {
     public static int COMMAND_CLASS = 0x00;
-    public static int COMMAND_METHOD = 0x01;
+    public static int COMMAND_METHOD = 0x0C;
 
-    /**
-     * Response constructor
-     */
-    public BlueGigaHelloResponse(int[] inputBuffer) {
-        // Super creates deserializer and reads header fields
-        super(inputBuffer);
+    @Override
+    public int[] serialize() {
+        // Serialize the header
+        serializeHeader(COMMAND_CLASS, COMMAND_METHOD);
 
-        event = (inputBuffer[0] & 0x80) != 0;
-
-        // Deserialize the fields
+        return getPayload();
     }
-
 
     @Override
     public String toString() {
-        return "BlueGigaHelloResponse []";
+        return "BlueGigaWhitelistClearCommand []";
     }
 }

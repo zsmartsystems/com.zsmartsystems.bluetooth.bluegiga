@@ -23,7 +23,7 @@ import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
  */
 public class BlueGigaSetParametersResponse extends BlueGigaResponse {
     public static int COMMAND_CLASS = 0x05;
-    public static int COMMAND_METHOD = 0x01;
+    public static int COMMAND_METHOD = 0x03;
 
     /**
      * Response constructor
@@ -31,6 +31,8 @@ public class BlueGigaSetParametersResponse extends BlueGigaResponse {
     public BlueGigaSetParametersResponse(int[] inputBuffer) {
         // Super creates deserializer and reads header fields
         super(inputBuffer);
+
+        event = (inputBuffer[0] & 0x80) != 0;
 
         // Deserialize the fields
     }

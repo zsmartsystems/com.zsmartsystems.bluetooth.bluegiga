@@ -47,6 +47,8 @@ public class BlueGigaPasskeyDisplayEvent extends BlueGigaResponse {
         // Super creates deserializer and reads header fields
         super(inputBuffer);
 
+        event = (inputBuffer[0] & 0x80) != 0;
+
         // Deserialize the fields
         handle = deserializeUInt8();
         passkey = deserializeUInt32();

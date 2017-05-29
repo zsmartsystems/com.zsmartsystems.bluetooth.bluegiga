@@ -60,6 +60,8 @@ public class BlueGigaBondStatusEvent extends BlueGigaResponse {
         // Super creates deserializer and reads header fields
         super(inputBuffer);
 
+        event = (inputBuffer[0] & 0x80) != 0;
+
         // Deserialize the fields
         bond = deserializeUInt8();
         keysize = deserializeUInt8();
