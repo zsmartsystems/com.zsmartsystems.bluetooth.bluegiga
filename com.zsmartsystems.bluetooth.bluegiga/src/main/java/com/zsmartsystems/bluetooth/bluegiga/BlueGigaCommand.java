@@ -1,6 +1,7 @@
 package com.zsmartsystems.bluetooth.bluegiga;
 
 import java.util.Arrays;
+import java.util.UUID;
 
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.BluetoothAddressType;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapConnectableMode;
@@ -8,6 +9,8 @@ import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapDiscoverMode;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapDiscoverableMode;
 
 /**
+ * Abstract base class for all commands. This provides the serialisation methods for converting parameters from Java
+ * classes to wire data.
  * 
  * @author Chris Jackson
  *
@@ -73,6 +76,15 @@ public abstract class BlueGigaCommand extends BlueGigaPacket {
         for (int val : array) {
             serializeUInt8(val);
         }
+    }
+
+    protected void serializeUuid(UUID uuid) {
+        // TODO this probably needs to support longer UUIDs?
+        buffer[length++] = 2;
+        long high = uuid.getMostSignificantBits();
+
+        buffer[length++] = (int) ((high >> 32) & 0xff);
+        buffer[length++] = (int) ((high >> 40) & 0xff);
     }
 
     protected void serializeAddress(String address) {

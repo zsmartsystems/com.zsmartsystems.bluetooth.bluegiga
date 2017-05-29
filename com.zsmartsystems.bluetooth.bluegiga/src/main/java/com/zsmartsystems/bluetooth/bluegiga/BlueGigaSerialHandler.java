@@ -19,6 +19,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * The main handler class for interacting with the BlueGiga serial API. This class provides transaction management and
+ * queuing of of data, and conversion of packets from the serial stream into command and response classes.
  * 
  * @author Chris Jackson
  *

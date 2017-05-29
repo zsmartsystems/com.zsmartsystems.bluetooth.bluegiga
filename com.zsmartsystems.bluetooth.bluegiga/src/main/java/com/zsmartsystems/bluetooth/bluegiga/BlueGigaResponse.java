@@ -1,10 +1,22 @@
 package com.zsmartsystems.bluetooth.bluegiga;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.AttributeValueType;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.BgApiResponse;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.BluetoothAddressType;
-import com.zsmartsystems.bluetooth.bluegiga.enumeration.ConnectionStatusFlags;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.ConnectionStatusFlag;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.ScanResponseType;
 
+/**
+ * Abstract class for response and event packets. This provides the deserialization methods to convert wire data to Java
+ * classes.
+ * 
+ * @author Chris Jackson
+ *
+ */
 public class BlueGigaResponse extends BlueGigaPacket {
     private int[] buffer = new int[131];
     private int position = 0;
@@ -60,12 +72,61 @@ public class BlueGigaResponse extends BlueGigaPacket {
         return buffer[position++] + (buffer[position++] << 8);
     }
 
+    protected UUID deserializeUuid() {
+        long low;
+        long high;
+
+        // This is a uint8array type so first byte is the length
+        int length = buffer[position++];
+        switch (length) {
+            case 2:
+                low = 0;
+                high = ((long) buffer[position++] << 32) + ((long) buffer[position++] << 40);
+                break;
+            case 4:
+                low = 0;
+                high = ((long) buffer[position++] << 32) + ((long) buffer[position++] << 40)
+                        + ((long) buffer[position++] << 48) + ((long) buffer[position++] << 56);
+                break;
+            case 16:
+                low = (buffer[position++]) + ((long) buffer[position++] << 8) + ((long) buffer[position++] << 16)
+                        + ((long) buffer[position++] << 24) + ((long) buffer[position++] << 32)
+                        + ((long) buffer[position++] << 40) + ((long) buffer[position++] << 48)
+                        + ((long) buffer[position++] << 56);
+                high = (buffer[position++]) + ((long) buffer[position++] << 8) + ((long) buffer[position++] << 16)
+                        + ((long) buffer[position++] << 24) + ((long) buffer[position++] << 32)
+                        + ((long) buffer[position++] << 40) + ((long) buffer[position++] << 48)
+                        + ((long) buffer[position++] << 56);
+                break;
+            default:
+                low = 0;
+                high = 0;
+                position += length;
+                break;
+        }
+        return new UUID(high, low);
+    }
+
     protected BgApiResponse deserializeBgApiResponse() {
         return BgApiResponse.getBgApiResponse(deserializeUInt16());
     }
 
-    protected ConnectionStatusFlags deserializeConnectionStatusFlags() {
-        return ConnectionStatusFlags.getConnectionStatusFlags(deserializeUInt8());
+    public Set<ConnectionStatusFlag> deserializeConnectionStatusFlag() {
+        int val = deserializeUInt16();
+        Set<ConnectionStatusFlag> options = new HashSet<ConnectionStatusFlag>();
+        for (ConnectionStatusFlag option : ConnectionStatusFlag.values()) {
+            if (option == ConnectionStatusFlag.UNKNOWN) {
+                continue;
+            }
+            if ((option.getKey() & val) != 0) {
+                options.add(option);
+            }
+        }
+        return options;
+    }
+
+    protected AttributeValueType deserializeAttributeValueType() {
+        return AttributeValueType.getAttributeValueType(deserializeUInt8());
     }
 
     protected BluetoothAddressType deserializeBluetoothAddressType() {
@@ -96,7 +157,7 @@ public class BlueGigaResponse extends BlueGigaPacket {
 
         for (int cnt = 5; cnt >= 0; cnt--) {
             if (cnt < 5) {
-                builder.append(":");
+                builder.append(':');
             }
             builder.append(String.format("%02X", buffer[position + cnt]));
         }

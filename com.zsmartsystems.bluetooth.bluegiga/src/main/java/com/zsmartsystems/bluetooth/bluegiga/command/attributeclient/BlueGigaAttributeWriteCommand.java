@@ -39,7 +39,7 @@ public class BlueGigaAttributeWriteCommand extends BlueGigaCommand {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int atthandle;
+    private int attHandle;
 
     /**
      * Attribute value
@@ -59,10 +59,10 @@ public class BlueGigaAttributeWriteCommand extends BlueGigaCommand {
     /**
      * Attribute handle to write to
      *
-     * @param atthandle the atthandle to set as {@link int}
+     * @param attHandle the attHandle to set as {@link int}
      */
-    public void setAtthandle(int atthandle) {
-        this.atthandle = atthandle;
+    public void setAttHandle(int attHandle) {
+        this.attHandle = attHandle;
     }
 
     /**
@@ -82,7 +82,7 @@ public class BlueGigaAttributeWriteCommand extends BlueGigaCommand {
 
         // Serialize the fields
         serializeUInt8(connection);
-        serializeUInt16(atthandle);
+        serializeUInt16(attHandle);
         serializeUInt8Array(data);
 
         return getPayload();
@@ -93,8 +93,8 @@ public class BlueGigaAttributeWriteCommand extends BlueGigaCommand {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaAttributeWriteCommand [connection=");
         builder.append(connection);
-        builder.append(", atthandle=");
-        builder.append(atthandle);
+        builder.append(", attHandle=");
+        builder.append(attHandle);
         builder.append(", data=");
         for (int c = 0; c < data.length; c++) {
             if (c > 0) {

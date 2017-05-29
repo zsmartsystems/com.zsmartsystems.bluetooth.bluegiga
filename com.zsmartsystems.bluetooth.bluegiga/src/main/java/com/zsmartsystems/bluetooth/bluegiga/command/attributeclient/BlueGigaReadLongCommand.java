@@ -41,7 +41,7 @@ public class BlueGigaReadLongCommand extends BlueGigaCommand {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int chrhandle;
+    private int chrHandle;
     /**
      * Connection handle
      *
@@ -54,10 +54,10 @@ public class BlueGigaReadLongCommand extends BlueGigaCommand {
     /**
      * Attribute handle
      *
-     * @param chrhandle the chrhandle to set as {@link int}
+     * @param chrHandle the chrHandle to set as {@link int}
      */
-    public void setChrhandle(int chrhandle) {
-        this.chrhandle = chrhandle;
+    public void setChrHandle(int chrHandle) {
+        this.chrHandle = chrHandle;
     }
 
 
@@ -68,7 +68,7 @@ public class BlueGigaReadLongCommand extends BlueGigaCommand {
 
         // Serialize the fields
         serializeUInt8(connection);
-        serializeUInt16(chrhandle);
+        serializeUInt16(chrHandle);
 
         return getPayload();
     }
@@ -78,8 +78,8 @@ public class BlueGigaReadLongCommand extends BlueGigaCommand {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaReadLongCommand [connection=");
         builder.append(connection);
-        builder.append(", chrhandle=");
-        builder.append(chrhandle);
+        builder.append(", chrHandle=");
+        builder.append(chrHandle);
         builder.append(']');
         return builder.toString();
     }

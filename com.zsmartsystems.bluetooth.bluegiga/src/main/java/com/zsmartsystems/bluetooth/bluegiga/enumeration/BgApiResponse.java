@@ -175,10 +175,28 @@ public enum BgApiResponse {
     COMMAND_DISALLOWED(0x020C),
 
     /**
+     * [525] The Connection Rejected Due To Limited Resources error code indicates that an
+     * incoming connection was rejected due to limited resources.
+     */
+    CONNECTION_REJECTED_DUE_TO_LIMITED_RESOURCES(0x020D),
+
+    /**
+     * [526] The Connection Rejected Due To Security Reasons error code indicates that a
+     * connection was rejected due to security requirements not being fulfilled, like
+     * authentication or pairing.
+     */
+    CONNECTION_REJECTED_DUE_TO_SECURITY_REASONS(0x020E),
+
+    /**
      * [527] The Connection was rejected because this device does not accept the BD_ADDR. This may
      * be because the device will only accept connections from specific BD_ADDRs.
      */
     CONNECTION_REJECTED_DUE_TO_UNACCEPTABLE_BD_ADDR(0x020F),
+
+    /**
+     * [528] The Connection Accept Timeout has been exceeded for this connection attempt.
+     */
+    CONNECTION_ACCEPT_TIMEOUT_EXCEEDED(0x0210),
 
     /**
      * [529] A feature or parameter value in the HCI command is not supported.
@@ -189,6 +207,27 @@ public enum BgApiResponse {
      * [530] Command contained invalid parameters.
      */
     INVALID_COMMAND_PARAMETERS(0x0212),
+
+    /**
+     * [531] User on the remote device terminated the connection.
+     */
+    REMOTE_USER_TERMINATED(0x0213),
+
+    /**
+     * [533] Remote Device Terminated Connection due to Power Off
+     */
+    REMOTE_POWERING_OFF(0x0215),
+
+    /**
+     * [534] Local device terminated the connection.
+     */
+    CONNECTION_TERMINATED_BY_LOCAL_HOST(0x0216),
+
+    /**
+     * [536] The device does not allow pairing. This can be for example, when a device only allows
+     * pairing during a certain time window after some user input allows pairing
+     */
+    PAIRING_NOT_ALLOWED(0x0218),
 
     /**
      * [769] The user input of passkey failed, for example, the user cancelled the operation
@@ -209,6 +248,67 @@ public enum BgApiResponse {
      * [1027] The attribute cannot be written
      */
     WRITE_NOT_PERMITTED(0x0403),
+
+    /**
+     * [1028] The attribute PDU was invalid
+     */
+    INVALID_PDU(0x0404),
+
+    /**
+     * [1029] The attribute requires authentication before it can be read or written.
+     */
+    INSUFFICIENT_AUTHENTICATION(0x0405),
+
+    /**
+     * [1030] Attribute Server does not support the request received from the client.
+     */
+    REQUEST_NOT_SUPPORTED(0x0406),
+
+    /**
+     * [1031] Offset specified was past the end of the attribute
+     */
+    INVALID_OFFSET(0x0407),
+
+    /**
+     * [1032] The attribute requires authorization before it can be read or written.
+     */
+    INSUFFICIENT_AUTHORIZATION(0x0408),
+
+    /**
+     * [1033] Too many prepare writes have been queueud
+     */
+    PREPARE_QUEUE_FULL(0x0409),
+
+    /**
+     * [1034] No attribute found within the given attribute handle range.
+     */
+    ATT_NOT_FOUND(0x040A),
+
+    /**
+     * [1035] The attribute cannot be read or written using the Read Blob Request
+     */
+    ATT_NOT_LONG(0x040B),
+
+    /**
+     * [1037] The attribute value length is invalid for the operation
+     */
+    INVALID_ATT_LENGTH(0x040D),
+
+    /**
+     * [1040] The attribute type is not a supported grouping attribute as defined by a higher layer
+     * specification.
+     */
+    UNSUPPORTED_GROUP_TYPE(0x0410),
+
+    /**
+     * [1041] Insufficient Resources to complete the request
+     */
+    INSUFFICIENT_RESOURCES(0x0411),
+
+    /**
+     * [1152] Application error code defined by a higher layer specification.
+     */
+    APPLICATION(0x0480),
 
     /**
      * [1537] Service Record not found

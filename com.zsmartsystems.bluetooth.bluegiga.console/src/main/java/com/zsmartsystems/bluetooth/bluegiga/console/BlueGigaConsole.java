@@ -9,12 +9,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.UUID;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaCommand;
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaEventListener;
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaSerialHandler;
+import com.zsmartsystems.bluetooth.bluegiga.command.attributeclient.BlueGigaAttributeWriteCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.attributeclient.BlueGigaFindInformationCommand;
+import com.zsmartsystems.bluetooth.bluegiga.command.attributeclient.BlueGigaReadByGroupTypeCommand;
+import com.zsmartsystems.bluetooth.bluegiga.command.connection.BlueGigaDisconnectCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaConnectDirectCommand;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaConnectDirectResponse;
 import com.zsmartsystems.bluetooth.bluegiga.command.gap.BlueGigaDiscoverCommand;
@@ -78,10 +82,14 @@ public final class BlueGigaConsole implements BlueGigaEventListener {
         commands.put("connections", new GetConnectionsCommand());
         commands.put("counters", new GetCountersCommand());
         commands.put("devices", new DevicesCommand());
+        commands.put("disconnect", new DisconnectCommand());
         commands.put("discover", new DiscoverCommand());
         commands.put("find", new FindCommand());
         commands.put("info", new GetInfoCommand());
+        commands.put("read", new ReadCommand());
+        commands.put("readgroup", new ReadGroupCommand());
         commands.put("reset", new ResetCommand());
+        commands.put("write", new WriteCommand());
 
         commands.put("quit", new QuitCommand());
         commands.put("help", new HelpCommand());
@@ -518,11 +526,9 @@ public final class BlueGigaConsole implements BlueGigaEventListener {
 
             BlueGigaFindInformationCommand info = new BlueGigaFindInformationCommand();
             info.setConnection(handle);
-            info.setStart(0);
+            info.setStart(1);
             info.setEnd(65535);
             bleHandler.sendTransaction(info);
-
-            // connect 55:7E:CE:81:E8:9D
 
             return true;
         }
@@ -609,6 +615,164 @@ public final class BlueGigaConsole implements BlueGigaEventListener {
         @Override
         public boolean process(final String[] args, PrintStream out) throws Exception {
             BlueGigaGetBondsCommand command = new BlueGigaGetBondsCommand();
+            bleHandler.queueFrame(command);
+
+            return true;
+        }
+    }
+
+    private class DisconnectCommand implements ConsoleCommand {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getDescription() {
+            return "disconnect a connection";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getSyntax() {
+            return "disconnect connection";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean process(final String[] args, PrintStream out) throws Exception {
+            if (args.length < 2) {
+                return false;
+            }
+
+            int connection = Integer.parseInt(args[1]);
+
+            BlueGigaDisconnectCommand command = new BlueGigaDisconnectCommand();
+            command.setConnection(connection);
+            bleHandler.queueFrame(command);
+
+            return true;
+        }
+    }
+
+    private class ReadCommand implements ConsoleCommand {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getDescription() {
+            return "read";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getSyntax() {
+            return "read connection start stop";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean process(final String[] args, PrintStream out) throws Exception {
+            if (args.length < 2) {
+                return false;
+            }
+
+            int connection = Integer.parseInt(args[1]);
+            int start = 1;
+            int end = 0xffff;
+
+            BlueGigaReadByGroupTypeCommand command = new BlueGigaReadByGroupTypeCommand();
+            command.setConnection(connection);
+            command.setStart(start);
+            command.setEnd(end);
+            // command.setUuid(UUID.fromString("0000fff1-0000-1000-8000-00805f9b34fb"));
+            command.setUuid(UUID.fromString("00002800-0000-0000-0000-000000000000"));
+            bleHandler.queueFrame(command);
+
+            return true;
+        }
+    }
+
+    private class ReadGroupCommand implements ConsoleCommand {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getDescription() {
+            return "readgroup";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getSyntax() {
+            return "read connection start stop uuid";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean process(final String[] args, PrintStream out) throws Exception {
+            if (args.length < 2) {
+                return false;
+            }
+
+            int connection = Integer.parseInt(args[1]);
+            int start = 1;
+            int end = 0xffff;
+
+            BlueGigaReadByGroupTypeCommand command = new BlueGigaReadByGroupTypeCommand();
+            command.setConnection(connection);
+            command.setStart(start);
+            command.setEnd(end);
+            command.setUuid(UUID.fromString("0000fff1-0000-0000-0000-000000000000"));
+            bleHandler.queueFrame(command);
+
+            return true;
+        }
+    }
+
+    private class WriteCommand implements ConsoleCommand {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getDescription() {
+            return "write an attribute";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getSyntax() {
+            return "write ";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean process(final String[] args, PrintStream out) throws Exception {
+            if (args.length < 2) {
+                return false;
+            }
+
+            int connection = Integer.parseInt(args[1]);
+
+            BlueGigaAttributeWriteCommand command = new BlueGigaAttributeWriteCommand();
+            command.setConnection(connection);
+            command.setAttHandle(18);
+            command.setData(new int[] { '2', '5', '5', ',', '0', ',', '0', ',', '1', '0', '0', ',', ',', ',', ',', ',',
+                    ',', ',' });
             bleHandler.queueFrame(command);
 
             return true;

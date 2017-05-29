@@ -9,6 +9,7 @@
 package com.zsmartsystems.bluetooth.bluegiga.command.attributeclient;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaCommand;
+import java.util.UUID;
 
 /**
  * Class to implement the BlueGiga command <b>findByTypeValue</b>.
@@ -50,9 +51,9 @@ public class BlueGigaFindByTypeValueCommand extends BlueGigaCommand {
     /**
      * 2 octet UUID to find
      * <p>
-     * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
+     * BlueGiga API type is <i>uuid</i> - Java type is {@link UUID}
      */
-    private int uuid;
+    private UUID uuid;
 
     /**
      * Attribute value to find
@@ -90,9 +91,9 @@ public class BlueGigaFindByTypeValueCommand extends BlueGigaCommand {
     /**
      * 2 octet UUID to find
      *
-     * @param uuid the uuid to set as {@link int}
+     * @param uuid the uuid to set as {@link UUID}
      */
-    public void setUuid(int uuid) {
+    public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
 
@@ -115,7 +116,7 @@ public class BlueGigaFindByTypeValueCommand extends BlueGigaCommand {
         serializeUInt8(connection);
         serializeUInt16(start);
         serializeUInt16(end);
-        serializeUInt16(uuid);
+        serializeUuid(uuid);
         serializeUInt8Array(value);
 
         return getPayload();

@@ -9,6 +9,7 @@
 package com.zsmartsystems.bluetooth.bluegiga.command.attributeclient;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaCommand;
+import java.util.UUID;
 
 /**
  * Class to implement the BlueGiga command <b>readByGroupType</b>.
@@ -52,9 +53,9 @@ public class BlueGigaReadByGroupTypeCommand extends BlueGigaCommand {
     /**
      * Group UUID to find
      * <p>
-     * BlueGiga API type is <i>uint8array</i> - Java type is {@link int[]}
+     * BlueGiga API type is <i>uuid</i> - Java type is {@link UUID}
      */
-    private int[] uuid;
+    private UUID uuid;
     /**
      * Connection handle
      *
@@ -85,9 +86,9 @@ public class BlueGigaReadByGroupTypeCommand extends BlueGigaCommand {
     /**
      * Group UUID to find
      *
-     * @param uuid the uuid to set as {@link int[]}
+     * @param uuid the uuid to set as {@link UUID}
      */
-    public void setUuid(int[] uuid) {
+    public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
 
@@ -101,7 +102,7 @@ public class BlueGigaReadByGroupTypeCommand extends BlueGigaCommand {
         serializeUInt8(connection);
         serializeUInt16(start);
         serializeUInt16(end);
-        serializeUInt8Array(uuid);
+        serializeUuid(uuid);
 
         return getPayload();
     }
@@ -116,12 +117,7 @@ public class BlueGigaReadByGroupTypeCommand extends BlueGigaCommand {
         builder.append(", end=");
         builder.append(end);
         builder.append(", uuid=");
-        for (int c = 0; c < uuid.length; c++) {
-            if (c > 0) {
-                builder.append(' ');
-            }
-            builder.append(String.format("%02X", uuid[c]));
-        }
+        builder.append(uuid);
         builder.append(']');
         return builder.toString();
     }

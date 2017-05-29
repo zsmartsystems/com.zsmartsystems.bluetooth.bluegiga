@@ -9,6 +9,7 @@
 package com.zsmartsystems.bluetooth.bluegiga.command.attributeclient;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
+import java.util.UUID;
 
 /**
  * Class to implement the BlueGiga command <b>findInformationFoundEvent</b>.
@@ -25,7 +26,7 @@ import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
  */
 public class BlueGigaFindInformationFoundEvent extends BlueGigaResponse {
     public static int COMMAND_CLASS = 0x04;
-    public static int COMMAND_METHOD = 0x05;
+    public static int COMMAND_METHOD = 0x04;
 
     /**
      * Connection handle
@@ -39,14 +40,14 @@ public class BlueGigaFindInformationFoundEvent extends BlueGigaResponse {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int chrhandle;
+    private int chrHandle;
 
     /**
      * Characteristics type (UUID)
      * <p>
-     * BlueGiga API type is <i>uint8array</i> - Java type is {@link int[]}
+     * BlueGiga API type is <i>uuid</i> - Java type is {@link UUID}
      */
-    private int[] uuid;
+    private UUID uuid;
 
     /**
      * Event constructor
@@ -59,8 +60,8 @@ public class BlueGigaFindInformationFoundEvent extends BlueGigaResponse {
 
         // Deserialize the fields
         connection = deserializeUInt8();
-        chrhandle = deserializeUInt16();
-        uuid = deserializeUInt8Array();
+        chrHandle = deserializeUInt16();
+        uuid = deserializeUuid();
     }
 
     /**
@@ -79,20 +80,20 @@ public class BlueGigaFindInformationFoundEvent extends BlueGigaResponse {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      *
-     * @return the current chrhandle as {@link int}
+     * @return the current chr_handle as {@link int}
      */
-    public int getChrhandle() {
-        return chrhandle;
+    public int getChrHandle() {
+        return chrHandle;
     }
 
     /**
      * Characteristics type (UUID)
      * <p>
-     * BlueGiga API type is <i>uint8array</i> - Java type is {@link int[]}
+     * BlueGiga API type is <i>uuid</i> - Java type is {@link UUID}
      *
-     * @return the current uuid as {@link int[]}
+     * @return the current uuid as {@link UUID}
      */
-    public int[] getUuid() {
+    public UUID getUuid() {
         return uuid;
     }
 
@@ -102,15 +103,10 @@ public class BlueGigaFindInformationFoundEvent extends BlueGigaResponse {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaFindInformationFoundEvent [connection=");
         builder.append(connection);
-        builder.append(", chrhandle=");
-        builder.append(chrhandle);
+        builder.append(", chrHandle=");
+        builder.append(chrHandle);
         builder.append(", uuid=");
-        for (int c = 0; c < uuid.length; c++) {
-            if (c > 0) {
-                builder.append(' ');
-            }
-            builder.append(String.format("%02X", uuid[c]));
-        }
+        builder.append(uuid);
         builder.append(']');
         return builder.toString();
     }

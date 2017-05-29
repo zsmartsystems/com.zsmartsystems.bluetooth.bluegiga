@@ -10,7 +10,9 @@ package com.zsmartsystems.bluetooth.bluegiga.command.connection;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.BluetoothAddressType;
-import com.zsmartsystems.bluetooth.bluegiga.enumeration.ConnectionStatusFlags;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.ConnectionStatusFlag;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Class to implement the BlueGiga command <b>connectionStatusEvent</b>.
@@ -37,9 +39,10 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
     /**
      * Connection status flags use connstatus-enumerator
      * <p>
-     * BlueGiga API type is <i>ConnectionStatusFlags</i> - Java type is {@link ConnectionStatusFlags}
+     * BlueGiga API type is <i>ConnectionStatusFlag</i> - Java type is {@link ConnectionStatusFlag}
+     * Parameter allows multiple options so implemented as a {@link Set}.
      */
-    private ConnectionStatusFlags flags;
+    private Set<ConnectionStatusFlag> flags = new HashSet<ConnectionStatusFlag>();
 
     /**
      * Remote devices Bluetooth address
@@ -94,7 +97,7 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
 
         // Deserialize the fields
         connection = deserializeUInt8();
-        flags = deserializeConnectionStatusFlags();
+        flags = deserializeConnectionStatusFlag();
         address = deserializeAddress();
         addressType = deserializeBluetoothAddressType();
         connInterval = deserializeUInt16();
@@ -117,11 +120,11 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
     /**
      * Connection status flags use connstatus-enumerator
      * <p>
-     * BlueGiga API type is <i>ConnectionStatusFlags</i> - Java type is {@link ConnectionStatusFlags}
+     * BlueGiga API type is <i>ConnectionStatusFlag</i> - Java type is {@link ConnectionStatusFlag}
      *
-     * @return the current flags as {@link ConnectionStatusFlags}
+     * @return the current flags as {@link Set} of {@link ConnectionStatusFlag}
      */
-    public ConnectionStatusFlags getFlags() {
+    public Set<ConnectionStatusFlag> getFlags() {
         return flags;
     }
 

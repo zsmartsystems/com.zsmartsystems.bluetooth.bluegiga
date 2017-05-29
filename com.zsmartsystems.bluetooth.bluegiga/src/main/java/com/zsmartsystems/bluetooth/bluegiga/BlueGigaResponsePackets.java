@@ -121,7 +121,7 @@ class BlueGigaResponsePackets {
         packetMap.put(Objects.hash(0x04, 0x06, false), BlueGigaWriteCommandResponse.class);
         packetMap.put(Objects.hash(0x04, 0x01, true), BlueGigaProcedureCompletedEvent.class);
         packetMap.put(Objects.hash(0x04, 0x05, true), BlueGigaAttributeValueEvent.class);
-        packetMap.put(Objects.hash(0x04, 0x05, true), BlueGigaFindInformationFoundEvent.class);
+        packetMap.put(Objects.hash(0x04, 0x04, true), BlueGigaFindInformationFoundEvent.class);
         packetMap.put(Objects.hash(0x04, 0x02, true), BlueGigaGroupFoundEvent.class);
         packetMap.put(Objects.hash(0x04, 0x00, true), BlueGigaIndicatedEvent.class);
         packetMap.put(Objects.hash(0x04, 0x00, true), BlueGigaReadMultipleResponseEvent.class);

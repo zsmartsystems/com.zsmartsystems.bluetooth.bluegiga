@@ -74,7 +74,7 @@
 			</parameter>
 			<parameter>
 				<data_type>uint16</data_type>
-				<name>attHandle</name>
+				<name>att_handle</name>
 				<description>Attribute handle to write to</description>
 			</parameter>
 			<parameter>
@@ -150,7 +150,7 @@
 				<description>Last requested handle number</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>uuid</data_type>
 				<name>uuid</name>
 				<description>2 octet UUID to find</description>
 			</parameter>
@@ -249,7 +249,7 @@
 			</parameter>
 			<parameter>
 				<data_type>uint16</data_type>
-				<name>atthandle</name>
+				<name>att_handle</name>
 				<description>Attribute handle</description>
 			</parameter>
 			<parameter>
@@ -299,7 +299,7 @@
 				<description>Last requested handle number</description>
 			</parameter>
 			<parameter>
-				<data_type>uint8array</data_type>
+				<data_type>uuid</data_type>
 				<name>uuid</name>
 				<description>Group UUID to find</description>
 			</parameter>
@@ -331,7 +331,7 @@
 			</parameter>
 			<parameter>
 				<data_type>uint16</data_type>
-				<name>chrhandle</name>
+				<name>chr_handle</name>
 				<description>Attribute handle</description>
 			</parameter>
 		</command_parameters>
@@ -403,7 +403,7 @@
 			</parameter>
 			<parameter>
 				<data_type>uint16</data_type>
-				<name>chrhandle</name>
+				<name>chr_handle</name>
 				<description>Attribute handle</description>
 			</parameter>
 		</command_parameters>
@@ -465,7 +465,7 @@
 			</parameter>
 			<parameter>
 				<data_type>uint16</data_type>
-				<name>atthandle</name>
+				<name>att_handle</name>
 				<description>Attribute handle to write</description>
 			</parameter>
 			<parameter>
@@ -500,13 +500,13 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>result</name>
-				<description>Attribute value</description>
+				<description>0: The operation was successful. Otherwise: attribute protocol error code returned by remote device</description>
 			</parameter>
 			<parameter>
 				<data_type>uint16</data_type>
-				<name>chrHandle</name>
+				<name>chr_handle</name>
 				<description>Characteristic handle at which the event ended</description>
 			</parameter>
 		</response_parameters>
@@ -525,11 +525,11 @@
 			</parameter>
 			<parameter>
 				<data_type>uint16</data_type>
-				<name>atthandle</name>
+				<name>att_handle</name>
 				<description>Attribute handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint8</data_type>
+				<data_type>AttributeValueType</data_type>
 				<name>type</name>
 				<description>Attribute type</description>
 			</parameter>
@@ -544,7 +544,7 @@
 	<command>
 		<name>findInformationFoundEvent</name>
 		<class>0x04</class>
-		<id>0x05</id>
+		<id>0x04</id>
 		<description>This event is generated when characteristics type mappings are found. This happens typically after Find Information command has been issued to discover all attributes of a service.</description>
 		<response_parameters>
 			<parameter>
@@ -554,11 +554,11 @@
 			</parameter>
 			<parameter>
 				<data_type>uint16</data_type>
-				<name>chrhandle</name>
+				<name>chr_handle</name>
 				<description>Characteristics handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint8array</data_type>
+				<data_type>uuid</data_type>
 				<name>uuid</name>
 				<description>Characteristics type (UUID)</description>
 			</parameter>
@@ -587,7 +587,7 @@
 				<description>Ending handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint8array</data_type>
+				<data_type>uuid</data_type>
 				<name>uuid</name>
 				<description>UUID of a service. Length is 0 if no services are found.</description>
 			</parameter>
@@ -1090,7 +1090,7 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>ConnectionStatusFlags</data_type>
+				<data_type multiple="true">ConnectionStatusFlag</data_type>
 				<name>flags</name>
 				<description>Connection status flags use connstatus-enumerator</description>
 			</parameter>
@@ -2068,7 +2068,7 @@
 	</enum>
 
 	<enum>
-		<name>ConnectionStatusFlags</name>
+		<name>ConnectionStatusFlag</name>
 		<description>The possible connection status flags are described in the table below. The flags field is a bit mask, so multiple flags can be set at a time. If the bit is 1 the flag is active and if the bit is 0 the flag is inactive.</description>
 		<values>
 			<value>
@@ -2117,6 +2117,43 @@
 				<name>gap_scannable_non_connectable</name>
 				<enum_value>0x03</enum_value>
 				<description>Same as non-connectable, but also supports ADV_SCAN_IND packets. Device accepts scan requests (active scanning) but is not connectable.</description>
+			</value>
+		</values>
+	</enum>
+
+	<enum>
+		<name>AttributeValueType</name>
+		<description>These enumerations are in the Attribute Client class</description>
+		<values>
+			<value>
+				<name>attclient_attribute_value_type_read</name>
+				<enum_value>0x00</enum_value>
+				<description>Value was read</description>
+			</value>
+			<value>
+				<name>attclient_attribute_value_type_notify</name>
+				<enum_value>0x01</enum_value>
+				<description>Value was notified</description>
+			</value>
+			<value>
+				<name>attclient_attribute_value_type_indicate</name>
+				<enum_value>0x02</enum_value>
+				<description>Value was indicated</description>
+			</value>
+			<value>
+				<name>attclient_attribute_value_type_read_by_type</name>
+				<enum_value>0x03</enum_value>
+				<description>Value was read</description>
+			</value>
+			<value>
+				<name>attclient_attribute_value_type_read_blob</name>
+				<enum_value>0x04</enum_value>
+				<description>Value was part of a long attribute</description>
+			</value>
+			<value>
+				<name>attclient_attribute_value_type_indicate_rsp_req</name>
+				<enum_value>0x05</enum_value>
+				<description>Value was indicated and the remote device is waiting for a confirmation. Indicate Confirm command can be used to send a confirmation.</description>
 			</value>
 		</values>
 	</enum>
@@ -2300,9 +2337,24 @@
 				<description>Command requested cannot be executed because the Controller is in a state where it cannot process this command at this time.</description>
 			</value>
 			<value>
+				<name>connection_rejected_due_to_limited_resources</name>
+				<enum_value>0x020d</enum_value>
+				<description>The Connection Rejected Due To Limited Resources error code indicates that an incoming connection was rejected due to limited resources.</description>
+			</value>
+			<value>
+				<name>connection_rejected_due_to_security_reasons</name>
+				<enum_value>0x020e</enum_value>
+				<description>The Connection Rejected Due To Security Reasons error code indicates that a connection was rejected due to security requirements not being fulfilled, like authentication or pairing.</description>
+			</value>
+			<value>
 				<name>connection_rejected_due_to_unacceptable_bd_addr</name>
 				<enum_value>0x020f</enum_value>
 				<description>The Connection was rejected because this device does not accept the BD_ADDR. This may be because the device will only accept connections from specific BD_ADDRs.</description>
+			</value>
+			<value>
+				<name>connection_accept_timeout_exceeded</name>
+				<enum_value>0x0210</enum_value>
+				<description>The Connection Accept Timeout has been exceeded for this connection attempt.</description>
 			</value>
 			<value>
 				<name>unsupported_feature_or_parameter_value</name>
@@ -2313,6 +2365,26 @@
 				<name>invalid_command_parameters</name>
 				<enum_value>0x0212</enum_value>
 				<description>Command contained invalid parameters.</description>
+			</value>
+			<value>
+				<name>remote_user_terminated</name>
+				<enum_value>0x0213</enum_value>
+				<description>User on the remote device terminated the connection.</description>
+			</value>
+			<value>
+				<name>remote_powering_off</name>
+				<enum_value>0x0215</enum_value>
+				<description>Remote Device Terminated Connection due to Power Off</description>
+			</value>
+			<value>
+				<name>connection_terminated_by_local_host</name>
+				<enum_value>0x0216</enum_value>
+				<description>Local device terminated the connection.</description>
+			</value>
+			<value>
+				<name>pairing_not_allowed</name>
+				<enum_value>0x0218</enum_value>
+				<description>The device does not allow pairing. This can be for example, when a device only allows pairing during a certain time window after some user input allows pairing</description>
 			</value>
 
 			
@@ -2336,6 +2408,66 @@
 				<name>write_not_permitted</name>
 				<enum_value>0x0403</enum_value>
 				<description>The attribute cannot be written</description>
+			</value>
+			<value>
+				<name>invalid_pdu</name>
+				<enum_value>0x0404</enum_value>
+				<description>The attribute PDU was invalid</description>
+			</value>
+			<value>
+				<name>insufficient_authentication</name>
+				<enum_value>0x0405</enum_value>
+				<description>The attribute requires authentication before it can be read or written.</description>
+			</value>
+			<value>
+				<name>request_not_supported</name>
+				<enum_value>0x0406</enum_value>
+				<description>Attribute Server does not support the request received from the client.</description>
+			</value>
+			<value>
+				<name>invalid_offset</name>
+				<enum_value>0x0407</enum_value>
+				<description>Offset specified was past the end of the attribute</description>
+			</value>
+			<value>
+				<name>insufficient_authorization</name>
+				<enum_value>0x0408</enum_value>
+				<description>The attribute requires authorization before it can be read or written.</description>
+			</value>
+			<value>
+				<name>prepare_queue_full</name>
+				<enum_value>0x0409</enum_value>
+				<description>Too many prepare writes have been queueud</description>
+			</value>
+			<value>
+				<name>att_not_found</name>
+				<enum_value>0x040a</enum_value>
+				<description>No attribute found within the given attribute handle range.</description>
+			</value>
+			<value>
+				<name>att_not_long</name>
+				<enum_value>0x040b</enum_value>
+				<description>The attribute cannot be read or written using the Read Blob Request</description>
+			</value>
+			<value>
+				<name>invalid_att_length</name>
+				<enum_value>0x040d</enum_value>
+				<description>The attribute value length is invalid for the operation</description>
+			</value>
+			<value>
+				<name>unsupported_group_type</name>
+				<enum_value>0x0410</enum_value>
+				<description>The attribute type is not a supported grouping attribute as defined by a higher layer specification.</description>
+			</value>
+			<value>
+				<name>insufficient_resources</name>
+				<enum_value>0x0411</enum_value>
+				<description>Insufficient Resources to complete the request</description>
+			</value>
+			<value>
+				<name>application</name>
+				<enum_value>0x0480</enum_value>
+				<description>Application error code defined by a higher layer specification.</description>
 			</value>
 			
 			<value>

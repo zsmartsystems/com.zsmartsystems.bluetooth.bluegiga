@@ -9,6 +9,7 @@
 package com.zsmartsystems.bluetooth.bluegiga.command.attributeclient;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.BgApiResponse;
 
 /**
  * Class to implement the BlueGiga command <b>procedureCompletedEvent</b>.
@@ -34,18 +35,19 @@ public class BlueGigaProcedureCompletedEvent extends BlueGigaResponse {
     private int connection;
 
     /**
-     * Attribute value
+     * 0: The operation was successful. Otherwise: attribute protocol error code returned by
+     * remote device
      * <p>
-     * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
+     * BlueGiga API type is <i>BgApiResponse</i> - Java type is {@link BgApiResponse}
      */
-    private int result;
+    private BgApiResponse result;
 
     /**
      * Characteristic handle at which the event ended
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int chrhandle;
+    private int chrHandle;
 
     /**
      * Event constructor
@@ -58,8 +60,8 @@ public class BlueGigaProcedureCompletedEvent extends BlueGigaResponse {
 
         // Deserialize the fields
         connection = deserializeUInt8();
-        result = deserializeUInt16();
-        chrhandle = deserializeUInt16();
+        result = deserializeBgApiResponse();
+        chrHandle = deserializeUInt16();
     }
 
     /**
@@ -74,13 +76,14 @@ public class BlueGigaProcedureCompletedEvent extends BlueGigaResponse {
     }
 
     /**
-     * Attribute value
+     * 0: The operation was successful. Otherwise: attribute protocol error code returned by
+     * remote device
      * <p>
-     * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
+     * BlueGiga API type is <i>BgApiResponse</i> - Java type is {@link BgApiResponse}
      *
-     * @return the current result as {@link int}
+     * @return the current result as {@link BgApiResponse}
      */
-    public int getResult() {
+    public BgApiResponse getResult() {
         return result;
     }
 
@@ -89,10 +92,10 @@ public class BlueGigaProcedureCompletedEvent extends BlueGigaResponse {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      *
-     * @return the current chrHandle as {@link int}
+     * @return the current chr_handle as {@link int}
      */
-    public int getChrhandle() {
-        return chrhandle;
+    public int getChrHandle() {
+        return chrHandle;
     }
 
 
@@ -103,8 +106,8 @@ public class BlueGigaProcedureCompletedEvent extends BlueGigaResponse {
         builder.append(connection);
         builder.append(", result=");
         builder.append(result);
-        builder.append(", chrhandle=");
-        builder.append(chrhandle);
+        builder.append(", chrHandle=");
+        builder.append(chrHandle);
         builder.append(']');
         return builder.toString();
     }

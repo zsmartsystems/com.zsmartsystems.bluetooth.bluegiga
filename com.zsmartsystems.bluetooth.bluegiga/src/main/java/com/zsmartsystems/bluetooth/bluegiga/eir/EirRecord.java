@@ -20,8 +20,8 @@ public class EirRecord {
             case EIR_FLAGS:
                 record = processFlags(data);
                 break;
-            case EIR_UUID16_COMPLETE:
-            case EIR_UUID16_INCOMPLETE:
+            case EIR_SVC_UUID16_COMPLETE:
+            case EIR_SVC_UUID16_INCOMPLETE:
                 record = processUuid16(data);
                 break;
             case EIR_NAME_LONG:

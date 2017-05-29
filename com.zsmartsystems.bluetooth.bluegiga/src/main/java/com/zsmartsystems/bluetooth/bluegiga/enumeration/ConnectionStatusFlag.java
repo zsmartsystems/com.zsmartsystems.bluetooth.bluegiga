@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Class to implement the BlueGiga Enumeration <b>ConnectionStatusFlags</b>.
+ * Class to implement the BlueGiga Enumeration <b>ConnectionStatusFlag</b>.
  * <p>
  * The possible connection status flags are described in the table below. The flags field is a
  * bit mask, so multiple flags can be set at a time. If the bit is 1 the flag is active and if the bit is
@@ -22,7 +22,7 @@ import java.util.Map;
  *
  * @author Chris Jackson - Initial contribution of Java code generator
  */
-public enum ConnectionStatusFlags {
+public enum ConnectionStatusFlag {
     /**
      * Default unknown value
      */
@@ -53,17 +53,17 @@ public enum ConnectionStatusFlags {
      * A mapping between the integer code and its corresponding type to
      * facilitate lookup by code.
      */
-    private static Map<Integer, ConnectionStatusFlags> codeMapping;
+    private static Map<Integer, ConnectionStatusFlag> codeMapping;
 
     private int key;
 
-    private ConnectionStatusFlags(int key) {
+    private ConnectionStatusFlag(int key) {
         this.key = key;
     }
 
     private static void initMapping() {
-        codeMapping = new HashMap<Integer, ConnectionStatusFlags>();
-        for (ConnectionStatusFlags s : values()) {
+        codeMapping = new HashMap<Integer, ConnectionStatusFlag>();
+        for (ConnectionStatusFlag s : values()) {
             codeMapping.put(s.key, s);
         }
     }
@@ -71,20 +71,20 @@ public enum ConnectionStatusFlags {
     /**
      * Lookup function based on the type code. Returns null if the code does not exist.
      *
-     * @param connectionStatusFlags
+     * @param connectionStatusFlag
      *            the code to lookup
      * @return enumeration value.
      */
-    public static ConnectionStatusFlags getConnectionStatusFlags(int connectionStatusFlags) {
+    public static ConnectionStatusFlag getConnectionStatusFlag(int connectionStatusFlag) {
         if (codeMapping == null) {
             initMapping();
         }
 
-        if (codeMapping.get(connectionStatusFlags) == null) {
+        if (codeMapping.get(connectionStatusFlag) == null) {
             return UNKNOWN;
         }
 
-        return codeMapping.get(connectionStatusFlags);
+        return codeMapping.get(connectionStatusFlag);
     }
 
     /**

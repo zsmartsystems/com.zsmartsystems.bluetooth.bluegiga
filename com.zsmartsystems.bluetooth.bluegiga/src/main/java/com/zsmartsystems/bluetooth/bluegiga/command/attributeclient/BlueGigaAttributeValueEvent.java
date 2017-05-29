@@ -9,6 +9,7 @@
 package com.zsmartsystems.bluetooth.bluegiga.command.attributeclient;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.AttributeValueType;
 
 /**
  * Class to implement the BlueGiga command <b>attributeValueEvent</b>.
@@ -39,14 +40,14 @@ public class BlueGigaAttributeValueEvent extends BlueGigaResponse {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int atthandle;
+    private int attHandle;
 
     /**
      * Attribute type
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>AttributeValueType</i> - Java type is {@link AttributeValueType}
      */
-    private int type;
+    private AttributeValueType type;
 
     /**
      * Attribute value (data)
@@ -66,8 +67,8 @@ public class BlueGigaAttributeValueEvent extends BlueGigaResponse {
 
         // Deserialize the fields
         connection = deserializeUInt8();
-        atthandle = deserializeUInt16();
-        type = deserializeUInt8();
+        attHandle = deserializeUInt16();
+        type = deserializeAttributeValueType();
         value = deserializeUInt8Array();
     }
 
@@ -87,20 +88,20 @@ public class BlueGigaAttributeValueEvent extends BlueGigaResponse {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      *
-     * @return the current atthandle as {@link int}
+     * @return the current att_handle as {@link int}
      */
-    public int getAtthandle() {
-        return atthandle;
+    public int getAttHandle() {
+        return attHandle;
     }
 
     /**
      * Attribute type
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>AttributeValueType</i> - Java type is {@link AttributeValueType}
      *
-     * @return the current type as {@link int}
+     * @return the current type as {@link AttributeValueType}
      */
-    public int getType() {
+    public AttributeValueType getType() {
         return type;
     }
 
@@ -121,8 +122,8 @@ public class BlueGigaAttributeValueEvent extends BlueGigaResponse {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaAttributeValueEvent [connection=");
         builder.append(connection);
-        builder.append(", atthandle=");
-        builder.append(atthandle);
+        builder.append(", attHandle=");
+        builder.append(attHandle);
         builder.append(", type=");
         builder.append(type);
         builder.append(", value=");

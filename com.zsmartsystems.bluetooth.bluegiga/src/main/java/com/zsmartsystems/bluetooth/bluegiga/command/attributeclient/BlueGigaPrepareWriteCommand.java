@@ -41,7 +41,7 @@ public class BlueGigaPrepareWriteCommand extends BlueGigaCommand {
      * <p>
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
-    private int atthandle;
+    private int attHandle;
 
     /**
      * Offset to write to
@@ -68,10 +68,10 @@ public class BlueGigaPrepareWriteCommand extends BlueGigaCommand {
     /**
      * Attribute handle
      *
-     * @param atthandle the atthandle to set as {@link int}
+     * @param attHandle the attHandle to set as {@link int}
      */
-    public void setAtthandle(int atthandle) {
-        this.atthandle = atthandle;
+    public void setAttHandle(int attHandle) {
+        this.attHandle = attHandle;
     }
 
     /**
@@ -100,7 +100,7 @@ public class BlueGigaPrepareWriteCommand extends BlueGigaCommand {
 
         // Serialize the fields
         serializeUInt8(connection);
-        serializeUInt16(atthandle);
+        serializeUInt16(attHandle);
         serializeUInt16(offset);
         serializeUInt8Array(data);
 
@@ -112,8 +112,8 @@ public class BlueGigaPrepareWriteCommand extends BlueGigaCommand {
         final StringBuilder builder = new StringBuilder();
         builder.append("BlueGigaPrepareWriteCommand [connection=");
         builder.append(connection);
-        builder.append(", atthandle=");
-        builder.append(atthandle);
+        builder.append(", attHandle=");
+        builder.append(attHandle);
         builder.append(", offset=");
         builder.append(offset);
         builder.append(", data=");
