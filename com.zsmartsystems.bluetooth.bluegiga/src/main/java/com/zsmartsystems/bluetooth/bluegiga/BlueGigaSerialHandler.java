@@ -77,6 +77,8 @@ public class BlueGigaSerialHandler {
         this.inputStream = inputStream;
         this.outputStream = outputStream;
 
+        final int framecheckParams[] = new int[] { 0x00, 0x7F, 0xC0, 0xF8, 0xE0 };
+
         parserThread = new Thread("BlueGigaBLEHandler") {
             @Override
             public void run() {
@@ -91,13 +93,22 @@ public class BlueGigaSerialHandler {
                         int val = inputStream.read();
                         // logger.debug("BLE RX: " + String.format("%02X", val));
 
-                        // TODO - how to handle synchronisation issues?
-                        // if (inputCount == inputBuffer.length) {
-                        // Buffer overrun - shouldn't ever happen and probably means we've lost packet sync!
-                        // }
-
                         inputBuffer[inputCount++] = val;
-                        if (inputCount == 4) {
+
+                        if (inputCount < 4) {
+                            // The BGAPI protocol has no packet framing, and no error detection, so we do a few
+                            // sanity checks on the header to try and allow resyncronisation should there be an
+                            // error.
+                            // Byte 0: Check technology type is bluetooth and high length is 0
+                            // Byte 1: Check length is less than 64 bytes
+                            // Byte 2: Check class ID is less than 8
+                            // Byte 3: Check command ID is less than 16
+                            if ((val & framecheckParams[inputCount]) != 0) {
+                                logger.debug("BlueGiga framing error byte {} = {}", inputCount, val);
+                                inputCount = 0;
+                                continue;
+                            }
+                        } else if (inputCount == 4) {
                             // Process the header to get the length
                             inputLength = inputBuffer[1] + (inputBuffer[0] & 0x02 << 8) + 4;
                             if (inputLength > 64) {
