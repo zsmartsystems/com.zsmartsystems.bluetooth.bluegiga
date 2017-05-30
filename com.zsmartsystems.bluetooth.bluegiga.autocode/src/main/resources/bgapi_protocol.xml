@@ -873,7 +873,7 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint8</data_type>
+				<data_type>AttributeChangeReason</data_type>
 				<name>reason</name>
 				<description>Reason why value has changed see: enum Attribute Change Reason</description>
 			</parameter>
@@ -1052,7 +1052,7 @@
 				<description>Connection handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint16</data_type>
+				<data_type>BgApiResponse</data_type>
 				<name>reason</name>
 				<description>Disconnection reason code. 0 : disconnected by local user</description>
 			</parameter>
@@ -1555,8 +1555,8 @@
 		<description>This command is used to configure the local Security Manager and its features</description>
 		<command_parameters>
 			<parameter>
-				<data_type>uint8</data_type>
-				<name>mitm</name>
+				<data_type>boolean</data_type>
+				<name>require_mitm</name>
 				<description>1: Man-in-the-middle protection required. 0: No Man-in-the-middle protection. Default: 0</description>
 			</parameter>
 			<parameter>
@@ -1565,7 +1565,7 @@
 				<description>Minimum key size in Bytes. Range: 7-16. Default: 7 (56bits)</description>
 			</parameter>
 			<parameter>
-				<data_type>uint8</data_type>
+				<data_type>SmpIoCapabilities</data_type>
 				<name>io_capabilities</name>
 				<description>Configures the local devices I/O capabilities. See: SMP IO Capabilities for options. Default: No Input and No Output</description>
 			</parameter>
@@ -1977,6 +1977,28 @@
 -->
 
 	<enum>
+		<name>AttributeChangeReason</name>
+		<description>This enumeration contains the reason for an attribute value change.</description>
+		<values>
+			<value>
+				<name>attributes_attribute_change_reason_write_request</name>
+				<enum_value>0x00</enum_value>
+				<description>Value was written by remote device using write request</description>
+			</value>
+			<value>
+				<name>attributes_attribute_change_reason_write_command</name>
+				<enum_value>0x01</enum_value>
+				<description>Value was written by remote device using write command</description>
+			</value>
+			<value>
+				<name>attributes_attribute_change_reason_write_request_user</name>
+				<enum_value>0x02</enum_value>
+				<description>Local attribute value was written by the remote device, but the Smart Bluetooth stack is waiting for the write to be confirmed by the application. User Write Response command should be used to send the confirmation. For this reason to appear the attribute in the GATT database must have the user property enabled. See Profile Toolkit Developer Guide for more information how to enable the user property for an attribute.</description>
+			</value>
+		</values>
+	</enum>
+
+	<enum>
 		<name>GapDiscoverableMode</name>
 		<description>GAP discoverable modes</description>
 		<values>
@@ -2117,6 +2139,38 @@
 				<name>gap_scannable_non_connectable</name>
 				<enum_value>0x03</enum_value>
 				<description>Same as non-connectable, but also supports ADV_SCAN_IND packets. Device accepts scan requests (active scanning) but is not connectable.</description>
+			</value>
+		</values>
+	</enum>
+
+	<enum>
+		<name>SmpIoCapabilities</name>
+		<description>Security Manager I/O Capabilities</description>
+		<values>
+			<value>
+				<name>sm_io_capability_displayonly</name>
+				<enum_value>0x00</enum_value>
+				<description>Display Only</description>
+			</value>
+			<value>
+				<name>sm_io_capability_displayyesno</name>
+				<enum_value>0x01</enum_value>
+				<description>Display with Yes/No-buttons</description>
+			</value>
+			<value>
+				<name>sm_io_capability_keyboardonly</name>
+				<enum_value>0x02</enum_value>
+				<description>Keyboard Only</description>
+			</value>
+			<value>
+				<name>sm_io_capability_noinputnooutput</name>
+				<enum_value>0x03</enum_value>
+				<description>No Input and No Output</description>
+			</value>
+			<value>
+				<name>sm_io_capability_keyboarddisplay</name>
+				<enum_value>0x04</enum_value>
+				<description>Display with Keyboard</description>
 			</value>
 		</values>
 	</enum>

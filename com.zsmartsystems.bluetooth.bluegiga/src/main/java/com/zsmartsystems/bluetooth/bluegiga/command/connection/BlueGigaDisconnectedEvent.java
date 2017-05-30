@@ -9,6 +9,7 @@
 package com.zsmartsystems.bluetooth.bluegiga.command.connection;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.BgApiResponse;
 
 /**
  * Class to implement the BlueGiga command <b>disconnectedEvent</b>.
@@ -35,9 +36,9 @@ public class BlueGigaDisconnectedEvent extends BlueGigaResponse {
     /**
      * Disconnection reason code. 0 : disconnected by local user
      * <p>
-     * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
+     * BlueGiga API type is <i>BgApiResponse</i> - Java type is {@link BgApiResponse}
      */
-    private int reason;
+    private BgApiResponse reason;
 
     /**
      * Event constructor
@@ -50,7 +51,7 @@ public class BlueGigaDisconnectedEvent extends BlueGigaResponse {
 
         // Deserialize the fields
         connection = deserializeUInt8();
-        reason = deserializeUInt16();
+        reason = deserializeBgApiResponse();
     }
 
     /**
@@ -67,11 +68,11 @@ public class BlueGigaDisconnectedEvent extends BlueGigaResponse {
     /**
      * Disconnection reason code. 0 : disconnected by local user
      * <p>
-     * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
+     * BlueGiga API type is <i>BgApiResponse</i> - Java type is {@link BgApiResponse}
      *
-     * @return the current reason as {@link int}
+     * @return the current reason as {@link BgApiResponse}
      */
-    public int getReason() {
+    public BgApiResponse getReason() {
         return reason;
     }
 

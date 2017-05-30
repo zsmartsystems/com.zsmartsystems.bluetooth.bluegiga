@@ -9,6 +9,7 @@
 package com.zsmartsystems.bluetooth.bluegiga.command.attributedb;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaResponse;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.AttributeChangeReason;
 
 /**
  * Class to implement the BlueGiga command <b>valueEvent</b>.
@@ -36,9 +37,9 @@ public class BlueGigaValueEvent extends BlueGigaResponse {
     /**
      * Reason why value has changed see: enum Attribute Change Reason
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>AttributeChangeReason</i> - Java type is {@link AttributeChangeReason}
      */
-    private int reason;
+    private AttributeChangeReason reason;
 
     /**
      * Attribute handle, which was changed
@@ -72,7 +73,7 @@ public class BlueGigaValueEvent extends BlueGigaResponse {
 
         // Deserialize the fields
         connection = deserializeUInt8();
-        reason = deserializeUInt8();
+        reason = deserializeAttributeChangeReason();
         handle = deserializeUInt16();
         offset = deserializeUInt16();
         value = deserializeUInt8Array();
@@ -92,11 +93,11 @@ public class BlueGigaValueEvent extends BlueGigaResponse {
     /**
      * Reason why value has changed see: enum Attribute Change Reason
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>AttributeChangeReason</i> - Java type is {@link AttributeChangeReason}
      *
-     * @return the current reason as {@link int}
+     * @return the current reason as {@link AttributeChangeReason}
      */
-    public int getReason() {
+    public AttributeChangeReason getReason() {
         return reason;
     }
 

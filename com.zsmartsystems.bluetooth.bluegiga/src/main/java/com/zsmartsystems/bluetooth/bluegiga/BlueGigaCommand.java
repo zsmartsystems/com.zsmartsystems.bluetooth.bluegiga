@@ -7,6 +7,7 @@ import com.zsmartsystems.bluetooth.bluegiga.enumeration.BluetoothAddressType;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapConnectableMode;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapDiscoverMode;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.GapDiscoverableMode;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.SmpIoCapabilities;
 
 /**
  * Abstract base class for all commands. This provides the serialisation methods for converting parameters from Java
@@ -103,6 +104,10 @@ public abstract class BlueGigaCommand extends BlueGigaPacket {
         for (int cnt = 5; cnt >= 0; cnt--) {
             serializeUInt8(Integer.parseInt(bytes[cnt], 16));
         }
+    }
+
+    protected void serializeSmpIoCapabilities(SmpIoCapabilities capabilities) {
+        serializeUInt8(capabilities.getKey());
     }
 
     protected void serializeBluetoothAddressType(BluetoothAddressType addrType) {

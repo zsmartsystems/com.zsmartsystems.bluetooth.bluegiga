@@ -9,6 +9,7 @@
 package com.zsmartsystems.bluetooth.bluegiga.command.security;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaCommand;
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.SmpIoCapabilities;
 
 /**
  * Class to implement the BlueGiga command <b>setParameters</b>.
@@ -29,9 +30,9 @@ public class BlueGigaSetParametersCommand extends BlueGigaCommand {
      * 1: Man-in-the-middle protection required. 0: No Man-in-the-middle protection. Default:
      * 0
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>boolean</i> - Java type is {@link boolean}
      */
-    private int mitm;
+    private boolean requireMitm;
 
     /**
      * Minimum key size in Bytes. Range: 7-16. Default: 7 (56bits)
@@ -44,17 +45,17 @@ public class BlueGigaSetParametersCommand extends BlueGigaCommand {
      * Configures the local devices I/O capabilities. See: SMP IO Capabilities for options.
      * Default: No Input and No Output
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>SmpIoCapabilities</i> - Java type is {@link SmpIoCapabilities}
      */
-    private int ioCapabilities;
+    private SmpIoCapabilities ioCapabilities;
     /**
      * 1: Man-in-the-middle protection required. 0: No Man-in-the-middle protection. Default:
      * 0
      *
-     * @param mitm the mitm to set as {@link int}
+     * @param requireMitm the requireMitm to set as {@link boolean}
      */
-    public void setMitm(int mitm) {
-        this.mitm = mitm;
+    public void setRequireMitm(boolean requireMitm) {
+        this.requireMitm = requireMitm;
     }
 
     /**
@@ -70,9 +71,9 @@ public class BlueGigaSetParametersCommand extends BlueGigaCommand {
      * Configures the local devices I/O capabilities. See: SMP IO Capabilities for options.
      * Default: No Input and No Output
      *
-     * @param ioCapabilities the ioCapabilities to set as {@link int}
+     * @param ioCapabilities the ioCapabilities to set as {@link SmpIoCapabilities}
      */
-    public void setIoCapabilities(int ioCapabilities) {
+    public void setIoCapabilities(SmpIoCapabilities ioCapabilities) {
         this.ioCapabilities = ioCapabilities;
     }
 
@@ -83,9 +84,9 @@ public class BlueGigaSetParametersCommand extends BlueGigaCommand {
         serializeHeader(COMMAND_CLASS, COMMAND_METHOD);
 
         // Serialize the fields
-        serializeUInt8(mitm);
+        serializeBoolean(requireMitm);
         serializeUInt8(minKeySize);
-        serializeUInt8(ioCapabilities);
+        serializeSmpIoCapabilities(ioCapabilities);
 
         return getPayload();
     }
@@ -93,8 +94,8 @@ public class BlueGigaSetParametersCommand extends BlueGigaCommand {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("BlueGigaSetParametersCommand [mitm=");
-        builder.append(mitm);
+        builder.append("BlueGigaSetParametersCommand [requireMitm=");
+        builder.append(requireMitm);
         builder.append(", minKeySize=");
         builder.append(minKeySize);
         builder.append(", ioCapabilities=");

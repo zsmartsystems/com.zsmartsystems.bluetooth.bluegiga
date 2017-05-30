@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.AttributeChangeReason;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.AttributeValueType;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.BgApiResponse;
 import com.zsmartsystems.bluetooth.bluegiga.enumeration.BluetoothAddressType;
@@ -131,6 +132,10 @@ public class BlueGigaResponse extends BlueGigaPacket {
 
     protected BluetoothAddressType deserializeBluetoothAddressType() {
         return BluetoothAddressType.getBluetoothAddressType(deserializeUInt8());
+    }
+
+    protected AttributeChangeReason deserializeAttributeChangeReason() {
+        return AttributeChangeReason.getAttributeChangeReason(deserializeUInt8());
     }
 
     protected ScanResponseType deserializeScanResponseType() {
