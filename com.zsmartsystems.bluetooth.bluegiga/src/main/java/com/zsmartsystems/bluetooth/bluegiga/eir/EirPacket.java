@@ -27,6 +27,10 @@ public class EirPacket {
         }
 
         for (int cnt = 0; cnt < data.length;) {
+            if (data[cnt] == 0) {
+                break;
+            }
+
             int[] rawRecord = Arrays.copyOfRange(data, cnt + 1, cnt + data[cnt] + 1);
             EirRecord record = new EirRecord(rawRecord);
 

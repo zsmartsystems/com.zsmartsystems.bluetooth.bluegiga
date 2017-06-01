@@ -15,6 +15,10 @@ public class EirRecord {
     private Object record;
 
     EirRecord(int[] data) {
+        if (data == null || data.length == 0) {
+            return;
+        }
+
         type = EirDataType.getEirPacketType(data[0]);
         switch (type) {
             case EIR_FLAGS:
@@ -23,6 +27,14 @@ public class EirRecord {
             case EIR_SVC_UUID16_COMPLETE:
             case EIR_SVC_UUID16_INCOMPLETE:
                 record = processUuid16(data);
+                break;
+            case EIR_SVC_UUID32_COMPLETE:
+            case EIR_SVC_UUID32_INCOMPLETE:
+                record = processUuid32(data);
+                break;
+            case EIR_SVC_UUID128_COMPLETE:
+            case EIR_SVC_UUID128_INCOMPLETE:
+                record = processUuid128(data);
                 break;
             case EIR_NAME_LONG:
             case EIR_NAME_SHORT:
@@ -46,6 +58,35 @@ public class EirRecord {
         for (int cnt = 1; cnt < data.length - 1; cnt += 2) {
             long high = ((long) data[cnt] << 32) + ((long) data[cnt + 1] << 40);
             uuidList.add(new UUID(high, 0));
+        }
+
+        return uuidList;
+    }
+
+    private List<UUID> processUuid32(int[] data) {
+        List<UUID> uuidList = new ArrayList<UUID>();
+
+        for (int cnt = 1; cnt < data.length - 1; cnt += 4) {
+            long high = ((long) data[cnt++] << 32) + ((long) data[cnt++] << 40) + ((long) data[cnt++] << 48)
+                    + ((long) data[cnt++] << 56);
+            uuidList.add(new UUID(high, 0));
+        }
+
+        return uuidList;
+    }
+
+    private List<UUID> processUuid128(int[] data) {
+        List<UUID> uuidList = new ArrayList<UUID>();
+
+        for (int cnt = 1; cnt < data.length - 1; cnt += 16) {
+            long low = (data[cnt++]) + ((long) data[cnt++] << 8) + ((long) data[cnt++] << 16)
+                    + ((long) data[cnt++] << 24) + ((long) data[cnt++] << 32) + ((long) data[cnt++] << 40)
+                    + ((long) data[cnt++] << 48) + ((long) data[cnt++] << 56);
+            long high = (data[cnt++]) + ((long) data[cnt++] << 8) + ((long) data[cnt++] << 16)
+                    + ((long) data[cnt++] << 24) + ((long) data[cnt++] << 32) + ((long) data[cnt++] << 40)
+                    + ((long) data[cnt++] << 48) + ((long) data[cnt++] << 56);
+
+            uuidList.add(new UUID(high, low));
         }
 
         return uuidList;
