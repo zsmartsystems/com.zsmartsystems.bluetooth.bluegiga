@@ -86,6 +86,7 @@ public class CommandGenerator extends ClassGenerator {
 
         out.println("    public static int COMMAND_CLASS = " + String.format("0x%02X", command.cmdClass) + ";");
         out.println("    public static int COMMAND_METHOD = " + String.format("0x%02X", command.id) + ";");
+        out.println();
 
         // out.println(" private static final Logger logger =
         // LoggerFactory.getLogger(" + className + ".class);");
@@ -95,7 +96,6 @@ public class CommandGenerator extends ClassGenerator {
                 continue;
             }
 
-            out.println();
             out.println("    /**");
             outputWithLinebreak(out, "    ", parameter.description);
             out.println("     * <p>");
@@ -113,10 +113,15 @@ public class CommandGenerator extends ClassGenerator {
                         + stringToLowerCamelCase(parameter.name) + " = new HashSet<" + getTypeClass(parameter.data_type)
                         + ">();");
             } else {
-                out.println("    private " + getTypeClass(parameter.data_type) + " "
-                        + stringToLowerCamelCase(parameter.name) + ";");
+                out.print("    private " + getTypeClass(parameter.data_type) + " "
+                        + stringToLowerCamelCase(parameter.name));
+                if (parameter.defaultValue != null && parameter.defaultValue.length() != 0) {
+                    out.print(" = " + parameter.defaultValue);
+                }
+                out.println(";");
             }
 
+            out.println();
         }
 
         if (className.endsWith("Command")) {
@@ -137,7 +142,6 @@ public class CommandGenerator extends ClassGenerator {
             // out.println(" }");
         } else {
             // addImport("com.zsmartsystems.zigbee.dongle.ember.ezsp.serializer.EzspDeserializer");
-            out.println();
             // out.println(" private EzspDeserializer serializer;");
             // out.println();
             out.println("    /**");
@@ -223,7 +227,6 @@ public class CommandGenerator extends ClassGenerator {
                             + stringToLowerCamelCase(parameter.name) + ";");
                 }
                 out.println("    }");
-                out.println();
             } else {
                 out.println("    /**");
                 outputWithLinebreak(out, "    ", parameter.description);
@@ -248,7 +251,6 @@ public class CommandGenerator extends ClassGenerator {
                 }
                 out.println("        return " + stringToLowerCamelCase(parameter.name) + ";");
                 out.println("    }");
-                out.println();
             }
         }
 

@@ -20,7 +20,6 @@ import com.zsmartsystems.bluetooth.bluegiga.autocode.xml.Protocol;
 import com.zsmartsystems.bluetooth.bluegiga.autocode.xml.Structure;
 import com.zsmartsystems.bluetooth.bluegiga.autocode.xml.Value;
 
-
 /**
  *
  * @author Chris Jackson
@@ -145,6 +144,9 @@ public class BlueGigaAutocoder {
                     }
                     if (nodes.item(temp).getNodeName().equals("auto_size")) {
                         parameter.auto_size = nodes.item(temp).getTextContent();
+                    }
+                    if (nodes.item(temp).getNodeName().equals("default")) {
+                        parameter.defaultValue = nodes.item(temp).getTextContent();
                     }
                     if (nodes.item(temp).getNodeName().equals("display")) {
                         String display = nodes.item(temp).getTextContent();
