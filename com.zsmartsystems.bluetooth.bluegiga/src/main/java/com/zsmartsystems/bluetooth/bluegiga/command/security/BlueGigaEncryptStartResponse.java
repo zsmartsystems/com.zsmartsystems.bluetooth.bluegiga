@@ -64,7 +64,6 @@ public class BlueGigaEncryptStartResponse extends BlueGigaResponse {
     public int getHandle() {
         return handle;
     }
-
     /**
      * 0 : the encryption was started successfully
      * <p>
@@ -75,7 +74,6 @@ public class BlueGigaEncryptStartResponse extends BlueGigaResponse {
     public BgApiResponse getResult() {
         return result;
     }
-
 
     @Override
     public String toString() {

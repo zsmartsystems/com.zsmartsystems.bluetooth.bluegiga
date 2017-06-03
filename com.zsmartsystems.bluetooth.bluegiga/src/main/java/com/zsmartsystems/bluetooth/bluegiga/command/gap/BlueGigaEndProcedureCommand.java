@@ -26,6 +26,7 @@ public class BlueGigaEndProcedureCommand extends BlueGigaCommand {
     public static int COMMAND_CLASS = 0x06;
     public static int COMMAND_METHOD = 0x04;
 
+
     @Override
     public int[] serialize() {
         // Serialize the header

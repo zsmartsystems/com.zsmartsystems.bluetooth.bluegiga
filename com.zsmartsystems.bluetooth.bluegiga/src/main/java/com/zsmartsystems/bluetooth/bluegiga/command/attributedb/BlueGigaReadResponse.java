@@ -82,7 +82,6 @@ public class BlueGigaReadResponse extends BlueGigaResponse {
     public int getHandle() {
         return handle;
     }
-
     /**
      * Offset read from
      * <p>
@@ -93,7 +92,6 @@ public class BlueGigaReadResponse extends BlueGigaResponse {
     public int getOffset() {
         return offset;
     }
-
     /**
      * 0 : the command was successful. Otherwise an error occurred
      * <p>
@@ -104,7 +102,6 @@ public class BlueGigaReadResponse extends BlueGigaResponse {
     public BgApiResponse getResult() {
         return result;
     }
-
     /**
      * Value of the attribute
      * <p>
@@ -115,7 +112,6 @@ public class BlueGigaReadResponse extends BlueGigaResponse {
     public int[] getValue() {
         return value;
     }
-
 
     @Override
     public String toString() {

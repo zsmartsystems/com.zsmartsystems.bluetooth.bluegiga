@@ -35,6 +35,7 @@ public class BlueGigaIndicateConfirmCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
      */
     private int connection;
+
     /**
      * Connection handle
      *
@@ -43,7 +44,6 @@ public class BlueGigaIndicateConfirmCommand extends BlueGigaCommand {
     public void setConnection(int connection) {
         this.connection = connection;
     }
-
 
     @Override
     public int[] serialize() {

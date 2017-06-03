@@ -52,6 +52,7 @@ public class BlueGigaSetAdvParametersCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
      */
     private int advChannels;
+
     /**
      * Minimum advertisement interval in units of 625us. Range: 0x20 to 0x4000. Default: 0x200
      * (320ms) Explanation: 0x200 = 512 512 * 625us = 320000us = 320ms
@@ -61,7 +62,6 @@ public class BlueGigaSetAdvParametersCommand extends BlueGigaCommand {
     public void setAdvIntervalMin(int advIntervalMin) {
         this.advIntervalMin = advIntervalMin;
     }
-
     /**
      * Maximum advertisement interval in units of 625us. Range: 0x20 to 0x4000. Default: 0x200
      * (320ms)
@@ -71,7 +71,6 @@ public class BlueGigaSetAdvParametersCommand extends BlueGigaCommand {
     public void setAdvIntervalMax(int advIntervalMax) {
         this.advIntervalMax = advIntervalMax;
     }
-
     /**
      * A bit mask to identify which of the three advertisement channels are used. Examples: 0x07:
      * All three channels are used 0x03: Advertisement channels 37 and 38 are used. 0x04: Only
@@ -82,7 +81,6 @@ public class BlueGigaSetAdvParametersCommand extends BlueGigaCommand {
     public void setAdvChannels(int advChannels) {
         this.advChannels = advChannels;
     }
-
 
     @Override
     public int[] serialize() {

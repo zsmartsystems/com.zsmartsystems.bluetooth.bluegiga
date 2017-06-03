@@ -51,6 +51,7 @@ public class BlueGigaSendAttributesCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint8array</i> - Java type is {@link int[]}
      */
     private int[] value;
+
     /**
      * Connection handle to send to. Use 0xFF to send to all connected clients which have subscribed
      * to receive the notifications or indications. An error is returned as soon as the first failed
@@ -61,7 +62,6 @@ public class BlueGigaSendAttributesCommand extends BlueGigaCommand {
     public void setConnection(int connection) {
         this.connection = connection;
     }
-
     /**
      * Attribute handle to send.
      *
@@ -70,7 +70,6 @@ public class BlueGigaSendAttributesCommand extends BlueGigaCommand {
     public void setHandle(int handle) {
         this.handle = handle;
     }
-
     /**
      * Data to send
      *
@@ -79,7 +78,6 @@ public class BlueGigaSendAttributesCommand extends BlueGigaCommand {
     public void setValue(int[] value) {
         this.value = value;
     }
-
 
     @Override
     public int[] serialize() {

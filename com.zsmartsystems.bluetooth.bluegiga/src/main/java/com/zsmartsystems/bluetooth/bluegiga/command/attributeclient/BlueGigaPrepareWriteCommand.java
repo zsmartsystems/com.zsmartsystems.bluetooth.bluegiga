@@ -56,6 +56,7 @@ public class BlueGigaPrepareWriteCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint8array</i> - Java type is {@link int[]}
      */
     private int[] data;
+
     /**
      * Connection handle
      *
@@ -64,7 +65,6 @@ public class BlueGigaPrepareWriteCommand extends BlueGigaCommand {
     public void setConnection(int connection) {
         this.connection = connection;
     }
-
     /**
      * Attribute handle
      *
@@ -73,7 +73,6 @@ public class BlueGigaPrepareWriteCommand extends BlueGigaCommand {
     public void setAttHandle(int attHandle) {
         this.attHandle = attHandle;
     }
-
     /**
      * Offset to write to
      *
@@ -82,7 +81,6 @@ public class BlueGigaPrepareWriteCommand extends BlueGigaCommand {
     public void setOffset(int offset) {
         this.offset = offset;
     }
-
     /**
      * Data to write. Maximum amount of data that can be sent in single command is 18 bytes.
      *
@@ -91,7 +89,6 @@ public class BlueGigaPrepareWriteCommand extends BlueGigaCommand {
     public void setData(int[] data) {
         this.data = data;
     }
-
 
     @Override
     public int[] serialize() {

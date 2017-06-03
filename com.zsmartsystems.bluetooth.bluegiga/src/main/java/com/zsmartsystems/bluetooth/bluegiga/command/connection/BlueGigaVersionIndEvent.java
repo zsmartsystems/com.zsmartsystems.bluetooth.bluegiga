@@ -79,7 +79,6 @@ public class BlueGigaVersionIndEvent extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * Bluetooth controller specification version
      * <p>
@@ -90,7 +89,6 @@ public class BlueGigaVersionIndEvent extends BlueGigaResponse {
     public int getVersNr() {
         return versNr;
     }
-
     /**
      * Manufacturer of the controller
      * <p>
@@ -101,7 +99,6 @@ public class BlueGigaVersionIndEvent extends BlueGigaResponse {
     public int getCompId() {
         return compId;
     }
-
     /**
      * Bluetooth controller version
      * <p>
@@ -112,7 +109,6 @@ public class BlueGigaVersionIndEvent extends BlueGigaResponse {
     public int getSubVersNr() {
         return subVersNr;
     }
-
 
     @Override
     public String toString() {

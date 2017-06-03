@@ -56,7 +56,6 @@ public class BlueGigaAddressGetResponse extends BlueGigaResponse {
         return address;
     }
 
-
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

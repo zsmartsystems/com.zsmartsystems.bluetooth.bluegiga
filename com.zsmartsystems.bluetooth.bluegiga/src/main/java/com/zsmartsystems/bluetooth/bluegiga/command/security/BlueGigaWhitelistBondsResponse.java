@@ -66,7 +66,6 @@ public class BlueGigaWhitelistBondsResponse extends BlueGigaResponse {
     public BgApiResponse getResult() {
         return result;
     }
-
     /**
      * Number of whitelisted bonds
      * <p>
@@ -77,7 +76,6 @@ public class BlueGigaWhitelistBondsResponse extends BlueGigaResponse {
     public int getCount() {
         return count;
     }
-
 
     @Override
     public String toString() {

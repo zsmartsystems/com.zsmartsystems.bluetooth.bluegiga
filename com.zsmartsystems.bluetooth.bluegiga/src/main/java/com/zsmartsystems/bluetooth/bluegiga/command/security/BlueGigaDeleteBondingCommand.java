@@ -34,6 +34,7 @@ public class BlueGigaDeleteBondingCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
      */
     private int handle;
+
     /**
      * Bonding handle of a device. This handle can be obtained for example from events like: Scan
      * Response Status - If handle is 0xFF, all bondings will be deleted
@@ -43,7 +44,6 @@ public class BlueGigaDeleteBondingCommand extends BlueGigaCommand {
     public void setHandle(int handle) {
         this.handle = handle;
     }
-
 
     @Override
     public int[] serialize() {

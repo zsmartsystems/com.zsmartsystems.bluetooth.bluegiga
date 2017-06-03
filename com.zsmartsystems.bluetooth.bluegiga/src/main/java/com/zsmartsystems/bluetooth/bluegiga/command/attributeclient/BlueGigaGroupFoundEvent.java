@@ -81,7 +81,6 @@ public class BlueGigaGroupFoundEvent extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * Starting handle
      * <p>
@@ -92,7 +91,6 @@ public class BlueGigaGroupFoundEvent extends BlueGigaResponse {
     public int getStart() {
         return start;
     }
-
     /**
      * Ending handle
      * <p>
@@ -103,7 +101,6 @@ public class BlueGigaGroupFoundEvent extends BlueGigaResponse {
     public int getEnd() {
         return end;
     }
-
     /**
      * UUID of a service. Length is 0 if no services are found.
      * <p>
@@ -114,7 +111,6 @@ public class BlueGigaGroupFoundEvent extends BlueGigaResponse {
     public UUID getUuid() {
         return uuid;
     }
-
 
     @Override
     public String toString() {

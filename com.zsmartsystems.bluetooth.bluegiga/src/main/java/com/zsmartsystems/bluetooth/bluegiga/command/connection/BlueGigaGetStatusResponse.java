@@ -56,7 +56,6 @@ public class BlueGigaGetStatusResponse extends BlueGigaResponse {
         return connection;
     }
 
-
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

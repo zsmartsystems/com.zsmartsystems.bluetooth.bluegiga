@@ -63,7 +63,6 @@ public class BlueGigaFeatureIndEvent extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * CtrData field from LL_FEATURE_RSP - packet
      * <p>
@@ -74,7 +73,6 @@ public class BlueGigaFeatureIndEvent extends BlueGigaResponse {
     public int[] getFeatures() {
         return features;
     }
-
 
     @Override
     public String toString() {

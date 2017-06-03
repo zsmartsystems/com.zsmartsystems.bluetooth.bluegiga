@@ -39,6 +39,7 @@ public class BlueGigaExecuteWriteCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
      */
     private int commit;
+
     /**
      * Connection handle
      *
@@ -47,7 +48,6 @@ public class BlueGigaExecuteWriteCommand extends BlueGigaCommand {
     public void setConnection(int connection) {
         this.connection = connection;
     }
-
     /**
      * 1: commits queued writes, 0: cancels queued writes
      *
@@ -56,7 +56,6 @@ public class BlueGigaExecuteWriteCommand extends BlueGigaCommand {
     public void setCommit(int commit) {
         this.commit = commit;
     }
-
 
     @Override
     public int[] serialize() {

@@ -64,7 +64,6 @@ public class BlueGigaDisconnectedEvent extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * Disconnection reason code. 0 : disconnected by local user
      * <p>
@@ -75,7 +74,6 @@ public class BlueGigaDisconnectedEvent extends BlueGigaResponse {
     public BgApiResponse getReason() {
         return reason;
     }
-
 
     @Override
     public String toString() {

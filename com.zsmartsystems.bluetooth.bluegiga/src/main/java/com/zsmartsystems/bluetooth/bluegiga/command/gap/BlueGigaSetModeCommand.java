@@ -42,6 +42,7 @@ public class BlueGigaSetModeCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>GapConnectableMode</i> - Java type is {@link GapConnectableMode}
      */
     private GapConnectableMode connect;
+
     /**
      * see:GAP Discoverable Mode
      *
@@ -50,7 +51,6 @@ public class BlueGigaSetModeCommand extends BlueGigaCommand {
     public void setDiscover(GapDiscoverableMode discover) {
         this.discover = discover;
     }
-
     /**
      * see:GAP Connectable Mode
      *
@@ -59,7 +59,6 @@ public class BlueGigaSetModeCommand extends BlueGigaCommand {
     public void setConnect(GapConnectableMode connect) {
         this.connect = connect;
     }
-
 
     @Override
     public int[] serialize() {

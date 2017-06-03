@@ -79,7 +79,6 @@ public class BlueGigaBondStatusEvent extends BlueGigaResponse {
     public int getBond() {
         return bond;
     }
-
     /**
      * Encryption key size used in long-term key
      * <p>
@@ -90,7 +89,6 @@ public class BlueGigaBondStatusEvent extends BlueGigaResponse {
     public int getKeysize() {
         return keysize;
     }
-
     /**
      * Was Man-in-the-Middle mode was used in pairing. 0: No MITM used. 1: MITM was used
      * <p>
@@ -101,7 +99,6 @@ public class BlueGigaBondStatusEvent extends BlueGigaResponse {
     public int getMitm() {
         return mitm;
     }
-
     /**
      * Keys stored for bonding. See: Bonding Keys
      * <p>
@@ -112,7 +109,6 @@ public class BlueGigaBondStatusEvent extends BlueGigaResponse {
     public int getKeys() {
         return keys;
     }
-
 
     @Override
     public String toString() {

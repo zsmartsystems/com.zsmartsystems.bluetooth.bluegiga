@@ -65,7 +65,6 @@ public class BlueGigaIndicatedEvent extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * Attribute handle
      * <p>
@@ -76,7 +75,6 @@ public class BlueGigaIndicatedEvent extends BlueGigaResponse {
     public int getAttrhandle() {
         return attrhandle;
     }
-
 
     @Override
     public String toString() {

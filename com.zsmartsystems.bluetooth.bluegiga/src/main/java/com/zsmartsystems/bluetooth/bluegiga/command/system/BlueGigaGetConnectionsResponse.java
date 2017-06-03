@@ -56,7 +56,6 @@ public class BlueGigaGetConnectionsResponse extends BlueGigaResponse {
         return maxconn;
     }
 
-
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

@@ -32,6 +32,7 @@ public class BlueGigaSetBondableModeCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>boolean</i> - Java type is {@link boolean}
      */
     private boolean bondable;
+
     /**
      * Enables or disables bonding mode. 0 : the device is not bondable. 1 : the device is bondable
      *
@@ -40,7 +41,6 @@ public class BlueGigaSetBondableModeCommand extends BlueGigaCommand {
     public void setBondable(boolean bondable) {
         this.bondable = bondable;
     }
-
 
     @Override
     public int[] serialize() {

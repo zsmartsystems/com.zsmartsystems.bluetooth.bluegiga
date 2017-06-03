@@ -116,7 +116,6 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * Connection status flags use connstatus-enumerator
      * <p>
@@ -127,7 +126,6 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
     public Set<ConnectionStatusFlag> getFlags() {
         return flags;
     }
-
     /**
      * Remote devices Bluetooth address
      * <p>
@@ -138,7 +136,6 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
     public String getAddress() {
         return address;
     }
-
     /**
      * Remote address type see: Bluetooth Address Types--gap
      * <p>
@@ -149,7 +146,6 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
     public BluetoothAddressType getAddressType() {
         return addressType;
     }
-
     /**
      * Current connection interval (units of 1.25ms)
      * <p>
@@ -160,7 +156,6 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
     public int getConnInterval() {
         return connInterval;
     }
-
     /**
      * Current supervision timeout (units of 10ms)
      * <p>
@@ -171,7 +166,6 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
     public int getTimeout() {
         return timeout;
     }
-
     /**
      * Slave latency which tells how many connection intervals the slave may skip.
      * <p>
@@ -182,7 +176,6 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
     public int getLatency() {
         return latency;
     }
-
     /**
      * Bonding handle if the device has been bonded with. Otherwise: 0xFF
      * <p>
@@ -193,7 +186,6 @@ public class BlueGigaConnectionStatusEvent extends BlueGigaResponse {
     public int getBonding() {
         return bonding;
     }
-
 
     @Override
     public String toString() {

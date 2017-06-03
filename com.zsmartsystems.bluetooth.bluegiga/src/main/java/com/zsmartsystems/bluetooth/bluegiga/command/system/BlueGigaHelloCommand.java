@@ -26,6 +26,7 @@ public class BlueGigaHelloCommand extends BlueGigaCommand {
     public static int COMMAND_CLASS = 0x00;
     public static int COMMAND_METHOD = 0x01;
 
+
     @Override
     public int[] serialize() {
         // Serialize the header

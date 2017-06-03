@@ -89,7 +89,6 @@ public class BlueGigaValueEvent extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * Reason why value has changed see: enum Attribute Change Reason
      * <p>
@@ -100,7 +99,6 @@ public class BlueGigaValueEvent extends BlueGigaResponse {
     public AttributeChangeReason getReason() {
         return reason;
     }
-
     /**
      * Attribute handle, which was changed
      * <p>
@@ -111,7 +109,6 @@ public class BlueGigaValueEvent extends BlueGigaResponse {
     public int getHandle() {
         return handle;
     }
-
     /**
      * Offset into attribute value where data starts
      * <p>
@@ -122,7 +119,6 @@ public class BlueGigaValueEvent extends BlueGigaResponse {
     public int getOffset() {
         return offset;
     }
-
     /**
      * Attribute value
      * <p>
@@ -133,7 +129,6 @@ public class BlueGigaValueEvent extends BlueGigaResponse {
     public int[] getValue() {
         return value;
     }
-
 
     @Override
     public String toString() {

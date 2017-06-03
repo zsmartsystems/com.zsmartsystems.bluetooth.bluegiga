@@ -1173,8 +1173,8 @@
 				<description>Scan Window defines how long time the scanner will listen on a certain frequency and try to pick up advertisement packets. Scan window is defined as units of 625us. Range: 0x4 - 0x4000. Default: 0x32 (31,25 ms). Scan windows must be equal or smaller than scan interval If scan window is equal to the scan interval value, then the module Bluetooth will be scanning at a 100% duty cycle. If scan window is half of the scan interval value, then the module Bluetooth will be scanning at a 50% duty cycle.</description>
 			</parameter>
 			<parameter>
-				<data_type>uint8</data_type>
-				<name>active</name>
+				<data_type>boolean</data_type>
+				<name>active_scanning</name>
 				<description>1: Active scanning is used. When an advertisement packet is received the Bluetooth stack will send a scan request packet to the advertiser to try and read the scan response data. 0: Passive scanning is used. No scan request is made.</description>
 			</parameter>
 		</command_parameters>
@@ -1777,9 +1777,10 @@
 		<description>This command resets the local device immediately. The command does not have a response.</description>
 		<command_parameters>
 			<parameter>
-				<data_type>uint8</data_type>
+				<data_type>boolean</data_type>
 				<name>boot_in_dfu</name>
 				<description>Selects the boot mode. 0 : boot to main program. 1 : boot to DFU</description>
+				<default>false</default>
 			</parameter>
 		</command_parameters>
 	</command>

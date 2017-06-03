@@ -67,7 +67,6 @@ public class BlueGigaReadByGroupTypeResponse extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * Command result.
      * <p>
@@ -78,7 +77,6 @@ public class BlueGigaReadByGroupTypeResponse extends BlueGigaResponse {
     public BgApiResponse getResult() {
         return result;
     }
-
 
     @Override
     public String toString() {

@@ -71,7 +71,6 @@ public class BlueGigaConnectSelectiveResponse extends BlueGigaResponse {
     public BgApiResponse getResult() {
         return result;
     }
-
     /**
      * Connection handle that is reserved for new connection
      * <p>
@@ -82,7 +81,6 @@ public class BlueGigaConnectSelectiveResponse extends BlueGigaResponse {
     public int getConnectionHandle() {
         return connectionHandle;
     }
-
 
     @Override
     public String toString() {

@@ -39,6 +39,7 @@ public class BlueGigaPassKeyCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint32</i> - Java type is {@link long}
      */
     private long passkey;
+
     /**
      * Connection handle
      *
@@ -47,7 +48,6 @@ public class BlueGigaPassKeyCommand extends BlueGigaCommand {
     public void setHandle(int handle) {
         this.handle = handle;
     }
-
     /**
      * Passkey. Range: 000000-999999
      *
@@ -56,7 +56,6 @@ public class BlueGigaPassKeyCommand extends BlueGigaCommand {
     public void setPasskey(long passkey) {
         this.passkey = passkey;
     }
-
 
     @Override
     public int[] serialize() {

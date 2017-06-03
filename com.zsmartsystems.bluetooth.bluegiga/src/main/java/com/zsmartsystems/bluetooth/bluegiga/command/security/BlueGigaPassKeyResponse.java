@@ -58,7 +58,6 @@ public class BlueGigaPassKeyResponse extends BlueGigaResponse {
         return result;
     }
 
-
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

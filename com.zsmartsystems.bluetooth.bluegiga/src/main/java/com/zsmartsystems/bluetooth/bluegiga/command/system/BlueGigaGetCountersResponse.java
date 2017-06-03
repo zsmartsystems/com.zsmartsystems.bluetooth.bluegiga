@@ -87,7 +87,6 @@ public class BlueGigaGetCountersResponse extends BlueGigaResponse {
     public int getTxok() {
         return txok;
     }
-
     /**
      * Number of retransmitted packets
      * <p>
@@ -98,7 +97,6 @@ public class BlueGigaGetCountersResponse extends BlueGigaResponse {
     public int getTxretry() {
         return txretry;
     }
-
     /**
      * Number of received packets where CRC was OK
      * <p>
@@ -109,7 +107,6 @@ public class BlueGigaGetCountersResponse extends BlueGigaResponse {
     public int getRxok() {
         return rxok;
     }
-
     /**
      * Number of received packets with CRC error
      * <p>
@@ -120,7 +117,6 @@ public class BlueGigaGetCountersResponse extends BlueGigaResponse {
     public int getRxfail() {
         return rxfail;
     }
-
     /**
      * Number of available packet buffers
      * <p>
@@ -131,7 +127,6 @@ public class BlueGigaGetCountersResponse extends BlueGigaResponse {
     public int getMbuf() {
         return mbuf;
     }
-
 
     @Override
     public String toString() {

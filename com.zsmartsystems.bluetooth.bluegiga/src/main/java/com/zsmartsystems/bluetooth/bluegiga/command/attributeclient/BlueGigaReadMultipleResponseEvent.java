@@ -64,7 +64,6 @@ public class BlueGigaReadMultipleResponseEvent extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * This array contains the concatenated data from the multiple attributes that have been read,
      * up to 22 bytes.
@@ -76,7 +75,6 @@ public class BlueGigaReadMultipleResponseEvent extends BlueGigaResponse {
     public int[] getHandles() {
         return handles;
     }
-
 
     @Override
     public String toString() {

@@ -61,6 +61,7 @@ public class BlueGigaFindByTypeValueCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint8array</i> - Java type is {@link int[]}
      */
     private int[] value;
+
     /**
      * Connection handle
      *
@@ -69,7 +70,6 @@ public class BlueGigaFindByTypeValueCommand extends BlueGigaCommand {
     public void setConnection(int connection) {
         this.connection = connection;
     }
-
     /**
      * First requested handle number
      *
@@ -78,7 +78,6 @@ public class BlueGigaFindByTypeValueCommand extends BlueGigaCommand {
     public void setStart(int start) {
         this.start = start;
     }
-
     /**
      * Last requested handle number
      *
@@ -87,7 +86,6 @@ public class BlueGigaFindByTypeValueCommand extends BlueGigaCommand {
     public void setEnd(int end) {
         this.end = end;
     }
-
     /**
      * 2 octet UUID to find
      *
@@ -96,7 +94,6 @@ public class BlueGigaFindByTypeValueCommand extends BlueGigaCommand {
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
-
     /**
      * Attribute value to find
      *
@@ -105,7 +102,6 @@ public class BlueGigaFindByTypeValueCommand extends BlueGigaCommand {
     public void setValue(int[] value) {
         this.value = value;
     }
-
 
     @Override
     public int[] serialize() {

@@ -40,8 +40,23 @@ public class EirPacket {
         }
     }
 
+    /**
+     * Returns a map of all records decoded in the packet
+     * 
+     * @return {@link Map} of {@link EirDataType} to {@link Object}
+     */
     public Map<EirDataType, Object> getRecords() {
         return records;
+    }
+
+    /**
+     * Returns the specified record decoded in the packet or null if the record is not found
+     * 
+     * @param recordType the requested {@link EirDataType}
+     * @return {@link Map} of to {@link Object}
+     */
+    public Object getRecord(EirDataType recordType) {
+        return records.get(recordType);
     }
 
     @Override
@@ -52,5 +67,4 @@ public class EirPacket {
         builder.append(']');
         return builder.toString();
     }
-
 }

@@ -82,7 +82,6 @@ public class BlueGigaAttributeValueEvent extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * Attribute handle
      * <p>
@@ -93,7 +92,6 @@ public class BlueGigaAttributeValueEvent extends BlueGigaResponse {
     public int getAttHandle() {
         return attHandle;
     }
-
     /**
      * Attribute type
      * <p>
@@ -104,7 +102,6 @@ public class BlueGigaAttributeValueEvent extends BlueGigaResponse {
     public AttributeValueType getType() {
         return type;
     }
-
     /**
      * Attribute value (data)
      * <p>
@@ -115,7 +112,6 @@ public class BlueGigaAttributeValueEvent extends BlueGigaResponse {
     public int[] getValue() {
         return value;
     }
-
 
     @Override
     public String toString() {

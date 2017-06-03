@@ -74,7 +74,6 @@ public class BlueGigaFindInformationFoundEvent extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * Characteristics handle
      * <p>
@@ -85,7 +84,6 @@ public class BlueGigaFindInformationFoundEvent extends BlueGigaResponse {
     public int getChrHandle() {
         return chrHandle;
     }
-
     /**
      * Characteristics type (UUID)
      * <p>
@@ -96,7 +94,6 @@ public class BlueGigaFindInformationFoundEvent extends BlueGigaResponse {
     public UUID getUuid() {
         return uuid;
     }
-
 
     @Override
     public String toString() {

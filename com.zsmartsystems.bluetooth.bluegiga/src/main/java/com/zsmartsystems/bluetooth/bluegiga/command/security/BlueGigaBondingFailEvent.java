@@ -65,7 +65,6 @@ public class BlueGigaBondingFailEvent extends BlueGigaResponse {
     public int getHandle() {
         return handle;
     }
-
     /**
      * Encryption status, describes error that occurred during bonding. See: Security Manager
      * Protocol Errors
@@ -77,7 +76,6 @@ public class BlueGigaBondingFailEvent extends BlueGigaResponse {
     public BgApiResponse getResult() {
         return result;
     }
-
 
     @Override
     public String toString() {

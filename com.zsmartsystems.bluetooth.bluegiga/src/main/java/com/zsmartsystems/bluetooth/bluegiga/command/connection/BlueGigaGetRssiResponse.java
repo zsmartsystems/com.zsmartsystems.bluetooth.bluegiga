@@ -64,7 +64,6 @@ public class BlueGigaGetRssiResponse extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * RSSI value of the connection in dBm. Range: -103 to -38
      * <p>
@@ -75,7 +74,6 @@ public class BlueGigaGetRssiResponse extends BlueGigaResponse {
     public int getRssi() {
         return rssi;
     }
-
 
     @Override
     public String toString() {

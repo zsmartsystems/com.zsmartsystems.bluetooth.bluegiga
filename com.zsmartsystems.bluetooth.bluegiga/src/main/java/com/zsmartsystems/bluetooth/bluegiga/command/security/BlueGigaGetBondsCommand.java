@@ -27,6 +27,7 @@ public class BlueGigaGetBondsCommand extends BlueGigaCommand {
     public static int COMMAND_CLASS = 0x05;
     public static int COMMAND_METHOD = 0x05;
 
+
     @Override
     public int[] serialize() {
         // Serialize the header

@@ -40,6 +40,7 @@ public class BlueGigaEncryptStartCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>boolean</i> - Java type is {@link boolean}
      */
     private boolean bonding;
+
     /**
      * Bonding handle of a device. This handle can be obtained for example from events like: Scan
      * Response Status - If handle is 0xFF, all bondings will be deleted
@@ -49,7 +50,6 @@ public class BlueGigaEncryptStartCommand extends BlueGigaCommand {
     public void setHandle(int handle) {
         this.handle = handle;
     }
-
     /**
      * Create bonding if devices are not already bonded. 0: Do not create bonding. 1: Creating
      * bonding
@@ -59,7 +59,6 @@ public class BlueGigaEncryptStartCommand extends BlueGigaCommand {
     public void setBonding(boolean bonding) {
         this.bonding = bonding;
     }
-
 
     @Override
     public int[] serialize() {

@@ -60,7 +60,6 @@ public class BlueGigaSetAdvParametersResponse extends BlueGigaResponse {
         return result;
     }
 
-
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

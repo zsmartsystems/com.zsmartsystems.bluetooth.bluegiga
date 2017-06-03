@@ -56,6 +56,7 @@ public class BlueGigaReadByGroupTypeCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uuid</i> - Java type is {@link UUID}
      */
     private UUID uuid;
+
     /**
      * Connection handle
      *
@@ -64,7 +65,6 @@ public class BlueGigaReadByGroupTypeCommand extends BlueGigaCommand {
     public void setConnection(int connection) {
         this.connection = connection;
     }
-
     /**
      * First requested handle number
      *
@@ -73,7 +73,6 @@ public class BlueGigaReadByGroupTypeCommand extends BlueGigaCommand {
     public void setStart(int start) {
         this.start = start;
     }
-
     /**
      * Last requested handle number
      *
@@ -82,7 +81,6 @@ public class BlueGigaReadByGroupTypeCommand extends BlueGigaCommand {
     public void setEnd(int end) {
         this.end = end;
     }
-
     /**
      * Group UUID to find
      *
@@ -91,7 +89,6 @@ public class BlueGigaReadByGroupTypeCommand extends BlueGigaCommand {
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
-
 
     @Override
     public int[] serialize() {

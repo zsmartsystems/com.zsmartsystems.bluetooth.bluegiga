@@ -91,6 +91,9 @@ public class BlueGigaSerialHandler {
                 while (!close) {
                     try {
                         int val = inputStream.read();
+                        if (val == -1) {
+                            continue;
+                        }
                         // logger.debug("BLE RX: " + String.format("%02X", val));
 
                         inputBuffer[inputCount++] = val;

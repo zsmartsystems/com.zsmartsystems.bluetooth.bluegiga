@@ -35,6 +35,7 @@ public class BlueGigaDiscoverCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>GapDiscoverMode</i> - Java type is {@link GapDiscoverMode}
      */
     private GapDiscoverMode mode;
+
     /**
      * see:GAP Discover Mode.
      *
@@ -43,7 +44,6 @@ public class BlueGigaDiscoverCommand extends BlueGigaCommand {
     public void setMode(GapDiscoverMode mode) {
         this.mode = mode;
     }
-
 
     @Override
     public int[] serialize() {

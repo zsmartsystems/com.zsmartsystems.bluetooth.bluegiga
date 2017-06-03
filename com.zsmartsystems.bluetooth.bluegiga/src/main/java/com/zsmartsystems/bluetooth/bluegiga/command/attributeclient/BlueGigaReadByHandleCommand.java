@@ -39,6 +39,7 @@ public class BlueGigaReadByHandleCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
     private int chrHandle;
+
     /**
      * Connection handle
      *
@@ -47,7 +48,6 @@ public class BlueGigaReadByHandleCommand extends BlueGigaCommand {
     public void setConnection(int connection) {
         this.connection = connection;
     }
-
     /**
      * Attribute handle
      *
@@ -56,7 +56,6 @@ public class BlueGigaReadByHandleCommand extends BlueGigaCommand {
     public void setChrHandle(int chrHandle) {
         this.chrHandle = chrHandle;
     }
-
 
     @Override
     public int[] serialize() {

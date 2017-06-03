@@ -46,6 +46,7 @@ public class BlueGigaFindInformationCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
     private int end;
+
     /**
      * Connection handle
      *
@@ -54,7 +55,6 @@ public class BlueGigaFindInformationCommand extends BlueGigaCommand {
     public void setConnection(int connection) {
         this.connection = connection;
     }
-
     /**
      * First attribute handle
      *
@@ -63,7 +63,6 @@ public class BlueGigaFindInformationCommand extends BlueGigaCommand {
     public void setStart(int start) {
         this.start = start;
     }
-
     /**
      * Last attribute handle
      *
@@ -72,7 +71,6 @@ public class BlueGigaFindInformationCommand extends BlueGigaCommand {
     public void setEnd(int end) {
         this.end = end;
     }
-
 
     @Override
     public int[] serialize() {

@@ -65,7 +65,6 @@ public class BlueGigaFindByTypeValueResponse extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * 0 : the operation was successful. Otherwise error occurred
      * <p>
@@ -76,7 +75,6 @@ public class BlueGigaFindByTypeValueResponse extends BlueGigaResponse {
     public BgApiResponse getResult() {
         return result;
     }
-
 
     @Override
     public String toString() {

@@ -36,6 +36,7 @@ public class BlueGigaWhitelistAppendCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>bd_addr</i> - Java type is {@link String}
      */
     private String address;
+
     /**
      * Bluetooth device address to add to the running white list. Maximum of 8 can be stored before
      * you must clear or remove entries.
@@ -45,7 +46,6 @@ public class BlueGigaWhitelistAppendCommand extends BlueGigaCommand {
     public void setAddress(String address) {
         this.address = address;
     }
-
 
     @Override
     public int[] serialize() {

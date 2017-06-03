@@ -60,7 +60,6 @@ public class BlueGigaProtocolErrorEvent extends BlueGigaResponse {
         return reason;
     }
 
-
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

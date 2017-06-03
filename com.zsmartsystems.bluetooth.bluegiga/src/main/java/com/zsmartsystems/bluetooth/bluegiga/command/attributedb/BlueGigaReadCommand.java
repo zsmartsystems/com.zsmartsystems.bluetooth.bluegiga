@@ -40,6 +40,7 @@ public class BlueGigaReadCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
     private int offset;
+
     /**
      * Handle of the attribute to read
      *
@@ -48,7 +49,6 @@ public class BlueGigaReadCommand extends BlueGigaCommand {
     public void setHandle(int handle) {
         this.handle = handle;
     }
-
     /**
      * Offset to read from. Maximum of 32 bytes can be read at a time.
      *
@@ -57,7 +57,6 @@ public class BlueGigaReadCommand extends BlueGigaCommand {
     public void setOffset(int offset) {
         this.offset = offset;
     }
-
 
     @Override
     public int[] serialize() {

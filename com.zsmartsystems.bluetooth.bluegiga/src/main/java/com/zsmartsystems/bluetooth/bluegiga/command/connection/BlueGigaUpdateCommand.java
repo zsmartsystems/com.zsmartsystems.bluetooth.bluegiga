@@ -65,6 +65,7 @@ public class BlueGigaUpdateCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
     private int timeout;
+
     /**
      * Connection handle.
      *
@@ -73,7 +74,6 @@ public class BlueGigaUpdateCommand extends BlueGigaCommand {
     public void setConnection(int connection) {
         this.connection = connection;
     }
-
     /**
      * Minimum connection interval (units of 1.25ms)
      *
@@ -82,7 +82,6 @@ public class BlueGigaUpdateCommand extends BlueGigaCommand {
     public void setIntervalMin(int intervalMin) {
         this.intervalMin = intervalMin;
     }
-
     /**
      * Maximum connection interval (units of 1.25ms)
      *
@@ -91,7 +90,6 @@ public class BlueGigaUpdateCommand extends BlueGigaCommand {
     public void setIntervalMax(int intervalMax) {
         this.intervalMax = intervalMax;
     }
-
     /**
      * Slave latency which defines how many connections intervals a slave may skip.
      *
@@ -100,7 +98,6 @@ public class BlueGigaUpdateCommand extends BlueGigaCommand {
     public void setLatency(int latency) {
         this.latency = latency;
     }
-
     /**
      * Supervision timeout (units of 10ms)
      *
@@ -109,7 +106,6 @@ public class BlueGigaUpdateCommand extends BlueGigaCommand {
     public void setTimeout(int timeout) {
         this.timeout = timeout;
     }
-
 
     @Override
     public int[] serialize() {

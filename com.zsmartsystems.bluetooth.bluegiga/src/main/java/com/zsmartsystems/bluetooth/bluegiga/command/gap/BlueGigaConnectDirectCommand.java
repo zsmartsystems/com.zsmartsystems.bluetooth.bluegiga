@@ -88,6 +88,7 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint16</i> - Java type is {@link int}
      */
     private int latency;
+
     /**
      * Bluetooth address of the target device.
      *
@@ -96,7 +97,6 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
     public void setAddress(String address) {
         this.address = address;
     }
-
     /**
      * see: Bluetooth Address Types.
      *
@@ -105,7 +105,6 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
     public void setAddrType(BluetoothAddressType addrType) {
         this.addrType = addrType;
     }
-
     /**
      * Minimum Connection Interval (in units of 1.25ms). Range: 6 - 3200 The lowest possible
      * Connection Interval is 7.50ms and the largest is 4000ms.
@@ -115,7 +114,6 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
     public void setConnIntervalMin(int connIntervalMin) {
         this.connIntervalMin = connIntervalMin;
     }
-
     /**
      * Maximum Connection Interval (in units of 1.25ms). Range: 6 - 3200 Must be equal or bigger than
      * minimum Connection Interval.
@@ -125,7 +123,6 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
     public void setConnIntervalMax(int connIntervalMax) {
         this.connIntervalMax = connIntervalMax;
     }
-
     /**
      * Supervision Timeout (in units of 10ms). The Supervision Timeout defines how long the
      * devices can be out of range before the connection is closed. Range: 10 - 3200 Minimum time for
@@ -138,7 +135,6 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
     public void setTimeout(int timeout) {
         this.timeout = timeout;
     }
-
     /**
      * This parameter configures the slave latency. Slave latency defines how many connection
      * intervals a slave device can skip. Increasing slave latency will decrease the energy
@@ -152,7 +148,6 @@ public class BlueGigaConnectDirectCommand extends BlueGigaCommand {
     public void setLatency(int latency) {
         this.latency = latency;
     }
-
 
     @Override
     public int[] serialize() {

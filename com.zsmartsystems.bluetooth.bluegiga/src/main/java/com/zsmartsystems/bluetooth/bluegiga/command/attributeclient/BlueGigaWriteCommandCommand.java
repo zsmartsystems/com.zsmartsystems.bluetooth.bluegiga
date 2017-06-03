@@ -46,6 +46,7 @@ public class BlueGigaWriteCommandCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint8array</i> - Java type is {@link int[]}
      */
     private int[] data;
+
     /**
      * Connection handle
      *
@@ -54,7 +55,6 @@ public class BlueGigaWriteCommandCommand extends BlueGigaCommand {
     public void setConnection(int connection) {
         this.connection = connection;
     }
-
     /**
      * Attribute handle to write
      *
@@ -63,7 +63,6 @@ public class BlueGigaWriteCommandCommand extends BlueGigaCommand {
     public void setAttHandle(int attHandle) {
         this.attHandle = attHandle;
     }
-
     /**
      * Value for the attribute
      *
@@ -72,7 +71,6 @@ public class BlueGigaWriteCommandCommand extends BlueGigaCommand {
     public void setData(int[] data) {
         this.data = data;
     }
-
 
     @Override
     public int[] serialize() {

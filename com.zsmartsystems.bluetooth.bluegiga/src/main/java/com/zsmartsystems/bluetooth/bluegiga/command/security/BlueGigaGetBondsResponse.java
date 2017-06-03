@@ -58,7 +58,6 @@ public class BlueGigaGetBondsResponse extends BlueGigaResponse {
         return bonds;
     }
 
-
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

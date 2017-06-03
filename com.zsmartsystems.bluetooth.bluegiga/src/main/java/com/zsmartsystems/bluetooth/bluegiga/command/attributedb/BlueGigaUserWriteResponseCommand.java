@@ -45,6 +45,7 @@ public class BlueGigaUserWriteResponseCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
      */
     private int attError;
+
     /**
      * Connection handle to response to.
      *
@@ -53,7 +54,6 @@ public class BlueGigaUserWriteResponseCommand extends BlueGigaCommand {
     public void setConnection(int connection) {
         this.connection = connection;
     }
-
     /**
      * 0: User Read Request is responded with data. In case of an error an application specific error
      * code can be sent.
@@ -63,7 +63,6 @@ public class BlueGigaUserWriteResponseCommand extends BlueGigaCommand {
     public void setAttError(int attError) {
         this.attError = attError;
     }
-
 
     @Override
     public int[] serialize() {

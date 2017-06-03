@@ -99,7 +99,6 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
     public int getRssi() {
         return rssi;
     }
-
     /**
      * Scan response header. 0: Connectable Advertisement packet. 2: Non Connectable
      * Advertisement packet. 4: Scan response packet. 6: Discoverable advertisement packet
@@ -111,7 +110,6 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
     public ScanResponseType getPacketType() {
         return packetType;
     }
-
     /**
      * Advertisers address
      * <p>
@@ -122,7 +120,6 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
     public String getSender() {
         return sender;
     }
-
     /**
      * Advertiser address type. 1: random address. 0: public address
      * <p>
@@ -133,7 +130,6 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
     public BluetoothAddressType getAddressType() {
         return addressType;
     }
-
     /**
      * Bond handle if there is known bond for this device, 0xff otherwise
      * <p>
@@ -144,7 +140,6 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
     public int getBond() {
         return bond;
     }
-
     /**
      * Scan response data
      * <p>
@@ -155,7 +150,6 @@ public class BlueGigaScanResponseEvent extends BlueGigaResponse {
     public int[] getData() {
         return data;
     }
-
 
     @Override
     public String toString() {

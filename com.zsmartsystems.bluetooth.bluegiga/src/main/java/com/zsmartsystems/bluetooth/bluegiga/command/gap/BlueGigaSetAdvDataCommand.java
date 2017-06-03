@@ -43,6 +43,7 @@ public class BlueGigaSetAdvDataCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint8array</i> - Java type is {@link int[]}
      */
     private int[] advData;
+
     /**
      * Advertisement data type. 0 : sets advertisement data. 1 : sets scan response data
      *
@@ -51,7 +52,6 @@ public class BlueGigaSetAdvDataCommand extends BlueGigaCommand {
     public void setSetScanrsp(int setScanrsp) {
         this.setScanrsp = setScanrsp;
     }
-
     /**
      * Advertisement data to send
      *
@@ -60,7 +60,6 @@ public class BlueGigaSetAdvDataCommand extends BlueGigaCommand {
     public void setAdvData(int[] advData) {
         this.advData = advData;
     }
-
 
     @Override
     public int[] serialize() {

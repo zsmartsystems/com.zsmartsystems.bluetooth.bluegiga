@@ -103,7 +103,6 @@ public class BlueGigaGetInfoResponse extends BlueGigaResponse {
     public int getMajor() {
         return major;
     }
-
     /**
      * Minor software version
      * <p>
@@ -114,7 +113,6 @@ public class BlueGigaGetInfoResponse extends BlueGigaResponse {
     public int getMinor() {
         return minor;
     }
-
     /**
      * Patch ID
      * <p>
@@ -125,7 +123,6 @@ public class BlueGigaGetInfoResponse extends BlueGigaResponse {
     public int getPatch() {
         return patch;
     }
-
     /**
      * Build version
      * <p>
@@ -136,7 +133,6 @@ public class BlueGigaGetInfoResponse extends BlueGigaResponse {
     public int getBuild() {
         return build;
     }
-
     /**
      * Link layer version
      * <p>
@@ -147,7 +143,6 @@ public class BlueGigaGetInfoResponse extends BlueGigaResponse {
     public int getLlVersion() {
         return llVersion;
     }
-
     /**
      * Protocol version
      * <p>
@@ -158,7 +153,6 @@ public class BlueGigaGetInfoResponse extends BlueGigaResponse {
     public int getProtocolVersion() {
         return protocolVersion;
     }
-
     /**
      * Hardware version
      * <p>
@@ -169,7 +163,6 @@ public class BlueGigaGetInfoResponse extends BlueGigaResponse {
     public int getHardware() {
         return hardware;
     }
-
 
     @Override
     public String toString() {

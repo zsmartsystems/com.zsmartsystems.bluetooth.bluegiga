@@ -65,7 +65,6 @@ public class BlueGigaReadByHandleResponse extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * 0 : the command was successful. Otherwise an error occurred
      * <p>
@@ -76,7 +75,6 @@ public class BlueGigaReadByHandleResponse extends BlueGigaResponse {
     public BgApiResponse getResult() {
         return result;
     }
-
 
     @Override
     public String toString() {

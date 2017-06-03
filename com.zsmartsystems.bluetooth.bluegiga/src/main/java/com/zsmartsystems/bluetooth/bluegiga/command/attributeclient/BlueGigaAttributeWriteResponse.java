@@ -66,7 +66,6 @@ public class BlueGigaAttributeWriteResponse extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * 0 : write was successful. Otherwise error occurred
      * <p>
@@ -77,7 +76,6 @@ public class BlueGigaAttributeWriteResponse extends BlueGigaResponse {
     public BgApiResponse getResult() {
         return result;
     }
-
 
     @Override
     public String toString() {

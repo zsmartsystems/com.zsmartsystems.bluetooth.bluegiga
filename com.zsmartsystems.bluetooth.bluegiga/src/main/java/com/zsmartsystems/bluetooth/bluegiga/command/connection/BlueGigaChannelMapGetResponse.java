@@ -64,7 +64,6 @@ public class BlueGigaChannelMapGetResponse extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * Current Channel Map. Each bit corresponds to one channel. 0-bit corresponds to 0 channel.
      * Size of Channel Map is 5 bytes. Channel range: 0-36
@@ -76,7 +75,6 @@ public class BlueGigaChannelMapGetResponse extends BlueGigaResponse {
     public int[] getMap() {
         return map;
     }
-
 
     @Override
     public String toString() {

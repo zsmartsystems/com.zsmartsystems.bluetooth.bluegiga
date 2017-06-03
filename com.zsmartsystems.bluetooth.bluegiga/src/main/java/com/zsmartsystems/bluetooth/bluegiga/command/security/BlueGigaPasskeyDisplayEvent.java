@@ -64,7 +64,6 @@ public class BlueGigaPasskeyDisplayEvent extends BlueGigaResponse {
     public int getHandle() {
         return handle;
     }
-
     /**
      * Passkey range: 000000-999999
      * <p>
@@ -75,7 +74,6 @@ public class BlueGigaPasskeyDisplayEvent extends BlueGigaResponse {
     public long getPasskey() {
         return passkey;
     }
-
 
     @Override
     public String toString() {

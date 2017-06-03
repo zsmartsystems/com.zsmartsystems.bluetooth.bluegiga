@@ -48,6 +48,7 @@ public class BlueGigaSetParametersCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>SmpIoCapabilities</i> - Java type is {@link SmpIoCapabilities}
      */
     private SmpIoCapabilities ioCapabilities;
+
     /**
      * 1: Man-in-the-middle protection required. 0: No Man-in-the-middle protection. Default:
      * 0
@@ -57,7 +58,6 @@ public class BlueGigaSetParametersCommand extends BlueGigaCommand {
     public void setRequireMitm(boolean requireMitm) {
         this.requireMitm = requireMitm;
     }
-
     /**
      * Minimum key size in Bytes. Range: 7-16. Default: 7 (56bits)
      *
@@ -66,7 +66,6 @@ public class BlueGigaSetParametersCommand extends BlueGigaCommand {
     public void setMinKeySize(int minKeySize) {
         this.minKeySize = minKeySize;
     }
-
     /**
      * Configures the local devices I/O capabilities. See: SMP IO Capabilities for options.
      * Default: No Input and No Output
@@ -76,7 +75,6 @@ public class BlueGigaSetParametersCommand extends BlueGigaCommand {
     public void setIoCapabilities(SmpIoCapabilities ioCapabilities) {
         this.ioCapabilities = ioCapabilities;
     }
-
 
     @Override
     public int[] serialize() {

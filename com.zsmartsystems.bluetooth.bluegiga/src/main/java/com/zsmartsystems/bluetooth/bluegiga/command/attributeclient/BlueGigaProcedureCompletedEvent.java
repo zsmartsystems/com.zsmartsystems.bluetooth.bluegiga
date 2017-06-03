@@ -74,7 +74,6 @@ public class BlueGigaProcedureCompletedEvent extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * 0: The operation was successful. Otherwise: attribute protocol error code returned by
      * remote device
@@ -86,7 +85,6 @@ public class BlueGigaProcedureCompletedEvent extends BlueGigaResponse {
     public BgApiResponse getResult() {
         return result;
     }
-
     /**
      * Characteristic handle at which the event ended
      * <p>
@@ -97,7 +95,6 @@ public class BlueGigaProcedureCompletedEvent extends BlueGigaResponse {
     public int getChrHandle() {
         return chrHandle;
     }
-
 
     @Override
     public String toString() {

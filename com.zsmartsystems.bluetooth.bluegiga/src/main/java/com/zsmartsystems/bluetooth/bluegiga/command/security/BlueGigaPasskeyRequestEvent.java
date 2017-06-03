@@ -58,7 +58,6 @@ public class BlueGigaPasskeyRequestEvent extends BlueGigaResponse {
         return handle;
     }
 
-
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

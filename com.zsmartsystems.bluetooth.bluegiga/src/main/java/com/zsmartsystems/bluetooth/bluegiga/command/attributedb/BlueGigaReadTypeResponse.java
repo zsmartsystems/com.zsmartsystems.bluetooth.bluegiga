@@ -72,7 +72,6 @@ public class BlueGigaReadTypeResponse extends BlueGigaResponse {
     public int getHandle() {
         return handle;
     }
-
     /**
      * 0 : the command was successful. Otherwise an error occurred
      * <p>
@@ -83,7 +82,6 @@ public class BlueGigaReadTypeResponse extends BlueGigaResponse {
     public BgApiResponse getResult() {
         return result;
     }
-
     /**
      * Value of the attribute type (UUID)
      * <p>
@@ -94,7 +92,6 @@ public class BlueGigaReadTypeResponse extends BlueGigaResponse {
     public int[] getValue() {
         return value;
     }
-
 
     @Override
     public String toString() {

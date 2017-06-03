@@ -32,6 +32,7 @@ public class BlueGigaWhitelistRemoveCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>bd_addr</i> - Java type is {@link String}
      */
     private String address;
+
     /**
      * Bluetooth device address to remove from the running white list.
      *
@@ -40,7 +41,6 @@ public class BlueGigaWhitelistRemoveCommand extends BlueGigaCommand {
     public void setAddress(String address) {
         this.address = address;
     }
-
 
     @Override
     public int[] serialize() {

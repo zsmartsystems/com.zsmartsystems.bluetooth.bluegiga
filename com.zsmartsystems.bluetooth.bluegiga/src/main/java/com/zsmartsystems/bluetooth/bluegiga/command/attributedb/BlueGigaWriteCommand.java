@@ -45,6 +45,7 @@ public class BlueGigaWriteCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint8array</i> - Java type is {@link int[]}
      */
     private int[] value;
+
     /**
      * Handle of the attribute to write.
      *
@@ -53,7 +54,6 @@ public class BlueGigaWriteCommand extends BlueGigaCommand {
     public void setHandle(int handle) {
         this.handle = handle;
     }
-
     /**
      * Attribute offset to write data
      *
@@ -62,7 +62,6 @@ public class BlueGigaWriteCommand extends BlueGigaCommand {
     public void setOffset(int offset) {
         this.offset = offset;
     }
-
     /**
      * Value of the attribute to write
      *
@@ -71,7 +70,6 @@ public class BlueGigaWriteCommand extends BlueGigaCommand {
     public void setValue(int[] value) {
         this.value = value;
     }
-
 
     @Override
     public int[] serialize() {

@@ -68,7 +68,6 @@ public class BlueGigaPrepareWriteResponse extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * Command result.
      * <p>
@@ -79,7 +78,6 @@ public class BlueGigaPrepareWriteResponse extends BlueGigaResponse {
     public BgApiResponse getResult() {
         return result;
     }
-
 
     @Override
     public String toString() {

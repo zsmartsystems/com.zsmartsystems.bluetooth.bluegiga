@@ -66,7 +66,6 @@ public class BlueGigaEndpointWatermarkTxEvent extends BlueGigaResponse {
     public int getEndpoint() {
         return endpoint;
     }
-
     /**
      * Space available
      * <p>
@@ -77,7 +76,6 @@ public class BlueGigaEndpointWatermarkTxEvent extends BlueGigaResponse {
     public int getData() {
         return data;
     }
-
 
     @Override
     public String toString() {

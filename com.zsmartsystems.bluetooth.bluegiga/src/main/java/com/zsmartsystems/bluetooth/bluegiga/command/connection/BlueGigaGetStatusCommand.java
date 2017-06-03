@@ -31,6 +31,7 @@ public class BlueGigaGetStatusCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
      */
     private int connection;
+
     /**
      * Connection handle to close.
      *
@@ -39,7 +40,6 @@ public class BlueGigaGetStatusCommand extends BlueGigaCommand {
     public void setConnection(int connection) {
         this.connection = connection;
     }
-
 
     @Override
     public int[] serialize() {

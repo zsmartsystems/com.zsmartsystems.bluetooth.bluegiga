@@ -53,9 +53,10 @@ public class BlueGigaSetScanParametersCommand extends BlueGigaCommand {
      * will send a scan request packet to the advertiser to try and read the scan response data. 0:
      * Passive scanning is used. No scan request is made.
      * <p>
-     * BlueGiga API type is <i>uint8</i> - Java type is {@link int}
+     * BlueGiga API type is <i>boolean</i> - Java type is {@link boolean}
      */
-    private int active;
+    private boolean activeScanning;
+
     /**
      * Scan interval defines the interval when scanning is re-started in units of 625us. Range: 0x4
      * - 0x4000. Default: (46,875ms) 0x4B After every scan interval the scanner will change the
@@ -68,7 +69,6 @@ public class BlueGigaSetScanParametersCommand extends BlueGigaCommand {
     public void setScanInterval(int scanInterval) {
         this.scanInterval = scanInterval;
     }
-
     /**
      * Scan Window defines how long time the scanner will listen on a certain frequency and try to
      * pick up advertisement packets. Scan window is defined as units of 625us. Range: 0x4 - 0x4000.
@@ -82,18 +82,16 @@ public class BlueGigaSetScanParametersCommand extends BlueGigaCommand {
     public void setScanWindow(int scanWindow) {
         this.scanWindow = scanWindow;
     }
-
     /**
      * 1: Active scanning is used. When an advertisement packet is received the Bluetooth stack
      * will send a scan request packet to the advertiser to try and read the scan response data. 0:
      * Passive scanning is used. No scan request is made.
      *
-     * @param active the active to set as {@link int}
+     * @param activeScanning the activeScanning to set as {@link boolean}
      */
-    public void setActive(int active) {
-        this.active = active;
+    public void setActiveScanning(boolean activeScanning) {
+        this.activeScanning = activeScanning;
     }
-
 
     @Override
     public int[] serialize() {
@@ -103,7 +101,7 @@ public class BlueGigaSetScanParametersCommand extends BlueGigaCommand {
         // Serialize the fields
         serializeUInt16(scanInterval);
         serializeUInt16(scanWindow);
-        serializeUInt8(active);
+        serializeBoolean(activeScanning);
 
         return getPayload();
     }
@@ -115,8 +113,8 @@ public class BlueGigaSetScanParametersCommand extends BlueGigaCommand {
         builder.append(scanInterval);
         builder.append(", scanWindow=");
         builder.append(scanWindow);
-        builder.append(", active=");
-        builder.append(active);
+        builder.append(", activeScanning=");
+        builder.append(activeScanning);
         builder.append(']');
         return builder.toString();
     }

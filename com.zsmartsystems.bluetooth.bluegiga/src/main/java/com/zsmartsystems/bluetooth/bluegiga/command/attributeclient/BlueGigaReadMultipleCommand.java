@@ -38,6 +38,7 @@ public class BlueGigaReadMultipleCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint8array</i> - Java type is {@link int[]}
      */
     private int[] handles;
+
     /**
      * Connection handle
      *
@@ -46,7 +47,6 @@ public class BlueGigaReadMultipleCommand extends BlueGigaCommand {
     public void setConnection(int connection) {
         this.connection = connection;
     }
-
     /**
      * List of attribute handles to read from the remote device
      *
@@ -55,7 +55,6 @@ public class BlueGigaReadMultipleCommand extends BlueGigaCommand {
     public void setHandles(int[] handles) {
         this.handles = handles;
     }
-
 
     @Override
     public int[] serialize() {

@@ -66,7 +66,6 @@ public class BlueGigaAttributeStatusEvent extends BlueGigaResponse {
     public int getHandle() {
         return handle;
     }
-
     /**
      * Attribute status flags. See: Attribute Status Flags
      * <p>
@@ -77,7 +76,6 @@ public class BlueGigaAttributeStatusEvent extends BlueGigaResponse {
     public int getFlags() {
         return flags;
     }
-
 
     @Override
     public String toString() {

@@ -54,6 +54,7 @@ public class BlueGigaReadByTypeCommand extends BlueGigaCommand {
      * BlueGiga API type is <i>uint8array</i> - Java type is {@link int[]}
      */
     private int[] uint8array;
+
     /**
      * Connection handle
      *
@@ -62,7 +63,6 @@ public class BlueGigaReadByTypeCommand extends BlueGigaCommand {
     public void setConnection(int connection) {
         this.connection = connection;
     }
-
     /**
      * First attribute handle
      *
@@ -71,7 +71,6 @@ public class BlueGigaReadByTypeCommand extends BlueGigaCommand {
     public void setStart(int start) {
         this.start = start;
     }
-
     /**
      * Last attribute handle
      *
@@ -80,7 +79,6 @@ public class BlueGigaReadByTypeCommand extends BlueGigaCommand {
     public void setEnd(int end) {
         this.end = end;
     }
-
     /**
      * Attribute type (UUID)
      *
@@ -89,7 +87,6 @@ public class BlueGigaReadByTypeCommand extends BlueGigaCommand {
     public void setUint8array(int[] uint8array) {
         this.uint8array = uint8array;
     }
-
 
     @Override
     public int[] serialize() {

@@ -82,7 +82,6 @@ public class BlueGigaUserReadRequestEvent extends BlueGigaResponse {
     public int getConnection() {
         return connection;
     }
-
     /**
      * Attribute handle requested
      * <p>
@@ -93,7 +92,6 @@ public class BlueGigaUserReadRequestEvent extends BlueGigaResponse {
     public int getHandle() {
         return handle;
     }
-
     /**
      * Attribute offset to send data from
      * <p>
@@ -104,7 +102,6 @@ public class BlueGigaUserReadRequestEvent extends BlueGigaResponse {
     public int getOffset() {
         return offset;
     }
-
     /**
      * Maximum data size to respond with. If more data is sent than indicated by this parameter, the
      * extra bytes will be ignored.
@@ -116,7 +113,6 @@ public class BlueGigaUserReadRequestEvent extends BlueGigaResponse {
     public int getMaxsize() {
         return maxsize;
     }
-
 
     @Override
     public String toString() {
