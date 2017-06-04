@@ -214,6 +214,11 @@ public enum BgApiResponse {
     REMOTE_USER_TERMINATED(0x0213),
 
     /**
+     * [532] The remote device terminated the connection because of low resources
+     */
+    REMOTE_DEVICE_TERMINATED_CONNECTION_LOW_RESOURCES(0x0214),
+
+    /**
      * [533] Remote Device Terminated Connection due to Power Off
      */
     REMOTE_POWERING_OFF(0x0215),
@@ -224,10 +229,69 @@ public enum BgApiResponse {
     CONNECTION_TERMINATED_BY_LOCAL_HOST(0x0216),
 
     /**
+     * [535] The Controller is disallowing an authentication or pairing procedure because too
+     * little time has elapsed since the last authentication or pairing attempt failed.
+     */
+    REPEATED_ATTEMPTS(0x0217),
+
+    /**
      * [536] The device does not allow pairing. This can be for example, when a device only allows
      * pairing during a certain time window after some user input allows pairing
      */
     PAIRING_NOT_ALLOWED(0x0218),
+
+    /**
+     * [537] The Controller has received an unknown LMP OpCode.
+     */
+    UNKNOWN_LMP_PDU(0x0219),
+
+    /**
+     * [538] The remote device does not support the feature associated with the issued command or
+     * LMP PDU.
+     */
+    UNSUPPORTED_REMOTE_FEATURE(0x021A),
+
+    /**
+     * [569] The Controller could not calculate an appropriate value for the Channel selection
+     * operation.
+     */
+    CONNECTION_REJECTED_NO_SUITABLE_CHANNEL(0x0239),
+
+    /**
+     * [570] Operation was rejected because the controller is busy and unable to process the
+     * request.
+     */
+    CONTROLLER_BUSY(0x023A),
+
+    /**
+     * [571] Remote device terminated the connection because of an unacceptable connection
+     * interval.
+     */
+    UNACCEPTABLE_CONNECTION_INTERVAL(0x023B),
+
+    /**
+     * [573] Connection was terminated because the Message Integrity Check (MIC) failed on a
+     * received packet.
+     */
+    CONNECTION_TERMINATED_DUE_TO_MIC_FAILURE(0x023D),
+
+    /**
+     * [574] LL initiated a connection but the connection has failed to be established. Controller
+     * did not receive any packets from remote end.
+     */
+    CONNECTION_FAILED_TO_BE_ESTABLISHED(0x023E),
+
+    /**
+     * [575] The MAC of the 802.11 AMP was requested to connect to a peer, but the connection failed.
+     */
+    MAC_CONNECTION_FAILED(0x023F),
+
+    /**
+     * [576] The master, at this time, is unable to make a coarse adjustment to the piconet clock,
+     * using the supplied parameters. Instead the master will attempt to move the clock using clock
+     * dragging.
+     */
+    COARSE_CLOCK_ADJUSTMENT_REJECTED(0x0240),
 
     /**
      * [769] The user input of passkey failed, for example, the user cancelled the operation

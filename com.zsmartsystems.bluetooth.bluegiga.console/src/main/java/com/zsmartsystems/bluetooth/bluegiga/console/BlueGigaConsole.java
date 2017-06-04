@@ -508,7 +508,7 @@ public final class BlueGigaConsole implements BlueGigaEventListener {
 
             BlueGigaConnectDirectCommand connect = new BlueGigaConnectDirectCommand();
             connect.setAddress(address);
-            connect.setAddrType(BluetoothAddressType.GAP_ADDRESS_TYPE_RANDOM);
+            connect.setAddrType(BluetoothAddressType.GAP_ADDRESS_TYPE_PUBLIC);// .GAP_ADDRESS_TYPE_RANDOM);
             connect.setConnIntervalMin(connIntervalMin);
             connect.setConnIntervalMax(connIntervalMax);
             connect.setLatency(latency);
