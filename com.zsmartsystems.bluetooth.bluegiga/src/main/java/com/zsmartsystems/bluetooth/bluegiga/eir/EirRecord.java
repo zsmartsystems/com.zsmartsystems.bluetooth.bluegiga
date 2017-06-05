@@ -1,6 +1,7 @@
 package com.zsmartsystems.bluetooth.bluegiga.eir;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,6 +24,9 @@ public class EirRecord {
         switch (type) {
             case EIR_FLAGS:
                 record = processFlags(data);
+                break;
+            case EIR_MANUFACTURER_SPECIFIC:
+                record = processManufacturer(data);
                 break;
             case EIR_SVC_UUID16_COMPLETE:
             case EIR_SVC_UUID16_INCOMPLETE:
@@ -50,6 +54,10 @@ public class EirRecord {
                 record = processUnknown(data);
                 break;
         }
+    }
+
+    private int[] processManufacturer(int[] data) {
+        return Arrays.copyOfRange(data, 1, data.length);
     }
 
     private List<UUID> processUuid16(int[] data) {

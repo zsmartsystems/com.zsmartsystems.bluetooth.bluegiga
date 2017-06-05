@@ -252,6 +252,12 @@ public enum BgApiResponse {
     UNSUPPORTED_REMOTE_FEATURE(0x021A),
 
     /**
+     * [560] A parameter value requested is outside the mandatory range of parameters for the given
+     * HCI command or LMP PDU.
+     */
+    PARAMETER_OUT_OF_MANDATORY_RANGE(0x0230),
+
+    /**
      * [569] The Controller could not calculate an appropriate value for the Channel selection
      * operation.
      */
