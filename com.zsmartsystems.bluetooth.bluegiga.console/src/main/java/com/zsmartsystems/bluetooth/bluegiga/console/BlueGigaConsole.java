@@ -87,6 +87,7 @@ public final class BlueGigaConsole implements BlueGigaEventListener {
         commands.put("disconnect", new DisconnectCommand());
         commands.put("discover", new DiscoverCommand());
         commands.put("find", new FindCommand());
+        commands.put("groups", new GroupsCommand());
         commands.put("info", new GetInfoCommand());
         commands.put("read", new ReadCommand());
         commands.put("readgroup", new ReadGroupCommand());
@@ -477,7 +478,7 @@ public final class BlueGigaConsole implements BlueGigaEventListener {
          */
         @Override
         public String getSyntax() {
-            return "connect address [direct]";
+            return "connect address [PUBLIC|RANDOM]";
         }
 
         /**
@@ -501,18 +502,28 @@ public final class BlueGigaConsole implements BlueGigaEventListener {
             int latency = 0;
             int timeout = 100;
 
-            // BlueGigaSetModeCommand modeCommand = new BlueGigaSetModeCommand();
-            // modeCommand.setConnect(GapConnectableMode.GAP_NON_CONNECTABLE);
-            // modeCommand.setDiscover(GapDiscoverableMode.GAP_NON_DISCOVERABLE);
-            // bleHandler.sendTransaction(modeCommand);
+            BluetoothAddressType addressType = BluetoothAddressType.GAP_ADDRESS_TYPE_PUBLIC;
+            if (args.length > 2) {
+                if (args[2].toLowerCase().equals("public")) {
+                    addressType = BluetoothAddressType.GAP_ADDRESS_TYPE_PUBLIC;
+                } else if (args[2].toLowerCase().equals("random")) {
+                    addressType = BluetoothAddressType.GAP_ADDRESS_TYPE_RANDOM;
+                }
+            }
+
+            BlueGigaSetModeCommand modeCommand = new BlueGigaSetModeCommand();
+            modeCommand.setConnect(GapConnectableMode.GAP_NON_CONNECTABLE);
+            modeCommand.setDiscover(GapDiscoverableMode.GAP_NON_DISCOVERABLE);
+            bleHandler.sendTransaction(modeCommand);
 
             BlueGigaConnectDirectCommand connect = new BlueGigaConnectDirectCommand();
             connect.setAddress(address);
-            connect.setAddrType(BluetoothAddressType.GAP_ADDRESS_TYPE_PUBLIC);// .GAP_ADDRESS_TYPE_RANDOM);
+            connect.setAddrType(addressType);
             connect.setConnIntervalMin(connIntervalMin);
             connect.setConnIntervalMax(connIntervalMax);
             connect.setLatency(latency);
             connect.setTimeout(timeout);
+
             BlueGigaConnectDirectResponse connectResponse = (BlueGigaConnectDirectResponse) bleHandler
                     .sendTransaction(connect);
             if (connectResponse.getResult() != BgApiResponse.SUCCESS) {
@@ -569,6 +580,57 @@ public final class BlueGigaConsole implements BlueGigaEventListener {
             info.setStart(1);
             info.setEnd(65535);
             bleHandler.sendTransaction(info);
+
+            return true;
+        }
+    }
+
+    private class GroupsCommand implements ConsoleCommand {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getDescription() {
+            return "get group info";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getSyntax() {
+            return "groups connection";
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean process(final String[] args, PrintStream out) throws Exception {
+            if (args.length < 2) {
+                return false;
+            }
+
+            String groupUUID = "00002800-0000-0000-0000-000000000000";
+            if (args.length > 2) {
+                if (args[2].toLowerCase().startsWith("pri")) {
+                    groupUUID = "00002800-0000-0000-0000-000000000000";
+                } else if (args[2].toLowerCase().startsWith("sec")) {
+                    groupUUID = "00002801-0000-0000-0000-000000000000";
+                }
+            }
+
+            int connection = Integer.parseInt(args[1]);
+            int start = 1;
+            int end = 0xffff;
+
+            BlueGigaReadByGroupTypeCommand command = new BlueGigaReadByGroupTypeCommand();
+            command.setConnection(connection);
+            command.setStart(start);
+            command.setEnd(end);
+            // command.setUuid(UUID.fromString("0000fff1-0000-1000-8000-00805f9b34fb"));
+            command.setUuid(UUID.fromString(groupUUID));
+            bleHandler.queueFrame(command);
 
             return true;
         }
