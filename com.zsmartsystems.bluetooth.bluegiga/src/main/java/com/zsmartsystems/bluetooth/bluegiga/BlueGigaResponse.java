@@ -113,7 +113,7 @@ public class BlueGigaResponse extends BlueGigaPacket {
     }
 
     public Set<ConnectionStatusFlag> deserializeConnectionStatusFlag() {
-        int val = deserializeUInt16();
+        int val = deserializeUInt8();
         Set<ConnectionStatusFlag> options = new HashSet<ConnectionStatusFlag>();
         for (ConnectionStatusFlag option : ConnectionStatusFlag.values()) {
             if (option == ConnectionStatusFlag.UNKNOWN) {
