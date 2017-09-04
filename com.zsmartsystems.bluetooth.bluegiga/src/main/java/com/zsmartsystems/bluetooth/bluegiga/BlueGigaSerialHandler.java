@@ -3,13 +3,13 @@ package com.zsmartsystems.bluetooth.bluegiga;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -60,12 +60,12 @@ public class BlueGigaSerialHandler {
     /**
      * Transaction listeners are used internally to correlate the commands and responses
      */
-    private final List<BleListener> transactionListeners = new ArrayList<BleListener>();
+    private final List<BleListener> transactionListeners = new CopyOnWriteArrayList<BleListener>();
 
     /**
      * The event listeners will be notified of any asynchronous events
      */
-    private final List<BlueGigaEventListener> eventListeners = new ArrayList<BlueGigaEventListener>();
+    private final List<BlueGigaEventListener> eventListeners = new CopyOnWriteArrayList<BlueGigaEventListener>();
 
     /**
      * Flag reflecting that parser has been closed and parser parserThread
@@ -394,15 +394,22 @@ public class BlueGigaSerialHandler {
 
     /**
      * Notify any transaction listeners when we receive a response.
+     * This uses a separate thread to separate the processing of the event.
      *
      * @param response
      *            the response data received
      * @return true if the response was processed
      */
     private void notifyEventListeners(final BlueGigaResponse response) {
-        synchronized (eventListeners) {
-            for (BlueGigaEventListener listener : eventListeners) {
-                listener.bluegigaEventReceived(response);
+        synchronized (this) {
+            // Notify the listeners
+            for (final BlueGigaEventListener listener : eventListeners) {
+                NotificationService.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        listener.bluegigaEventReceived(response);
+                    }
+                });
             }
         }
     }
