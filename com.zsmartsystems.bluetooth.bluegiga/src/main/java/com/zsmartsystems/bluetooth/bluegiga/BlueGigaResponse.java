@@ -1,15 +1,10 @@
 package com.zsmartsystems.bluetooth.bluegiga;
 
+import com.zsmartsystems.bluetooth.bluegiga.enumeration.*;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
-import com.zsmartsystems.bluetooth.bluegiga.enumeration.AttributeChangeReason;
-import com.zsmartsystems.bluetooth.bluegiga.enumeration.AttributeValueType;
-import com.zsmartsystems.bluetooth.bluegiga.enumeration.BgApiResponse;
-import com.zsmartsystems.bluetooth.bluegiga.enumeration.BluetoothAddressType;
-import com.zsmartsystems.bluetooth.bluegiga.enumeration.ConnectionStatusFlag;
-import com.zsmartsystems.bluetooth.bluegiga.enumeration.ScanResponseType;
 
 /**
  * Abstract class for response and event packets. This provides the deserialization methods to convert wire data to Java
@@ -113,7 +108,7 @@ public class BlueGigaResponse extends BlueGigaPacket {
     }
 
     public Set<ConnectionStatusFlag> deserializeConnectionStatusFlag() {
-        int val = deserializeUInt16();
+        int val = deserializeUInt8();
         Set<ConnectionStatusFlag> options = new HashSet<ConnectionStatusFlag>();
         for (ConnectionStatusFlag option : ConnectionStatusFlag.values()) {
             if (option == ConnectionStatusFlag.UNKNOWN) {
