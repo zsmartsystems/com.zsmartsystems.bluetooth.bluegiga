@@ -371,8 +371,8 @@
 				<description>Last attribute handle</description>
 			</parameter>
 			<parameter>
-				<data_type>uint8array</data_type>
-				<name>uint8array</name>
+				<data_type>uuid</data_type>
+				<name>uuid</name>
 				<description>Attribute type (UUID)</description>
 			</parameter>
 		</command_parameters>
