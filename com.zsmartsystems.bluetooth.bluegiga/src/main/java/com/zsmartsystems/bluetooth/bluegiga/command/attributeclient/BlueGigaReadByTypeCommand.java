@@ -9,6 +9,7 @@
 package com.zsmartsystems.bluetooth.bluegiga.command.attributeclient;
 
 import com.zsmartsystems.bluetooth.bluegiga.BlueGigaCommand;
+import java.util.UUID;
 
 /**
  * Class to implement the BlueGiga command <b>readByType</b>.
@@ -51,9 +52,9 @@ public class BlueGigaReadByTypeCommand extends BlueGigaCommand {
     /**
      * Attribute type (UUID)
      * <p>
-     * BlueGiga API type is <i>uint8array</i> - Java type is {@link int[]}
+     * BlueGiga API type is <i>uuid</i> - Java type is {@link UUID}
      */
-    private int[] uint8array;
+    private UUID uuid;
 
     /**
      * Connection handle
@@ -82,10 +83,10 @@ public class BlueGigaReadByTypeCommand extends BlueGigaCommand {
     /**
      * Attribute type (UUID)
      *
-     * @param uint8array the uint8array to set as {@link int[]}
+     * @param uuid the uuid to set as {@link UUID}
      */
-    public void setUint8array(int[] uint8array) {
-        this.uint8array = uint8array;
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     @Override
@@ -97,7 +98,7 @@ public class BlueGigaReadByTypeCommand extends BlueGigaCommand {
         serializeUInt8(connection);
         serializeUInt16(start);
         serializeUInt16(end);
-        serializeUInt8Array(uint8array);
+        serializeUuid(uuid);
 
         return getPayload();
     }
@@ -111,13 +112,8 @@ public class BlueGigaReadByTypeCommand extends BlueGigaCommand {
         builder.append(start);
         builder.append(", end=");
         builder.append(end);
-        builder.append(", uint8array=");
-        for (int c = 0; c < uint8array.length; c++) {
-            if (c > 0) {
-                builder.append(' ');
-            }
-            builder.append(String.format("%02X", uint8array[c]));
-        }
+        builder.append(", uuid=");
+        builder.append(uuid);
         builder.append(']');
         return builder.toString();
     }
