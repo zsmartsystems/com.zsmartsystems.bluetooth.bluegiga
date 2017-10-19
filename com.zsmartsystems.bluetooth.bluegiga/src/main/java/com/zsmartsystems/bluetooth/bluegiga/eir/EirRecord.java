@@ -50,6 +50,9 @@ public class EirRecord {
             case EIR_SLAVEINTERVALRANGE:
                 record = processUInt16List(data);
                 break;
+            case EIR_DEVICE_CLASS:
+                record = processUInt8(data);
+                break;
             default:
                 record = processUnknown(data);
                 break;
