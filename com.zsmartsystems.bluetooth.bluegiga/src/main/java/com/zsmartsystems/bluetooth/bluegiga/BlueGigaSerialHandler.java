@@ -68,6 +68,11 @@ public class BlueGigaSerialHandler {
     private final List<BlueGigaEventListener> eventListeners = new CopyOnWriteArrayList<BlueGigaEventListener>();
 
     /**
+     * The event listeners will be notified of any life-cycle events of the handler.
+     */
+    private final List<BlueGigaHandlerListener> hanlerListeners = new CopyOnWriteArrayList<>();
+
+    /**
      * Flag reflecting that parser has been closed and parser parserThread
      * should exit.
      */
@@ -143,6 +148,7 @@ public class BlueGigaSerialHandler {
                             // if (!close) {
                             // frameHandler.error(e);
                             close = true;
+                            notifyClosed(e);
                         }
                     }
                 }
@@ -173,7 +179,7 @@ public class BlueGigaSerialHandler {
      * @return true if parser thread is alive.
      */
     public boolean isAlive() {
-        return parserThread != null && parserThread.isAlive();
+        return parserThread != null && parserThread.isAlive() && !close;
     }
 
     // Synchronize this method to ensure a packet gets sent as a block
@@ -235,6 +241,8 @@ public class BlueGigaSerialHandler {
     public void queueFrame(BlueGigaCommand request) {
         logger.debug("TX BLE frame: {}", request);
 
+        checkIfAlive();
+
         sendQueue.add(request);
 
         logger.debug("TX BLE queue: {}", sendQueue.size());
@@ -289,6 +297,7 @@ public class BlueGigaSerialHandler {
      * @return response {@link Future} {@link BlueGigaResponse}
      */
     public Future<BlueGigaResponse> sendBleRequestAsync(final BlueGigaCommand bleCommand) {
+        checkIfAlive();
         class TransactionWaiter implements Callable<BlueGigaResponse>, BleListener {
             private boolean complete = false;
             private BlueGigaResponse response = null;
@@ -348,6 +357,7 @@ public class BlueGigaSerialHandler {
      * @return response {@link BlueGigaResponse}
      */
     public BlueGigaResponse sendTransaction(BlueGigaCommand bleCommand) {
+        checkIfAlive();
         Future<BlueGigaResponse> futureResponse = sendBleRequestAsync(bleCommand);
         if (futureResponse == null) {
             logger.debug("Error sending BLE transaction: Future is null");
@@ -424,6 +434,20 @@ public class BlueGigaSerialHandler {
         }
     }
 
+    /**
+     * Adds a handler listener.
+     * @param listener a new handler listener
+     */
+    public void addHandlerListener(BlueGigaHandlerListener listener) {
+        synchronized (hanlerListeners) {
+            if (hanlerListeners.contains(listener)) {
+                return;
+            }
+
+            hanlerListeners.add(listener);
+        }
+    }
+
     public void removeEventListener(BlueGigaEventListener listener) {
         synchronized (eventListeners) {
             eventListeners.remove(listener);
@@ -438,6 +462,31 @@ public class BlueGigaSerialHandler {
         }
 
         return builder.toString();
+    }
+
+    private void checkIfAlive() {
+        if (!isAlive()) {
+            throw new IllegalStateException("Bluegiga handler is dead. Most likely because of IO errors. "
+                + "Re-initialization of the BlueGigaSerialHandler is required.");
+        }
+    }
+
+    /**
+     * Notify handler event listeners that the handler was bluegigaClosed due to an error specified as an argument.
+     *
+     * @param reason the reason to bluegigaClosed
+     */
+    private void notifyClosed(Exception reason) {
+        // It should be safe enough not to use the NotificationService as this is a fatal error, no any further actions
+        // can be done with the handler, a new handler should be re-created
+        // There is another reason why NotificationService can't be used - the listeners should be notified immidiately
+        for (BlueGigaHandlerListener listener : hanlerListeners) {
+            try {
+                listener.bluegigaClosed(reason);
+            } catch (Exception ex) {
+                logger.warn("Execution  error of a BlueGigaHandlerListener listener.", ex);
+            }
+        }
     }
 
     interface BleListener {
