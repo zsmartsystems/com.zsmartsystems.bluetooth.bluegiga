@@ -8,12 +8,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -197,7 +192,7 @@ public class BlueGigaSerialHandler {
                 outputStream.write(b);
             }
         } catch (IOException e) {
-            logger.debug(e.getMessage());
+            throw new BlueGigaException("Error sending BLE frame: ", e);
         }
 
         // logger.debug(result.toString());
@@ -352,26 +347,39 @@ public class BlueGigaSerialHandler {
      * Sends a {@link BlueGigaCommand} request to the NCP and waits for the response. The response is correlated with
      * the request and the returned {@link BlueGigaResponse} contains the request and response data.
      *
-     * @param bleRequest
+     * @param bleCommand
      *            Request {@link BlueGigaCommand}
      * @return response {@link BlueGigaResponse}
      */
     public BlueGigaResponse sendTransaction(BlueGigaCommand bleCommand) {
         checkIfAlive();
         Future<BlueGigaResponse> futureResponse = sendBleRequestAsync(bleCommand);
-        if (futureResponse == null) {
-            logger.debug("Error sending BLE transaction: Future is null");
-            return null;
-        }
-
         try {
             return futureResponse.get();
-            // return bleCommand;
         } catch (InterruptedException | ExecutionException e) {
-            logger.debug("Error sending BLE transaction to listeners: ", e);
+            throw new BlueGigaException("Error sending BLE transaction to listeners: ", e);
         }
+    }
 
-        return null;
+    /**
+     * Sends a {@link BlueGigaCommand} request to the NCP and waits for the response for specified period of time.
+     * The response is correlated with the request and the returned {@link BlueGigaResponse}
+     * contains the request and response data.
+     *
+     * @param bleCommand
+     *            Request {@link BlueGigaCommand}
+     * @param timeout milliseconds to wait until {@link TimeoutException} is thrown
+     * @return response {@link BlueGigaResponse}
+     * @throws TimeoutException when specified timeout exceeds
+     */
+    public BlueGigaResponse sendTransaction(BlueGigaCommand bleCommand, long timeout) throws TimeoutException {
+        Future<BlueGigaResponse> futureResponse = sendBleRequestAsync(bleCommand);
+        try {
+            return futureResponse.get(timeout, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException | ExecutionException e) {
+            futureResponse.cancel(true);
+            throw new BlueGigaException("Error sending BLE transaction to listeners: ", e);
+        }
     }
 
     // TODO: Add a timeout mechanism
