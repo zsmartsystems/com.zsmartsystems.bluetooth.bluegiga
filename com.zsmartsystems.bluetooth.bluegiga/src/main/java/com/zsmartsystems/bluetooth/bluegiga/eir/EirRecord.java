@@ -2,7 +2,9 @@ package com.zsmartsystems.bluetooth.bluegiga.eir;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -53,22 +55,46 @@ public class EirRecord {
             case EIR_DEVICE_CLASS:
                 record = processUInt8(data);
                 break;
+            case EIR_SVC_DATA_UUID16:
+                record = processUUID16ServiceData(data);
+                break;
+            case EIR_SVC_DATA_UUID32:
+                record = processUUID32ServiceData(data);
+                break;
+            case EIR_SVC_DATA_UUID128:
+                record = processUUID128ServiceData(data);
+                break;
             default:
                 record = processUnknown(data);
                 break;
         }
     }
 
-    private int[] processManufacturer(int[] data) {
-        return Arrays.copyOfRange(data, 1, data.length);
+    private Map<Short, int[]> processManufacturer(int[] data) {
+        short manufacturer = (short) (((data[2] & 0xFFFF) << 8) | (data[1] & 0xFFFF));
+        return Collections.singletonMap(manufacturer, Arrays.copyOfRange(data, 3, data.length));
+    }
+
+    private Map<UUID, int[]> processUUID16ServiceData(int[] data) {
+        return Collections.singletonMap(process16BitUUID(data, 1),
+                Arrays.copyOfRange(data, 3, data.length));
+    }
+
+    private Map<UUID, int[]> processUUID32ServiceData(int[] data) {
+        return Collections.singletonMap(process32BitUUID(data, 1),
+                Arrays.copyOfRange(data, 5, data.length));
+    }
+
+    private Map<UUID, int[]> processUUID128ServiceData(int[] data) {
+        return Collections.singletonMap(process128BitUUID(data, 1),
+                Arrays.copyOfRange(data, 17, data.length));
     }
 
     private List<UUID> processUuid16(int[] data) {
         List<UUID> uuidList = new ArrayList<UUID>();
 
         for (int cnt = 1; cnt < data.length - 1; cnt += 2) {
-            long high = ((long) data[cnt] << 32) + ((long) data[cnt + 1] << 40);
-            uuidList.add(new UUID(high, 0));
+            uuidList.add(process16BitUUID(data, cnt));
         }
 
         return uuidList;
@@ -78,9 +104,7 @@ public class EirRecord {
         List<UUID> uuidList = new ArrayList<UUID>();
 
         for (int cnt = 1; cnt < data.length - 1; cnt += 4) {
-            long high = ((long) data[cnt++] << 32) + ((long) data[cnt++] << 40) + ((long) data[cnt++] << 48)
-                    + ((long) data[cnt++] << 56);
-            uuidList.add(new UUID(high, 0));
+            uuidList.add(process32BitUUID(data, cnt));
         }
 
         return uuidList;
@@ -90,17 +114,31 @@ public class EirRecord {
         List<UUID> uuidList = new ArrayList<UUID>();
 
         for (int cnt = 1; cnt < data.length - 1; cnt += 16) {
-            long low = (data[cnt++]) + ((long) data[cnt++] << 8) + ((long) data[cnt++] << 16)
-                    + ((long) data[cnt++] << 24) + ((long) data[cnt++] << 32) + ((long) data[cnt++] << 40)
-                    + ((long) data[cnt++] << 48) + ((long) data[cnt++] << 56);
-            long high = (data[cnt++]) + ((long) data[cnt++] << 8) + ((long) data[cnt++] << 16)
-                    + ((long) data[cnt++] << 24) + ((long) data[cnt++] << 32) + ((long) data[cnt++] << 40)
-                    + ((long) data[cnt++] << 48) + ((long) data[cnt++] << 56);
-
-            uuidList.add(new UUID(high, low));
+            uuidList.add(process128BitUUID(data, cnt));
         }
 
         return uuidList;
+    }
+
+    private UUID process16BitUUID(int[] data, int index) {
+        long high = ((long) data[index++] << 32) + ((long) data[index] << 40);
+        return new UUID(high, 0);
+    }
+
+    private UUID process32BitUUID(int[] data, int index) {
+        long high = ((long) data[index++] << 32) + ((long) data[index++] << 40) + ((long) data[index++] << 48)
+                + ((long) data[index] << 56);
+        return new UUID(high, 0);
+    }
+
+    private UUID process128BitUUID(int[] data, int index) {
+        long low = (data[index++]) + ((long) data[index++] << 8) + ((long) data[index++] << 16)
+                + ((long) data[index++] << 24) + ((long) data[index++] << 32) + ((long) data[index++] << 40)
+                + ((long) data[index++] << 48) + ((long) data[index++] << 56);
+        long high = (data[index++]) + ((long) data[index++] << 8) + ((long) data[index++] << 16)
+                + ((long) data[index++] << 24) + ((long) data[index++] << 32) + ((long) data[index++] << 40)
+                + ((long) data[index++] << 48) + ((long) data[index] << 56);
+        return new UUID(high, low);
     }
 
     private List<Integer> processUInt16List(int[] data) {
