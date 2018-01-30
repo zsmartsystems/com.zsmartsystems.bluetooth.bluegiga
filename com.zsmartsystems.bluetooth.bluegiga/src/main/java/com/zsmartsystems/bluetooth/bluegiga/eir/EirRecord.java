@@ -121,23 +121,23 @@ public class EirRecord {
     }
 
     private UUID process16BitUUID(int[] data, int index) {
-        long high = ((long) data[index++] << 32) + ((long) data[index] << 40);
+        long high = ((long) data[index] << 32) + ((long) data[index + 1] << 40);
         return new UUID(high, 0);
     }
 
     private UUID process32BitUUID(int[] data, int index) {
-        long high = ((long) data[index++] << 32) + ((long) data[index++] << 40) + ((long) data[index++] << 48)
-                + ((long) data[index] << 56);
+        long high = ((long) data[index] << 32) + ((long) data[index + 1] << 40) + ((long) data[index + 2] << 48)
+                + ((long) data[index + 3] << 56);
         return new UUID(high, 0);
     }
 
     private UUID process128BitUUID(int[] data, int index) {
-        long low = (data[index++]) + ((long) data[index++] << 8) + ((long) data[index++] << 16)
-                + ((long) data[index++] << 24) + ((long) data[index++] << 32) + ((long) data[index++] << 40)
-                + ((long) data[index++] << 48) + ((long) data[index++] << 56);
-        long high = (data[index++]) + ((long) data[index++] << 8) + ((long) data[index++] << 16)
-                + ((long) data[index++] << 24) + ((long) data[index++] << 32) + ((long) data[index++] << 40)
-                + ((long) data[index++] << 48) + ((long) data[index] << 56);
+        long low = (data[index]) + ((long) data[index + 1] << 8) + ((long) data[index + 2] << 16)
+                + ((long) data[index + 3] << 24) + ((long) data[index + 4] << 32) + ((long) data[index + 5] << 40)
+                + ((long) data[index + 6] << 48) + ((long) data[index + 7] << 56);
+        long high = (data[index + 8]) + ((long) data[index + 9] << 8) + ((long) data[index + 10] << 16)
+                + ((long) data[index + 11] << 24) + ((long) data[index + 12] << 32) + ((long) data[index + 13] << 40)
+                + ((long) data[index + 14] << 48) + ((long) data[index + 15] << 56);
         return new UUID(high, low);
     }
 
