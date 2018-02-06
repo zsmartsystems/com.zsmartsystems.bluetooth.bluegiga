@@ -153,6 +153,17 @@ public class BlueGigaSerialHandler {
 
         parserThread.setDaemon(true);
         parserThread.start();
+        int tries = 0;
+        // wait until the daemon thread kicks off, e.g. when it is ready to receive any commands
+        while (parserThread.getState() == Thread.State.NEW) {
+            try {
+                Thread.sleep(100);
+                tries++;
+                if (tries > 10) {
+                    throw new IllegalStateException("BlueGiga handler thread failed to start");
+                }
+            } catch (InterruptedException ignore) { /* ignore */ }
+        }
     }
 
     /**
@@ -160,6 +171,7 @@ public class BlueGigaSerialHandler {
      */
     public void close() {
         this.close = true;
+        executor.shutdownNow();
         try {
             parserThread.interrupt();
             parserThread.join();
@@ -492,7 +504,7 @@ public class BlueGigaSerialHandler {
             try {
                 listener.bluegigaClosed(reason);
             } catch (Exception ex) {
-                logger.warn("Execution  error of a BlueGigaHandlerListener listener.", ex);
+                logger.warn("Execution error of a BlueGigaHandlerListener listener.", ex);
             }
         }
     }
