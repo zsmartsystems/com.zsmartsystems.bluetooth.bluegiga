@@ -1,5 +1,8 @@
 package com.zsmartsystems.bluetooth.bluegiga;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -8,10 +11,14 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.*;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * The main handler class for interacting with the BlueGiga serial API. This class provides transaction management and
@@ -153,16 +160,36 @@ public class BlueGigaSerialHandler {
 
         parserThread.setDaemon(true);
         parserThread.start();
+        int tries = 0;
+        // wait until the daemon thread kicks off, e.g. when it is ready to receive any commands
+        while (parserThread.getState() == Thread.State.NEW) {
+            try {
+                Thread.sleep(100);
+                tries++;
+                if (tries > 10) {
+                    throw new IllegalStateException("BlueGiga handler thread failed to start");
+                }
+            } catch (InterruptedException ignore) { /* ignore */ }
+        }
     }
 
     /**
-     * Requests parser thread to shutdown.
+     * Requests parser thread to shutdown. Waits forever while the parser thread is getting shut down.
      */
     public void close() {
+        close(0);
+    }
+
+    /**
+     * Requests parser thread to shutdown. Waits specified milliseconds while the parser thread is getting shut down.
+     * @param timeout milliseconds to wait
+     */
+    public void close(long timeout) {
         this.close = true;
+        executor.shutdownNow();
         try {
             parserThread.interrupt();
-            parserThread.join();
+            parserThread.join(timeout);
         } catch (InterruptedException e) {
             logger.warn("Interrupted in packet parser thread shutdown join.");
         }
@@ -291,14 +318,15 @@ public class BlueGigaSerialHandler {
      *            Request {@link BlueGigaCommand}
      * @return response {@link Future} {@link BlueGigaResponse}
      */
-    public Future<BlueGigaResponse> sendBleRequestAsync(final BlueGigaCommand bleCommand) {
+    public <T extends BlueGigaResponse> Future<T> sendBleRequestAsync(final BlueGigaCommand bleCommand,
+                                                                      final Class<T> expected) {
         checkIfAlive();
-        class TransactionWaiter implements Callable<BlueGigaResponse>, BleListener {
-            private boolean complete = false;
-            private BlueGigaResponse response = null;
+        class TransactionWaiter implements Callable<T>, BleListener<T> {
+            private boolean complete;
+            private T response;
 
             @Override
-            public BlueGigaResponse call() {
+            public T call() {
                 // Register a listener
                 addTransactionListener(this);
 
@@ -323,9 +351,16 @@ public class BlueGigaSerialHandler {
             }
 
             @Override
-            public boolean transactionEvent(BlueGigaResponse bleResponse) {
+            public boolean transactionEvent(T bleResponse) {
                 // Check if this response completes our transaction
                 if (bleCommand.hashCode() == bleResponse.hashCode()) {
+                    return false;
+                }
+
+                if (!expected.isInstance(bleResponse)) {
+                    // ignoring response if it was not requested
+                    logger.warn("Ignoring {} response which has not been requested.",
+                            bleResponse.getClass().getSimpleName());
                     return false;
                 }
 
@@ -339,7 +374,7 @@ public class BlueGigaSerialHandler {
             }
         }
 
-        Callable<BlueGigaResponse> worker = new TransactionWaiter();
+        Callable<T> worker = new TransactionWaiter();
         return executor.submit(worker);
     }
 
@@ -353,7 +388,7 @@ public class BlueGigaSerialHandler {
      */
     public BlueGigaResponse sendTransaction(BlueGigaCommand bleCommand) {
         checkIfAlive();
-        Future<BlueGigaResponse> futureResponse = sendBleRequestAsync(bleCommand);
+        Future<BlueGigaResponse> futureResponse = sendBleRequestAsync(bleCommand, BlueGigaResponse.class);
         try {
             return futureResponse.get();
         } catch (InterruptedException | ExecutionException e) {
@@ -372,8 +407,9 @@ public class BlueGigaSerialHandler {
      * @return response {@link BlueGigaResponse}
      * @throws TimeoutException when specified timeout exceeds
      */
-    public BlueGigaResponse sendTransaction(BlueGigaCommand bleCommand, long timeout) throws TimeoutException {
-        Future<BlueGigaResponse> futureResponse = sendBleRequestAsync(bleCommand);
+    public <T extends BlueGigaResponse> T sendTransaction(BlueGigaCommand bleCommand, Class<T> expected, long timeout)
+            throws TimeoutException {
+        Future<T> futureResponse = sendBleRequestAsync(bleCommand, expected);
         try {
             return futureResponse.get(timeout, TimeUnit.MILLISECONDS);
         } catch (InterruptedException | ExecutionException e) {
@@ -492,12 +528,12 @@ public class BlueGigaSerialHandler {
             try {
                 listener.bluegigaClosed(reason);
             } catch (Exception ex) {
-                logger.warn("Execution  error of a BlueGigaHandlerListener listener.", ex);
+                logger.warn("Execution error of a BlueGigaHandlerListener listener.", ex);
             }
         }
     }
 
-    interface BleListener {
-        boolean transactionEvent(BlueGigaResponse bleResponse);
+    interface BleListener<T extends BlueGigaResponse> {
+        boolean transactionEvent(T bleResponse);
     }
 }
